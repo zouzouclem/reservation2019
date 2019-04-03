@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 //TODO (exclude = SecurityAutoConfiguration.class) A ajouter pour la desactivation de la sécurité
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class ReservationApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(ReservationApplication.class, args);
-	}
-
+public class ReservationApplication
+{
+    public static void main(String[] args)
+    {
+	SpringApplication.run(ReservationApplication.class, args);
+    }
 }
