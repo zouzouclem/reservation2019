@@ -35,7 +35,7 @@ public class Representations {
     }
 
     @Basic
-    @Column(name = "when")
+    @Column(name = "whenDate")
     public Timestamp getWhen() {
         return when;
     }
