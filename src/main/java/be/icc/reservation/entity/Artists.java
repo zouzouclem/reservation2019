@@ -1,19 +1,29 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Artists {
-    private int id;
-    private String firstname;
-    private String lastname;
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue
+    private int id;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "artiste_type",
+            joinColumns = {@JoinColumn(name = "artist_id")},
+            inverseJoinColumns = {@JoinColumn(name = "type_id")}
+    )
+    private Set<Types> types;
+
+    @Column(nullable = false)
+    private String firstname;
+    @Column(nullable = false)
+    private String lastname;
+
     public int getId() {
         return id;
     }
@@ -22,8 +32,6 @@ public class Artists {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "firstname")
     public String getFirstname() {
         return firstname;
     }
@@ -32,14 +40,20 @@ public class Artists {
         this.firstname = firstname;
     }
 
-    @Basic
-    @Column(name = "lastname")
     public String getLastname() {
         return lastname;
     }
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Set<Types> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<Types> types) {
+        this.types = types;
     }
 
     @Override

@@ -1,24 +1,31 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class Users {
+    @Id
+    @GeneratedValue
     private int id;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "roles_id")
+    private Roles role;
+
+    @Column(nullable = false)
     private String login;
+    @Column(nullable = false)
     private String password;
-    private int roleId;
+    @Column(nullable = false)
     private String firstname;
+    @Column(nullable = false)
     private String lastname;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String langue;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -27,8 +34,14 @@ public class Users {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "login")
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -37,8 +50,6 @@ public class Users {
         this.login = login;
     }
 
-    @Basic
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -47,18 +58,6 @@ public class Users {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "role_id")
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    @Basic
-    @Column(name = "firstname")
     public String getFirstname() {
         return firstname;
     }
@@ -67,8 +66,6 @@ public class Users {
         this.firstname = firstname;
     }
 
-    @Basic
-    @Column(name = "lastname")
     public String getLastname() {
         return lastname;
     }
@@ -77,8 +74,6 @@ public class Users {
         this.lastname = lastname;
     }
 
-    @Basic
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -87,8 +82,6 @@ public class Users {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "langue")
     public String getLangue() {
         return langue;
     }
@@ -103,7 +96,6 @@ public class Users {
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
         return id == users.id &&
-                roleId == users.roleId &&
                 Objects.equals(login, users.login) &&
                 Objects.equals(password, users.password) &&
                 Objects.equals(firstname, users.firstname) &&
@@ -114,6 +106,7 @@ public class Users {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, roleId, firstname, lastname, email, langue);
+        return Objects.hash(id, login, password, firstname, lastname, email, langue);
     }
+
 }
