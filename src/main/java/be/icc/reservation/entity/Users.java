@@ -2,6 +2,7 @@ package be.icc.reservation.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Users {
@@ -12,6 +13,9 @@ public class Users {
     @ManyToOne(optional = false)
     @JoinColumn(name = "roles_id")
     private Roles role;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<Representations> representations;
 
     @Column(nullable = false)
     private String login;
@@ -109,4 +113,11 @@ public class Users {
         return Objects.hash(id, login, password, firstname, lastname, email, langue);
     }
 
+    public Set<Representations> getRepresentations() {
+        return representations;
+    }
+
+    public void setRepresentations(Set<Representations> representations) {
+        this.representations = representations;
+    }
 }

@@ -1,17 +1,23 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Representations {
     @Id
     @GeneratedValue
     private int id;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "representation_user",
+            joinColumns = {@JoinColumn(name = "representation_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<Users> users;
 
     @Column(name = "show_id", nullable = false)
     private int showId;
@@ -68,5 +74,13 @@ public class Representations {
     @Override
     public int hashCode() {
         return Objects.hash(id, showId, whenDate, locationId);
+    }
+
+    public Set<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<Users> users) {
+        this.users = users;
     }
 }
