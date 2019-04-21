@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="<c:url value="/resources/css/myCss.css" />" rel="stylesheet">
 </head>
 <body>
     <form:form method="post" action="connect/signup" modelAttribute="signupForm">
@@ -33,21 +34,21 @@
                 <label for="firstName" class="col-lg-2 control-label">prénom</label>
                 <div class="col-lg-8">
                     <form:input type="firstName" path="firstName" id="firstName"/>
-                    <form:errors path="firstName"/>
+                    <form:errors path="firstName" cssClass="error"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="lastName" class="col-lg-2 control-label">nom</label>
                 <div class="col-lg-8">
                     <form:input type="lastName" path="lastName" id="lastName"/>
-                    <form:errors path="lastName"/>
+                    <form:errors path="lastName" cssClass="error"/>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-lg-2 control-label">mail</label>
                 <div class="col-lg-8">
                     <form:input type="email" path="email" id="email"/>
-                    <form:errors path="email"/>
+                    <form:errors path="email" cssClass="error"/>
                 </div>
             </div>
             <div class="form-group">

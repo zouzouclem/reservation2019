@@ -60,7 +60,6 @@ public class IdentificationController {
         user.setFirstname(signupForm.getFirstName());
         user.setEmail(signupForm.getEmail());
         user.setPassword(signupForm.getPassword());
-        user.setRoleId();
         userService.signUp(user);
         return "redirect:/connect?success=userCreated";
     }

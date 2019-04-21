@@ -7,4 +7,6 @@ public interface UserService {
     Users findByEmail(String email);
     Users save(Users user);
     Users findById(int id);
+
+    Users signUp(Users user);
 }

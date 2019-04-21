@@ -9,13 +9,13 @@ import javax.validation.constraints.Pattern;
  */
 public class SignupForm {
 
-    @NotBlank(message = "{Veuillez mettre un pseudo}")
+    @NotBlank(message = "Veuillez mettre un pseudo")
     private String login;
-    @NotBlank(message = "{Veuillez mettre un mot de passe}")
+    @NotBlank(message = "Veuillez mettre un mot de passe")
     private String password;
-    @NotBlank(message = "{Veuillez mettre un prénom}" )
+    @NotBlank(message = "Veuillez mettre un prénom" )
     private String firstName;
-    @NotBlank(message = "{Veuillez mettre un nom}" )
+    @NotBlank(message = "Veuillez mettre un nom" )
     private String lastName;
     @Pattern(regexp = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,3})", message = "Email invalide")
     private String email;
