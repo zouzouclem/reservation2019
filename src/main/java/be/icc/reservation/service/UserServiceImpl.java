@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(hashedPassword);
         Roles role = rolesService.createOrgetIfExists("ROLE_USER");
         user.setRoleId(role.getId());
-        Users userDto = userRepository.save(user);
-        return userDto;
+        user = userRepository.save(user);
+        return user;
     }
 }

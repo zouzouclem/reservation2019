@@ -16,13 +16,17 @@
 <body>
     <form:form method="post" action="connect/signup" modelAttribute="signupForm">
         <fieldset>
-            <c:if test="${not empty error}">
-                <label class="error"><spring:message code="${error}"/></label>
-            </c:if>
             <c:if test="${not empty success}">
-                <label class="success"><spring:message code="${success}"/></label>
+                <label class="success">Votre compte a bien été créer</label>
             </c:if>
             <h2>Inscription</h2>
+            <div class="form-group">
+                <label for="login" class="col-lg-2 control-label">login</label>
+                <div class="col-lg-8">
+                    <form:input type="login" path="login" cssClass="form-control" id="login"/>
+                    <form:errors path="login" cssClass="error"/>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="password" class="col-lg-2 control-label">mot de passe</label>
                 <div class="col-lg-8">
