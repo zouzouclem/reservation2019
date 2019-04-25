@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = encoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         Roles role = rolesService.createOrgetIfExists("ROLE_USER");
-        user.setRoleId(role.getId());
+        user.setRole(role);
         user = userRepository.save(user);
         return user;
     }
