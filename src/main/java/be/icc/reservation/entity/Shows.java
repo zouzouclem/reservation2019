@@ -1,24 +1,27 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 public class Shows {
+    @Id
+    @GeneratedValue
     private int id;
+    @Column(nullable = false)
     private String slug;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String posterUrl;
+    @Column(name = "location_id", nullable = false)
     private int locationId;
+    @Column(nullable = false)
     private byte bookable;
+    @Column(nullable = false)
     private BigDecimal price;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -27,8 +30,6 @@ public class Shows {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "slug")
     public String getSlug() {
         return slug;
     }
@@ -37,8 +38,6 @@ public class Shows {
         this.slug = slug;
     }
 
-    @Basic
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -47,8 +46,6 @@ public class Shows {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "poster_url")
     public String getPosterUrl() {
         return posterUrl;
     }
@@ -57,8 +54,6 @@ public class Shows {
         this.posterUrl = posterUrl;
     }
 
-    @Basic
-    @Column(name = "location_id")
     public int getLocationId() {
         return locationId;
     }
@@ -67,8 +62,6 @@ public class Shows {
         this.locationId = locationId;
     }
 
-    @Basic
-    @Column(name = "bookable")
     public byte getBookable() {
         return bookable;
     }
@@ -77,8 +70,6 @@ public class Shows {
         this.bookable = bookable;
     }
 
-    @Basic
-    @Column(name = "price")
     public BigDecimal getPrice() {
         return price;
     }

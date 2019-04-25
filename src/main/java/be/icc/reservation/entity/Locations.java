@@ -1,23 +1,31 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * This entity represents the location of a show.
+ */
 @Entity
 public class Locations {
+    @Id
+    @GeneratedValue
     private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "localities_id")
+    private Localities locality;
+
+    @Column(nullable = false)
     private String slug;
+    @Column(nullable = false)
     private String designation;
+    @Column(nullable = false)
     private String address;
-    private int localityId;
     private String website;
     private String phone;
 
-    @Id
-    @Column(name = "id")
+
     public int getId() {
         return id;
     }
@@ -26,8 +34,14 @@ public class Locations {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "slug")
+    public Localities getLocality() {
+        return locality;
+    }
+
+    public void setLocality(Localities locality) {
+        this.locality = locality;
+    }
+
     public String getSlug() {
         return slug;
     }
@@ -36,8 +50,6 @@ public class Locations {
         this.slug = slug;
     }
 
-    @Basic
-    @Column(name = "designation")
     public String getDesignation() {
         return designation;
     }
@@ -46,8 +58,6 @@ public class Locations {
         this.designation = designation;
     }
 
-    @Basic
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -56,18 +66,6 @@ public class Locations {
         this.address = address;
     }
 
-    @Basic
-    @Column(name = "locality_id")
-    public int getLocalityId() {
-        return localityId;
-    }
-
-    public void setLocalityId(int localityId) {
-        this.localityId = localityId;
-    }
-
-    @Basic
-    @Column(name = "website")
     public String getWebsite() {
         return website;
     }
@@ -76,8 +74,6 @@ public class Locations {
         this.website = website;
     }
 
-    @Basic
-    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -92,7 +88,7 @@ public class Locations {
         if (o == null || getClass() != o.getClass()) return false;
         Locations locations = (Locations) o;
         return id == locations.id &&
-                localityId == locations.localityId &&
+                Objects.equals(locality, locations.locality) &&
                 Objects.equals(slug, locations.slug) &&
                 Objects.equals(designation, locations.designation) &&
                 Objects.equals(address, locations.address) &&
@@ -102,6 +98,7 @@ public class Locations {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, slug, designation, address, localityId, website, phone);
+        return Objects.hash(id, slug, designation, address, locality, website, phone);
     }
+
 }

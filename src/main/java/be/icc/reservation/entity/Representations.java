@@ -1,21 +1,33 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Representations {
+    @Id
+    @GeneratedValue
     private int id;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "representation_user",
+            joinColumns = {@JoinColumn(name = "representation_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<Users> users;
+
+    @Column(name = "show_id", nullable = false)
     private int showId;
-    private Timestamp when;
+
+    @Column(name = "location_id", nullable = false)
     private int locationId;
 
-    @Id
-    @Column(name = "id")
+    @Column(nullable = false)
+    private Timestamp whenDate;
+
     public int getId() {
         return id;
     }
@@ -24,8 +36,6 @@ public class Representations {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "show_id")
     public int getShowId() {
         return showId;
     }
@@ -34,18 +44,14 @@ public class Representations {
         this.showId = showId;
     }
 
-    @Basic
-    @Column(name = "whenDate")
-    public Timestamp getWhen() {
-        return when;
+    public Timestamp getWhenDate() {
+        return whenDate;
     }
 
-    public void setWhen(Timestamp when) {
-        this.when = when;
+    public void setWhenDate(Timestamp whenDate) {
+        this.whenDate = whenDate;
     }
 
-    @Basic
-    @Column(name = "location_id")
     public int getLocationId() {
         return locationId;
     }
@@ -62,11 +68,19 @@ public class Representations {
         return id == that.id &&
                 showId == that.showId &&
                 locationId == that.locationId &&
-                Objects.equals(when, that.when);
+                Objects.equals(whenDate, that.whenDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, showId, when, locationId);
+        return Objects.hash(id, showId, whenDate, locationId);
+    }
+
+    public Set<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<Users> users) {
+        this.users = users;
     }
 }

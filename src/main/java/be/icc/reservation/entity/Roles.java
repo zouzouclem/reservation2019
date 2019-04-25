@@ -1,18 +1,20 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
 public class Roles {
+    @Id
+    @GeneratedValue
     private int id;
+
+    @Column(nullable = false)
     private String role;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -21,8 +23,6 @@ public class Roles {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "role")
     public String getRole() {
         return role;
     }

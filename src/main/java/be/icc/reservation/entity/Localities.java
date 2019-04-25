@@ -1,19 +1,25 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * This entity represents localities such as 1000 Brussel. Those combinations are uniques.
+ */
 @Entity
 public class Localities {
+    @Id
+    @GeneratedValue
     private int id;
+
+    @Column(name = "postal_code", nullable = false)
     private String postalCode;
+    @Column(nullable = false)
     private String locality;
 
-    @Id
-    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -22,8 +28,6 @@ public class Localities {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "postal_code")
     public String getPostalCode() {
         return postalCode;
     }
@@ -32,8 +36,6 @@ public class Localities {
         this.postalCode = postalCode;
     }
 
-    @Basic
-    @Column(name = "locality")
     public String getLocality() {
         return locality;
     }
