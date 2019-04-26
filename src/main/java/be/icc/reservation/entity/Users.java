@@ -1,11 +1,16 @@
 package be.icc.reservation.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Users {
+public class Users implements UserDetails {
     @Id
     @GeneratedValue
     private int id;
@@ -54,8 +59,38 @@ public class Users {
         this.login = login;
     }
 
+    @Override
+    public Collection<Roles> getAuthorities() {
+        return Arrays.asList(getRole());
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return getLogin();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
     public void setPassword(String password) {

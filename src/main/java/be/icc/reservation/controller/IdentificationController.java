@@ -2,9 +2,12 @@ package be.icc.reservation.controller;
 
 
 import be.icc.reservation.entity.Users;
+import be.icc.reservation.form.LoginForm;
 import be.icc.reservation.form.SignupForm;
 import be.icc.reservation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +37,9 @@ public class IdentificationController {
         if (isNotBlank(success)) {
             model.addAttribute("success", "success.userCreated");
         }
-
+        if (!model.containsAttribute("loginForm")) {
+            model.addAttribute("loginForm", new LoginForm());
+        }
         if (!model.containsAttribute("signupForm")) {
             model.addAttribute("signupForm", new SignupForm());
         }
@@ -62,5 +67,25 @@ public class IdentificationController {
         user.setPassword(signupForm.getPassword());
         userService.signUp(user);
         return "redirect:/connect?success=userCreated";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@ModelAttribute("loginForm") @Valid LoginForm loginForm, BindingResult result,
+                        RedirectAttributes attr) {
+        if (result.hasErrors()) {
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.loginForm", result);
+            attr.addFlashAttribute("loginForm", loginForm);
+            return "redirect:/connect";
+        }
+
+        Users user = userService.findByLoginAndPassword(loginForm.getUserName(), loginForm.getPassword());
+
+        if (user == null) {
+            return "redirect:/connect?error=wrong";
+        } else {
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(token);
+        }
+        return "redirect:/";
     }
 }

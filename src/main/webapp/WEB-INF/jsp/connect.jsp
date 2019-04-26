@@ -9,62 +9,96 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-    <link href="<c:url value="/resources/css/myCss.css" />" rel="stylesheet">
-</head>
-<body>
-    <form:form method="post" action="connect/signup" modelAttribute="signupForm">
-        <fieldset>
-            <c:if test="${not empty success}">
-                <label class="success">Votre compte a bien été créer</label>
-            </c:if>
-            <h2>Inscription</h2>
-            <div class="form-group">
-                <label for="login" class="col-lg-2 control-label">login</label>
-                <div class="col-lg-8">
-                    <form:input type="login" path="login" cssClass="form-control" id="login"/>
-                    <form:errors path="login" cssClass="error"/>
-                </div>
+    <head>
+        <title>Title</title>
+        <link href="<c:url value="/resources/css/myCss.css" />" rel="stylesheet">
+    </head>
+    <body>
+        <c:if test="${not empty success}">
+            <label class="success">Votre compte a bien été créer</label>
+        </c:if>
+        <div>
+            <form:form method="post" action="connect/login" modelAttribute="loginForm">
+                <fieldset>
+                    <c:if test="${not empty error}">
+                        <label class="error">${error}/></label>
+                    </c:if>
+                    <h2>Login</h2>
+                    <div>
+                        <label for="userName">Login</label>
+                        <div>
+                            <form:input type="text" path="userName" id="username"/>
+                            <form:errors path="userName" cssClass="error"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="pwd">mot de passe</label>
+                        <div>
+                            <form:input type="password" path="password" id="pwd"/>
+                            <form:errors path="password" cssClass="error"/>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" value="se connecter">
+                    </div>
+                </fieldset>
+            </form:form>
+        </div>
+        <c:if test="${empty success}">
+            <div>
+                <form:form method="post" action="connect/signup" modelAttribute="signupForm">
+                    <fieldset>
+                        <c:if test="${not empty success}">
+                            <label class="success">Votre compte a bien été créer</label>
+                        </c:if>
+                        <h2>Inscription</h2>
+                        <div>
+                            <label for="login">login</label>
+                            <div>
+                                <form:input type="login" path="login" id="login"/>
+                                <form:errors path="login" cssClass="error"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="pwd">mot de passe</label>
+                            <div>
+                                <form:input type="password" path="password" id="pwd"/>
+                                <form:errors path="password" cssClass="error"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="firstName">prénom</label>
+                            <div>
+                                <form:input type="firstName" path="firstName" id="firstName"/>
+                                <form:errors path="firstName" cssClass="error"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="lastName">nom</label>
+                            <div>
+                                <form:input type="lastName" path="lastName" id="lastName"/>
+                                <form:errors path="lastName" cssClass="error"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email">mail</label>
+                            <div>
+                                <form:input type="email" path="email" id="email"/>
+                                <form:errors path="email" cssClass="error"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="langue">langue</label>
+                            <div>
+                                <form:input type="langue" path="langue" id="langue"/>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="inscription">
+                        </div>
+                    </fieldset>
+                </form:form>
             </div>
-            <div class="form-group">
-                <label for="password" class="col-lg-2 control-label">mot de passe</label>
-                <div class="col-lg-8">
-                    <form:input type="password" path="password" cssClass="form-control" id="password"/>
-                    <form:errors path="password" cssClass="error"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="firstName" class="col-lg-2 control-label">prénom</label>
-                <div class="col-lg-8">
-                    <form:input type="firstName" path="firstName" id="firstName"/>
-                    <form:errors path="firstName" cssClass="error"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="lastName" class="col-lg-2 control-label">nom</label>
-                <div class="col-lg-8">
-                    <form:input type="lastName" path="lastName" id="lastName"/>
-                    <form:errors path="lastName" cssClass="error"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email" class="col-lg-2 control-label">mail</label>
-                <div class="col-lg-8">
-                    <form:input type="email" path="email" id="email"/>
-                    <form:errors path="email" cssClass="error"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="langue" class="col-lg-2 control-label">langue</label>
-                <div class="col-lg-8">
-                    <form:input type="langue" path="langue" id="langue"/>
-                </div>
-            </div>
-            <div class="col-md-offset-5">
-                <input type="submit" class="btn btn-primary" value="inscription">
-            </div>
-        </fieldset>
-    </form:form>
-</body>
+        </c:if>
+    </body>
 </html>

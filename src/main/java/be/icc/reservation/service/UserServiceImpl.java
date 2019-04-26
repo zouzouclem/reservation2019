@@ -43,4 +43,23 @@ public class UserServiceImpl implements UserService {
         user = userRepository.save(user);
         return user;
     }
+
+    @Override
+    public Users findByLoginAndPassword(String login, String password) {
+
+        Users user = userRepository.findByLogin(login);
+
+        if (user == null) {
+            return null;
+        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        boolean passwordsMatch = encoder.matches(password, user.getPassword());
+
+        if (!passwordsMatch) {
+            return null;
+        }
+
+        return user;
+    }
 }

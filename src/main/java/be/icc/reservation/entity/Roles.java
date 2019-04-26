@@ -1,5 +1,7 @@
 package be.icc.reservation.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Roles {
+public class Roles implements GrantedAuthority {
     @Id
     @GeneratedValue
     private int id;
@@ -43,5 +45,10 @@ public class Roles {
     @Override
     public int hashCode() {
         return Objects.hash(id, role);
+    }
+
+    @Override
+    public String getAuthority() {
+        return getRole();
     }
 }
