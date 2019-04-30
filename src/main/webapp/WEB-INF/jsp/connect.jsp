@@ -17,6 +17,7 @@
         <c:if test="${not empty success}">
             <label class="success">Votre compte a bien été créer</label>
         </c:if>
+        <c:if test="${signupForm.id == null}">
         <div>
             <form:form method="post" action="connect/login" modelAttribute="loginForm">
                 <fieldset>
@@ -44,19 +45,35 @@
                 </fieldset>
             </form:form>
         </div>
+        </c:if>
+        <c:if test="${signupForm.id == null}">
+            <c:set var="signupOrUpdate" value="connect/signup"/>
+        </c:if>
+        <c:if test="${signupForm.id != null}">
+            <c:set var="signupOrUpdate" value="update"/>
+        </c:if>
         <c:if test="${empty success}">
             <div>
-                <form:form method="post" action="connect/signup" modelAttribute="signupForm">
+                <form:form method="post" action="${signupOrUpdate}" modelAttribute="signupForm">
                     <fieldset>
                         <c:if test="${not empty success}">
                             <label class="success">Votre compte a bien été créer</label>
                         </c:if>
+                        <div style="visibility: hidden;">
+                            <form:input type="text" path="id" cssClass="form-control" id="title"/>
+                        </div>
                         <h2>Inscription</h2>
                         <div>
                             <label for="login">login</label>
                             <div>
-                                <form:input type="login" path="login" id="login"/>
-                                <form:errors path="login" cssClass="error"/>
+                                <c:if test="${signupForm.id == null}">
+                                    <form:input type="text" path="login" cssClass=" form-control" id="login"/>
+                                    <form:errors path="login" cssClass="error"/>
+                                </c:if>
+                                <c:if test="${signupForm.id != null}">
+                                    <form:input type="text" path="login" cssClass=" form-control" id="login"
+                                                readonly="true"/>
+                                </c:if>
                             </div>
                         </div>
                         <div>
@@ -94,7 +111,12 @@
                             </div>
                         </div>
                         <div>
-                            <input type="submit" value="inscription">
+                            <c:if test="${signupForm.id == null}">
+                                <input type="submit" value="inscription">
+                            </c:if>
+                            <c:if test="${signupForm.id != null}">
+                                <input type="submit" value="mettre à jour">
+                            </c:if>
                         </div>
                     </fieldset>
                 </form:form>

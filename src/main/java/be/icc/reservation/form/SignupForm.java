@@ -20,6 +20,7 @@ public class SignupForm {
     @Pattern(regexp = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,3})", message = "Email invalide")
     private String email;
     private String langue;
+    private Integer id;
 
     public String getLogin() {
         return login;
@@ -67,5 +68,13 @@ public class SignupForm {
 
     public void setLangue(String langue) {
         this.langue = langue;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
