@@ -20,10 +20,10 @@
                     Spectacles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<c:url value="/spectacle" />">liste des spectacles</a>
+                    <a class="dropdown-item" href="<c:url value="/show" />">liste des spectacles</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<c:url value="/spectacle/add" />">ajouter un spectacle</a>
-                    <a class="dropdown-item" href="<c:url value="/spectacle/update" />">modifier un spectacle</a>
+                    <a class="dropdown-item" href="<c:url value="/show/add" />">ajouter un spectacle</a>
+                    <a class="dropdown-item" href="<c:url value="/show/update" />">modifier un spectacle</a>
                 </div>
             </li>
         </ul>
