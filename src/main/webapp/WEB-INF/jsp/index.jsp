@@ -9,15 +9,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %><html>
-<head>
-    <title>Title</title>
-</head>
+
+<jsp:include page="./assets/header.jsp" />
+
 <body>
+<jsp:include page="./assets/menu.jsp" />
+
     HELLO WORLD
     <br/>
     <sec:authorize access="isAuthenticated()">
         <sec:authentication property="principal.username" var="username" />
         Vous êtes connecté en tant que : ${username}
     </sec:authorize>
+
+    <jsp:include page="./assets/footer.jsp" />
+
 </body>
-</html>

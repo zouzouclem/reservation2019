@@ -9,12 +9,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <head>
-        <title>Title</title>
-        <link href="<c:url value="/resources/css/myCss.css" />" rel="stylesheet">
-    </head>
+<jsp:include page="./assets/header.jsp" />
+
     <body>
-        <c:if test="${not empty success}">
+    <jsp:include page="./assets/menu.jsp" />
+
+    <c:if test="${not empty success}">
             <label class="success">Votre compte a bien été créer</label>
         </c:if>
         <c:if test="${signupForm.id == null}">
@@ -122,5 +122,8 @@
                 </form:form>
             </div>
         </c:if>
+
+        <jsp:include page="./assets/footer.jsp" />
+
     </body>
 </html>
