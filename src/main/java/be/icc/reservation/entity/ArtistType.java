@@ -17,7 +17,7 @@ public class ArtistType {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "artiste_type_show",
+            name = "artist_type_show",
             joinColumns = {@JoinColumn(name = "artist_type_id")},
             inverseJoinColumns = {@JoinColumn(name = "show_id")}
     )
