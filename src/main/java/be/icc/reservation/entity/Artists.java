@@ -1,8 +1,10 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Artists {
@@ -10,14 +12,6 @@ public class Artists {
     @Id
     @GeneratedValue
     private int id;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "artiste_type",
-            joinColumns = {@JoinColumn(name = "artist_id")},
-            inverseJoinColumns = {@JoinColumn(name = "type_id")}
-    )
-    private Set<Types> types;
 
     @Column(nullable = false)
     private String firstname;
@@ -46,14 +40,6 @@ public class Artists {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public Set<Types> getTypes() {
-        return types;
-    }
-
-    public void setTypes(Set<Types> types) {
-        this.types = types;
     }
 
     @Override

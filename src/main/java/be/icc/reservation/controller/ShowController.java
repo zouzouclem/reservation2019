@@ -4,6 +4,8 @@ package be.icc.reservation.controller;
 import be.icc.reservation.entity.Shows;
 import be.icc.reservation.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import be.icc.reservation.service.ShowService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
@@ -28,7 +30,8 @@ public class ShowController {
     }
 
     @RequestMapping(value = "/show/add")
-    public String addSpectacle() {
+    public String addSpectacle()
+    {
         return "show/addShow";
     }
 
@@ -36,7 +39,5 @@ public class ShowController {
     public String updateSpectacle() {
         return "show/updateShow";
     }
-
-
 
 }
