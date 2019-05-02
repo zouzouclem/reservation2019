@@ -1,17 +1,16 @@
 package be.icc.reservation.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Types {
     @Id
     @GeneratedValue
     private int id;
-
-    @ManyToMany(mappedBy = "types")
-    private Set<Artists> artists;
 
     @Column(nullable = false)
     private String type;
@@ -30,14 +29,6 @@ public class Types {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Set<Artists> getArtists() {
-        return artists;
-    }
-
-    public void setArtists(Set<Artists> artists) {
-        this.artists = artists;
     }
 
     @Override

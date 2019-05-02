@@ -14,9 +14,9 @@ import javax.transaction.Transactional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    RolesService rolesService;
+    private RolesService rolesService;
 
     @Override
     public Users findByEmail(String email) {
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         String hashedPassword = encoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         Roles role = rolesService.createOrgetIfExists("ROLE_USER");
-        user.setRoleId(role.getId());
+        user.setRole(role);
         user = userRepository.save(user);
         return user;
     }
