@@ -11,6 +11,18 @@
 
 Liste des spectacles
 
+<c:forEach items="${showList}" var="show">
+    <tr>
+        <td>${show.id}</td>
+        <td>${show.slug}</td>
+        <td>${show.title}</td>
+        <td>${show.posterUrl}</td>
+        <td>${show.locationId}</td>
+        <td>${show.bookable}</td>
+        <td>${show.price}</td>
+    </tr>
+</c:forEach>
+
 <jsp:include page="../assets/footer.jsp"/>
 
 </body>
