@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ShowRepository extends JpaRepository <Shows, Integer> {
 
-
+    Shows findById(int id);
 
 }
 

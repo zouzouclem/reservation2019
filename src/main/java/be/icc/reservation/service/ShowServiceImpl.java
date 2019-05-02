@@ -29,6 +29,11 @@ public class ShowServiceImpl implements ShowService {
     public void deleteShow(Shows show) {
         showRepository.delete(show);
     }
+
+    @Override
+    public Shows findById(int id) {
+        return showRepository.findById(id);
+    }
 }
 
 
