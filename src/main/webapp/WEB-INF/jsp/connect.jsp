@@ -67,11 +67,11 @@
                             <label for="login">login</label>
                             <div>
                                 <c:if test="${signupForm.id == null}">
-                                    <form:input type="text" path="login" cssClass=" form-control" id="login"/>
+                                    <form:input type="text" path="login" id="login"/>
                                     <form:errors path="login" cssClass="error"/>
                                 </c:if>
                                 <c:if test="${signupForm.id != null}">
-                                    <form:input type="text" path="login" cssClass=" form-control" id="login"
+                                    <form:input type="text" path="login" id="login"
                                                 readonly="true"/>
                                 </c:if>
                             </div>
@@ -81,6 +81,15 @@
                             <div>
                                 <form:input type="password" path="password" id="pwd"/>
                                 <form:errors path="password" cssClass="error"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="pwdCheck">Confirmer le mot de passe</label>
+                            <div>
+                                <form:input type="password" path="passwordCheck" id="pwdCheck"/>
+                                <form:errors path="passwordCheck" cssClass="error"/>
+                                <br/>
+                                <form:errors path="isPasswordMatch" cssClass="error"/>
                             </div>
                         </div>
                         <div>
@@ -106,9 +115,10 @@
                         </div>
                         <div>
                             <label for="langue">langue</label>
-                            <div>
-                                <form:input type="langue" path="langue" id="langue"/>
-                            </div>
+                            <form:select type="langue" path="langue" id="langue">
+                                <form:option value = "FR">Francais</form:option>
+                                <form:option value = "EN">Anglais</form:option>
+                            </form:select>
                         </div>
                         <div>
                             <c:if test="${signupForm.id == null}">

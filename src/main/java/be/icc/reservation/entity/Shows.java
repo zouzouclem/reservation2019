@@ -15,8 +15,8 @@ public class Shows {
     private String title;
     @Column(nullable = false)
     private String posterUrl;
-    @Column(name = "location_id", nullable = false)
-    private int locationId;
+    @OneToOne
+    private Locations location;
     @Column(nullable = false)
     private byte bookable;
     @Column(nullable = false)
@@ -54,12 +54,12 @@ public class Shows {
         this.posterUrl = posterUrl;
     }
 
-    public int getLocationId() {
-        return locationId;
+    public Locations getLocationId() {
+        return location;
     }
 
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
+    public void setLocationId(Locations locationId) {
+        this.location = locationId;
     }
 
     public byte getBookable() {
@@ -84,8 +84,8 @@ public class Shows {
         if (o == null || getClass() != o.getClass()) return false;
         Shows shows = (Shows) o;
         return id == shows.id &&
-                locationId == shows.locationId &&
                 bookable == shows.bookable &&
+                Objects.equals(location, shows.location) &&
                 Objects.equals(slug, shows.slug) &&
                 Objects.equals(title, shows.title) &&
                 Objects.equals(posterUrl, shows.posterUrl) &&
@@ -94,6 +94,6 @@ public class Shows {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, slug, title, posterUrl, locationId, bookable, price);
+        return Objects.hash(id, slug, title, posterUrl, location, bookable, price);
     }
 }

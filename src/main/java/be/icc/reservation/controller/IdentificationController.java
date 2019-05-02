@@ -31,7 +31,7 @@ import static org.apache.logging.log4j.util.Strings.isNotBlank;
  * Created by Scohier Dorian on 19-04-19.
  */
 @Controller
-@RequestMapping("/connect")
+@RequestMapping("connect")
 public class IdentificationController {
 
     @Autowired
