@@ -11,17 +11,30 @@
 
 Liste des spectacles
 
-<c:forEach items="${showList}" var="show">
+
+
+
+<table class="table table-striped">
+  <thead>
     <tr>
-        <td>${show.id}</td>
-        <td>${show.slug}</td>
-        <td>${show.title}</td>
-        <td>${show.posterUrl}</td>
-        <td>${show.locationId}</td>
-        <td>${show.bookable}</td>
-        <td>${show.price}</td>
+      <th scope="col"> Titre</th>
+      <th scope="col">Lieu</th>
+      <th scope="col">Prix</th>
     </tr>
-</c:forEach>
+  </thead>
+  <tbody>
+  <c:forEach items="${showList}" var="show">
+    <tr>
+       <td>${show.title}</td>
+       <td>${show.locationId}</td>
+       <td>${show.price}</td>
+    </tr>
+   </c:forEach>
+
+  </tbody>
+</table>
+
+
 
 <jsp:include page="../assets/footer.jsp"/>
 
