@@ -2,6 +2,7 @@ package be.icc.reservation.form;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -12,7 +13,10 @@ public class SignupForm {
     @NotBlank(message = "Veuillez mettre un pseudo")
     private String login;
     @NotBlank(message = "Veuillez mettre un mot de passe")
+    @Pattern(regexp = "^(?=.*[$&+,:;=?@#|'<>.^*()%!-])(?=.*[A-Z]).{6,}$", message = "Veuillez mettre un mot de passe comportant au moins une majuscule, un caractère spécial et qui a une taille d'au moins 6 caractères")
     private String password;
+    @NotBlank(message = "Veuillez confirmer le mot de passe")
+    private String passwordCheck;
     @NotBlank(message = "Veuillez mettre un prénom" )
     private String firstName;
     @NotBlank(message = "Veuillez mettre un nom" )
@@ -21,6 +25,7 @@ public class SignupForm {
     private String email;
     private String langue;
     private Integer id;
+    private boolean isPasswordMatch;
 
     public String getLogin() {
         return login;
@@ -76,5 +81,27 @@ public class SignupForm {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setPasswordMatch(boolean passwordMatch) {
+        isPasswordMatch = passwordMatch;
+    }
+
+    @AssertTrue(message = "Le mot de passe n'est pas le même")
+    public boolean getIsPasswordMatch() {
+        if(password==null||passwordCheck==null){
+            isPasswordMatch = false;
+        }else{
+            isPasswordMatch = password.equals(passwordCheck);
+        }
+        return  isPasswordMatch;
+    }
+
+    public String getPasswordCheck() {
+        return passwordCheck;
+    }
+
+    public void setPasswordCheck(String passwordCheck) {
+        this.passwordCheck = passwordCheck;
     }
 }
