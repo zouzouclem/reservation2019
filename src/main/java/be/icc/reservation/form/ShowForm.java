@@ -6,12 +6,23 @@ public class ShowForm
     private String slug;
     private String title;
     private String posterURL;
+    private int location;
     private boolean bookable;
     private float price;
 
     public Integer getId()
     {
         return id;
+    }
+
+    public int getLocation()
+    {
+        return location;
+    }
+
+    public void setLocation(int location)
+    {
+        this.location = location;
     }
 
     public void setId(Integer id)

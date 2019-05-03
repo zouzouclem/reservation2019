@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 
 <jsp:include page="../assets/header.jsp"/>
@@ -9,7 +10,7 @@
 <body>
 <jsp:include page="../assets/menu.jsp"/>
 
-    <c:if test="${ShowForm.id == null}">
+    <c:if test="${showForm.id == null}">
         <div>
             <form:form method="post" action="show/add" modelAttribute="showForm">
                 <fieldset>
@@ -27,29 +28,36 @@
                     <div>
                         <label for="title">Title</label>
                         <div>
-                            &lt;%&ndash;<form:input type="text" path="title" id="title"/>
-                            <form:errors path="title" cssClass="error"/>&ndash;%&gt;
+                            <form:input type="text" path="title" id="title"/>
+                            <form:errors path="title" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="postUrl">Poster_URL</label>
+                        <label for="posterURL">Poster_URL</label>
                         <div>
-                            <form:input type="text" path="postUrl" id="postUrl"/>
-                            <form:errors path="postUrl" cssClass="error"/>
+                            <form:input type="text" path="posterURL" id="posterURL"/>
+                            <form:errors path="posterURL" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="booking">Bookable</label>
+                        <label for="location">Location</label>
                         <div>
-                            <form:input type="checkbox" path="booking" id="booking"/>
-                            <form:errors path="booking" cssClass="error"/>
+                            <form:select path="location" items="${locationsList}"/>
+                            <form:errors path="location" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="prix">Price</label>
+                        <label for="bookable">Bookable</label>
                         <div>
-                            <form:input type="text" path="prix" id="prix"/>
-                            <form:errors path="prix" cssClass="error"/>
+                            <form:checkbox path="bookable" id="bookable"/>
+                            <form:errors path="bookable" cssClass="error"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="price">Price</label>
+                        <div>
+                            <form:input type="text" path="price" id="price"/>
+                            <form:errors path="price" cssClass="error"/>
                         </div>
                     </div>
                     <div>

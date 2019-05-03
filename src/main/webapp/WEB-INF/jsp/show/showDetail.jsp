@@ -9,34 +9,17 @@
 <body>
 <jsp:include page="../assets/menu.jsp"/>
 
-Liste des spectacles
+<!-- Aqui metes la definicion de la vista, lo que vas a mostrar-->
+
+<h1>Liste des spectacles</h1>
 
 
 
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col"> Titre</th>
-      <th scope="col">Lieu</th>
-      <th scope="col">Prix</th>
-    </tr>
-  </thead>
-  <tbody>
-  <c:forEach items="${showList}" var="show">
-    <tr>
-       <td>${show.title}</td>
-       <td>${show.locationId}</td>
-       <td>${show.price}</td>
-    </tr>
-   </c:forEach>
-
-  </tbody>
-</table>
-
-
+Image: <img src=${show.posterUrl}  class="img-fluid" alt="Responsive image">
+</br>
+Title: ${show.title} (${show.slug})</br>
+Location: ${show.locationId} Bookable: ${show.bookable} Price: ${show.price}
 
 <jsp:include page="../assets/footer.jsp"/>
 
 </body>
-</html>
