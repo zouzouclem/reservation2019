@@ -10,6 +10,6 @@ public interface UserService {
 
     Users signUp(Users user);
     Users findByLoginAndPassword(String login, String password);
-
+    Users findByLogin(String login);
     Users update(Users user);
 }

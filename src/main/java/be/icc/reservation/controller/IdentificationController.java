@@ -63,6 +63,22 @@ public class IdentificationController {
             return "redirect:/connect";
         }
 
+        boolean isUsernameUnique = userService.findByLogin(signupForm.getLogin()) == null;
+        if (!isUsernameUnique) {
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.signupForm", result);
+            attr.addFlashAttribute("signupForm", signupForm);
+            attr.addFlashAttribute("error", "Le login doit-être unique");
+            return "redirect:/connect";
+        }
+
+        boolean isMailUnique = userService.findByEmail(signupForm.getEmail()) == null;
+        if (!isMailUnique) {
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.signupForm", result);
+            attr.addFlashAttribute("signupForm", signupForm);
+            attr.addFlashAttribute("error", "Cette adresse mail est déja liée à un compte");
+            return "redirect:/connect";
+        }
+
         Users user = new Users();
         user.setLogin(signupForm.getLogin());
         user.setLastname(signupForm.getLastName());

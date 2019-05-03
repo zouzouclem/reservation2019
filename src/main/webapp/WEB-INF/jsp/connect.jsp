@@ -22,7 +22,7 @@
             <form:form method="post" action="connect/login" modelAttribute="loginForm">
                 <fieldset>
                     <c:if test="${not empty error}">
-                        <label class="error">${error}/></label>
+                        <label class="error">${error}</label>
                     </c:if>
                     <h2>Login</h2>
                     <div>
@@ -109,8 +109,14 @@
                         <div>
                             <label for="email">mail</label>
                             <div>
-                                <form:input type="email" path="email" id="email"/>
-                                <form:errors path="email" cssClass="error"/>
+                                <c:if test="${signupForm.id == null}">
+                                    <form:input type="email" path="email" id="email"/>
+                                    <form:errors path="email" cssClass="error"/>
+                                </c:if>
+                                <c:if test="${signupForm.id != null}">
+                                    <form:input type="email" path="email" id="email"
+                                                readonly="true"/>
+                                </c:if>
                             </div>
                         </div>
                         <div>
