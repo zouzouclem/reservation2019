@@ -4,6 +4,7 @@ package be.icc.reservation.controller;
 import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.LoginForm;
 import be.icc.reservation.form.SignupForm;
+import be.icc.reservation.service.MailService;
 import be.icc.reservation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,13 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
-import java.security.Principal;
 
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
@@ -36,6 +33,8 @@ public class IdentificationController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    MailService mailService;
 
     @RequestMapping("")
     public String connect(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String success) {
@@ -87,6 +86,7 @@ public class IdentificationController {
         user.setEmail(signupForm.getEmail());
         user.setPassword(signupForm.getPassword());
         userService.signUp(user);
+        mailService.sendConfirmationSignUpEmail(user);
         return "redirect:/connect?success=userCreated";
     }
 
