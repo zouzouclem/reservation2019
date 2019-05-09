@@ -25,4 +25,14 @@ public class LocationsServiceImpl implements LocationsService
     public Locations findLocationsById(int idLoc){
         return locationsRepository.findById(idLoc);
     }
+
+    @Override
+    public Locations findById(Integer id) {
+        return locationsRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void save(Locations newLocation) {
+        locationsRepository.save(newLocation);
+    }
 }
