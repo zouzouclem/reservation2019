@@ -101,4 +101,8 @@ public class Locations {
         return Objects.hash(id, slug, designation, address, locality, website, phone);
     }
 
+    @Override
+    public String toString(){
+        return this.getLocality().getLocality();
+    }
 }
