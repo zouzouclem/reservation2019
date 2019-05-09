@@ -14,8 +14,7 @@
 
 <body>
 <jsp:include page="./assets/menu.jsp" />
-
-    HELLO WORLD
+    <spring:message code="welcome.text"/>
     <br/>
     <sec:authorize access="isAuthenticated()">
         <sec:authentication property="principal.username" var="username" />
