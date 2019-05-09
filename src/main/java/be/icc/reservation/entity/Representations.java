@@ -19,11 +19,11 @@ public class Representations {
     )
     private Set<Users> users;
 
-    @Column(name = "show_id", nullable = false)
-    private int showId;
+    @ManyToOne
+    private Shows show;
 
-    @Column(name = "location_id", nullable = false)
-    private int locationId;
+    @ManyToOne
+    private Locations location;
 
     @Column(nullable = false)
     private Timestamp whenDate;
@@ -36,28 +36,20 @@ public class Representations {
         this.id = id;
     }
 
-    public int getShowId() {
-        return showId;
+    public Shows getShow() {
+        return show;
     }
 
-    public void setShowId(int showId) {
-        this.showId = showId;
+    public void setShow(Shows show) {
+        this.show = show;
     }
 
-    public Timestamp getWhenDate() {
-        return whenDate;
+    public Locations getLocation() {
+        return location;
     }
 
-    public void setWhenDate(Timestamp whenDate) {
-        this.whenDate = whenDate;
-    }
-
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
+    public void setLocation(Locations location) {
+        this.location = location;
     }
 
     @Override
@@ -66,14 +58,14 @@ public class Representations {
         if (o == null || getClass() != o.getClass()) return false;
         Representations that = (Representations) o;
         return id == that.id &&
-                showId == that.showId &&
-                locationId == that.locationId &&
+                show.getId() == that.show.getId() &&
+                location.getId() == that.location.getId() &&
                 Objects.equals(whenDate, that.whenDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, showId, whenDate, locationId);
+        return Objects.hash(id, show.getId(), whenDate, location.getId());
     }
 
     public Set<Users> getUsers() {
