@@ -13,14 +13,14 @@ public class Shows {
     private String slug;
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
     private String posterUrl;
     @OneToOne
     private Locations location;
     @Column(nullable = false)
-    private byte bookable;
+    private boolean bookable;
     @Column(nullable = false)
     private BigDecimal price;
+    private String description;
 
     public int getId() {
         return id;
@@ -62,11 +62,11 @@ public class Shows {
         this.location = locationId;
     }
 
-    public byte getBookable() {
+    public boolean isBookable() {
         return bookable;
     }
 
-    public void setBookable(byte bookable) {
+    public void setBookable(boolean bookable) {
         this.bookable = bookable;
     }
 
@@ -89,11 +89,20 @@ public class Shows {
                 Objects.equals(slug, shows.slug) &&
                 Objects.equals(title, shows.title) &&
                 Objects.equals(posterUrl, shows.posterUrl) &&
+                Objects.equals(description, shows.description) &&
                 Objects.equals(price, shows.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, slug, title, posterUrl, location, bookable, price);
+        return Objects.hash(id, slug, title, posterUrl, location, bookable, price, description);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
