@@ -128,7 +128,7 @@
                         </div>
                         <div>
                             <c:if test="${signupForm.id == null}">
-                                <input type="submit" value="inscription">
+                                <input type="submit" value="inscription" id="btnInscription">
                             </c:if>
                             <c:if test="${signupForm.id != null}">
                                 <input type="submit" value="mettre à jour">
@@ -140,6 +140,23 @@
         </c:if>
 
         <jsp:include page="./assets/footer.jsp" />
+
+    <script>
+        $(document).ready(function() {
+
+            $("#firstName").blur(function () {
+                var first = $("#firstName").val();
+                if(first.length < 3){
+                    $('#btnInscription').attr("disabled",true);
+                }
+            });
+
+        })
+
+    </script>
+
+
+
 
     </body>
 </html>
