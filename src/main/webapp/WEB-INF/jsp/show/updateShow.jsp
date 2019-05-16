@@ -74,6 +74,9 @@
         </div>
     </c:if>
 
+
+
+
 <jsp:include page="../assets/footer.jsp"/>
 
 </body>
