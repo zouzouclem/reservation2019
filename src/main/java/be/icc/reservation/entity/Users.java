@@ -15,7 +15,6 @@ public class Users implements UserDetails {
     private int id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "roles_id")
     private Roles role;
 
     @ManyToMany(mappedBy = "users")

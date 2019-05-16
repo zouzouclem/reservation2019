@@ -75,4 +75,12 @@ public class Representations {
     public void setUsers(Set<Users> users) {
         this.users = users;
     }
+
+    public Timestamp getWhenDate() {
+        return this.whenDate;
+    }
+
+    public void setWhenDate(Timestamp whenDate) {
+        this.whenDate = whenDate;
+    }
 }

@@ -11,6 +11,30 @@
 
 Liste des reservations
 
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"> ID</th>
+      <th scope="col"> Titre</th>
+      <th scope="col">Lieu</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach items="${Reservations}" var="reservation">
+    <tr>
+       <td>${reservation.id}</td>
+       <td>${reservation.show.title}</td>
+       <td>${reservation.location.address}</td>
+       <td>${reservation.whenDate}</td>
+
+    </tr>
+   </c:forEach>
+
+  </tbody>
+</table>
+
 <jsp:include page="./assets/footer.jsp"/>
 
 </body>

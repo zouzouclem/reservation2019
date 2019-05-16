@@ -10,10 +10,11 @@ import java.util.*;
 
 @Service
 @Transactional
-public class RepresentationServiceImpl implements RepresentationService
-{
+public class RepresentationServiceImpl implements RepresentationService {
     @Autowired
     RepresentationRepository representationRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public List<Representations> findAllRepresentations()
@@ -28,8 +29,16 @@ public class RepresentationServiceImpl implements RepresentationService
     }
 
     @Override
-    public void deleteRepresentation(Representations rep_id)
-    {
-        representationRepository.delete(rep_id);
+    public void deleteRepresentation(Representations rep_id){ representationRepository.delete(rep_id); }
+
+    @Override
+    public ArrayList<Representations> userReservations(int user_id) {
+
+        Users user = userRepository.findById(user_id);
+        List<Users> users = new ArrayList<>();
+        users.add(user);
+        return representationRepository.findByUsersIn(users);
     }
+
+
 }
