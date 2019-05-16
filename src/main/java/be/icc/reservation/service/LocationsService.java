@@ -11,5 +11,7 @@ public interface LocationsService {
 
     Locations findLocationsById(int idLoc);
 
+    Locations findById(Integer id);
+
     void save(Locations newLocation);
 }

@@ -3,15 +3,11 @@ package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
 import be.icc.reservation.entity.Shows;
-import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.ShowForm;
-import be.icc.reservation.form.SignupForm;
 import be.icc.reservation.service.LocationsService;
-import be.icc.reservation.entity.Shows;
 import be.icc.reservation.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-
 import java.util.List;
 
 
@@ -29,9 +24,9 @@ import java.util.List;
 public class ShowController {
 
     @Autowired
-    ShowService showService;
+    private ShowService showService;
     @Autowired
-    LocationsService locationsService;
+    private LocationsService locationsService;
 
     @RequestMapping(value = "/show")
     public String home(Model model) {
@@ -41,8 +36,7 @@ public class ShowController {
     }
 
     @RequestMapping(value = "/show/add")
-    public String addSpectacle(Model model)
-    {
+    public String addSpectacle(Model model) {
         model.addAttribute("showForm", new ShowForm());
         model.addAttribute("locationsList", locationsService.findAllLocations());
         return "show/addShow";
@@ -50,7 +44,7 @@ public class ShowController {
 
     @RequestMapping(value = "show/show/add", method = RequestMethod.POST)
     public String addShowDB(@ModelAttribute("showForm") @Valid ShowForm showForm, BindingResult result,
-                         RedirectAttributes attr, Model model) {
+                            RedirectAttributes attr, Model model) {
         /*if (result.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.showForm", result);
             attr.addFlashAttribute("showForm", showForm);
@@ -61,7 +55,7 @@ public class ShowController {
         s.setSlug(showForm.getSlug());
         Locations loc = locationsService.findLocationsById(showForm.getLocation());
         s.setLocationId(loc);
-        s.setBookable(showForm.isBookable()? Byte.parseByte("1") : 0 );
+        s.setBookable(showForm.isBookable());
         s.setPosterUrl(showForm.getPosterURL());
         s.setPrice(BigDecimal.valueOf(showForm.getPrice()));
         s.setTitle(showForm.getTitle());
