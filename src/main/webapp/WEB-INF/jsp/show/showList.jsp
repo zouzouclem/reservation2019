@@ -13,8 +13,7 @@
 Liste des spectacles
 
 
-
-<table class="table table-striped">
+<table class="table table-striped" id="showListTable" data-pagination="true" data-page-size="10" data-sortable="true">
   <thead>
     <tr>
         <th></th>
@@ -43,7 +42,6 @@ Liste des spectacles
 
   </tbody>
 </table>
-
 
 
 <jsp:include page="../assets/footer.jsp"/>
