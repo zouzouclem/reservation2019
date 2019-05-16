@@ -10,18 +10,18 @@ import javax.validation.constraints.Pattern;
  */
 public class SignupForm {
 
-    @NotBlank(message = "Veuillez mettre un pseudo")
+    @NotBlank(message = "{error.connect.username}")
     private String login;
-    @NotBlank(message = "Veuillez mettre un mot de passe")
-    @Pattern(regexp = "^(?=.*[$&+,:;=?@#|'<>.^*()%!-])(?=.*[A-Z]).{6,}$", message = "Veuillez mettre un mot de passe comportant au moins une majuscule, un caractère spécial et qui a une taille d'au moins 6 caractères")
+    @NotBlank(message = "{error.connect.password}")
+    @Pattern(regexp = "^(?=.*[$&+,:;=?@#|'<>.^*()%!-])(?=.*[A-Z]).{6,}$", message = "{error.connect.passwordFormat}")
     private String password;
-    @NotBlank(message = "Veuillez confirmer le mot de passe")
+    @NotBlank(message = "{error.connect.passwordMatch}")
     private String passwordCheck;
-    @NotBlank(message = "Veuillez mettre un prénom" )
+    @NotBlank(message = "{error.connect.lastName}" )
     private String firstName;
-    @NotBlank(message = "Veuillez mettre un nom" )
+    @NotBlank(message = "{error.connect.firstName}" )
     private String lastName;
-    @Pattern(regexp = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,3})", message = "Email invalide")
+    @Pattern(regexp = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,3})", message = "{error.connect.mail}")
     private String email;
     private String langue;
     private Integer id;
@@ -87,7 +87,7 @@ public class SignupForm {
         isPasswordMatch = passwordMatch;
     }
 
-    @AssertTrue(message = "Le mot de passe n'est pas le même")
+    @AssertTrue(message = "{error.connect.passwordNotMatch}")
     public boolean getIsPasswordMatch() {
         if(password==null||passwordCheck==null){
             isPasswordMatch = false;

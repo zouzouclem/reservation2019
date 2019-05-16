@@ -39,7 +39,7 @@ public class IdentificationController {
     @RequestMapping("")
     public String connect(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String success) {
         if (isNotBlank(success)) {
-            model.addAttribute("success", "success.userCreated");
+            model.addAttribute("success", "success.connect.userCreated");
         }
         if (!model.containsAttribute("loginForm")) {
             model.addAttribute("loginForm", new LoginForm());
@@ -66,7 +66,7 @@ public class IdentificationController {
         if (!isUsernameUnique) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.signupForm", result);
             attr.addFlashAttribute("signupForm", signupForm);
-            attr.addFlashAttribute("error", "Le login doit-être unique");
+            attr.addFlashAttribute("error", "error.connect.userNameNotUnique");
             return "redirect:/connect";
         }
 
@@ -74,7 +74,7 @@ public class IdentificationController {
         if (!isMailUnique) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.signupForm", result);
             attr.addFlashAttribute("signupForm", signupForm);
-            attr.addFlashAttribute("error", "Cette adresse mail est déja liée à un compte");
+            attr.addFlashAttribute("error", "error.connect.mailNotUnique");
             return "redirect:/connect";
         }
 
@@ -96,7 +96,7 @@ public class IdentificationController {
         if (result.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.loginForm", result);
             attr.addFlashAttribute("loginForm", loginForm);
-            return "connect";
+            return "redirect:/connect";
         }
 
         Users user = userService.findByLoginAndPassword(loginForm.getUserName(), loginForm.getPassword());
