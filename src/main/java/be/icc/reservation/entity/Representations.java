@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class Representations {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToMany(cascade = CascadeType.ALL)

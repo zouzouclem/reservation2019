@@ -7,7 +7,7 @@ import java.util.Objects;
 @Entity
 public class Shows {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
     private String slug;
