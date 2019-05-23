@@ -1,16 +1,19 @@
 package be.icc.reservation.form;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class ShowForm
 {
     private Integer id;
-    @Size(min=3)
+    @Size(min=3, max=30)
     private String slug;
     @Size(min=5)
     private String title;
-    @NotNull
+    @NotBlank(message = "Ce champ ne peut pas rester vide")
+
     private String posterURL;
     @NotNull
     private int location;

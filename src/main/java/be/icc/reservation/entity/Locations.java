@@ -105,4 +105,8 @@ public class Locations {
     public String toString(){
         return this.getLocality().getLocality();
     }
+
+    public String getCompleteAddress(){
+        return getAddress() + " " + getLocality().getPostalCode() + " "+ getLocality().getLocality();
+    }
 }

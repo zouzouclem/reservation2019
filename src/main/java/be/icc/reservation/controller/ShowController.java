@@ -22,7 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -43,7 +46,11 @@ public class ShowController {
     @RequestMapping(value = "/show/add")
     public String addSpectacle(Model model) {
         model.addAttribute("showForm", new ShowForm());
-        model.addAttribute("locationsList", locationsService.findAllLocations());
+        Map<String,String> locationList = new LinkedHashMap<String,String>();
+        for(Locations location: locationsService.findAllLocations()){
+            locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
+        }
+        model.addAttribute("locationsList", locationList);
         return "show/addShow";
     }
 
@@ -56,7 +63,15 @@ public class ShowController {
             return "show/addShow";
         }
 
-        Shows s = new Shows();
+        Shows s = convertShowFormInShows(null, showForm);
+        showService.saveShow(s);
+        return "redirect:/show";
+    }
+
+    private Shows convertShowFormInShows(Shows s, ShowForm showForm){
+        if(s == null){
+            s = new Shows();
+        }
         s.setSlug(showForm.getSlug());
         Locations loc = locationsService.findLocationsById(showForm.getLocation());
         s.setLocationId(loc);
@@ -64,12 +79,11 @@ public class ShowController {
         s.setPosterUrl(showForm.getPosterURL());
         s.setPrice(showForm.getPrice());
         s.setTitle(showForm.getTitle());
-        showService.saveShow(s);
-        return "redirect:/show";
+        return s;
     }
 
     @RequestMapping(value = "/show/update/{id}")
-    public String updateSpectacle(Model model, @PathVariable int id)
+    public String modifyShow(Model model, @PathVariable int id)
     {
         Shows sho = showService.findById(id);
         ShowForm showForm = new ShowForm();
@@ -81,7 +95,13 @@ public class ShowController {
         showForm.setBookable(sho.isBookable());
         showForm.setPrice((BigDecimal)sho.getPrice());
         model.addAttribute("showForm", showForm);
-        model.addAttribute("locationsList", locationsService.findAllLocations());
+
+        Map<String,String> locationList = new LinkedHashMap<String,String>();
+        for(Locations location: locationsService.findAllLocations()){
+            locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
+        }
+
+        model.addAttribute("locationsList", locationList);
         return "show/updateShow";
     }
 
@@ -97,14 +117,8 @@ public class ShowController {
         }
 
         Shows s = showService.findById(showForm.getId());
-        s.setSlug(showForm.getSlug());
-        Locations l = locationsService.findLocationsById(showForm.getLocation());
-        s.setLocationId(l);
-        s.setBookable(showForm.isBookable());
-        s.setPosterUrl(showForm.getPosterURL());
-        s.setPrice(showForm.getPrice());
-        s.setTitle(showForm.getTitle());
+        s=convertShowFormInShows(s,showForm);
         showService.updateShow(s);
-        return "show/updateShow";
+        return "redirect:/show/";
     }
 }
