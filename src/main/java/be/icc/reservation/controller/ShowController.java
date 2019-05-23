@@ -40,7 +40,7 @@ public class ShowController {
     @RequestMapping(value = "/show")
     public String home(Model model) {
         Pageable sortedByName =
-                PageRequest.of(0, 3, Sort.by("title"));
+                PageRequest.of(0, 20, Sort.by("title"));
         Page<Shows> showsList = showService.findAllShows(sortedByName);
         model.addAttribute("showList", showsList.getContent());
         return "show/showList";

@@ -5,6 +5,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#showListTable').DataTable();
+} );
+</script>
+
+
 <jsp:include page="../assets/header.jsp"/>
 
 <body>
@@ -13,7 +20,7 @@
 Liste des spectacles
 
 
-<table class="table table-striped" id="showListTable" data-pagination="true" data-page-size="10" data-sortable="true">
+<table class="table table-striped" id="showListTable"   >
   <thead>
     <tr>
         <th></th>
