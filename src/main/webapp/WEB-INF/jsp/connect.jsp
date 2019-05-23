@@ -128,7 +128,7 @@
                         </div>
                         <div>
                             <c:if test="${signupForm.id == null}">
-                                <input type="submit" value="<spring:message code="connect.signup"/>" id="btnInscription">
+                                <input type="submit" value="<spring:message code="connect.signup"/>" id="btnInscription" disabled>
                             </c:if>
                             <c:if test="${signupForm.id != null}">
                                 <input type="submit" value="<spring:message code="connect.update"/>">
@@ -144,19 +144,79 @@
     <script>
         $(document).ready(function() {
 
-            $("#firstName").blur(function () {
-                var first = $("#firstName").val();
-                if(first.length < 3){
-                    $('#btnInscription').attr("disabled",true);
-                }
+            $("#login").blur(function () {
+                callValidations();
             });
 
+            $("#pwd").blur(function () {
+                callValidations();
+            });
+
+            $("#pwdCheck").blur(function () {
+                callValidations();
+            });
+
+            $("#firstName").blur(function () {
+                callValidations();
+            });
+
+            $("#lastName").blur(function () {
+                callValidations();
+            });
+
+            $("#email").blur(function () {
+                callValidations();
+            });
+
+            function callValidations() {
+                validationLogin();
+                // validationPassword();
+                validationFirstName();
+                validationLastName();
+                validationEmail();
+                $('#btnInscription').attr("disabled",false);
+            }
+
+            function validationLogin() {
+                var login = $("#login").val();
+                if(login.length < 1){
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid login");
+                }
+            }
+
+           /** function validationPassword() {
+                var regex = new RegExp("^(?=.*[$&+,:;=?@#|'<>.^*()%!-])(?=.*[A-Z]).{6,}$");
+                if($("#pwd").val().match(regex)) {
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid password");
+                }
+            } **/
+
+            function validationFirstName() {
+                var first = $("#firstName").val();
+                if(first.length < 1){
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid first name");
+                }
+            }
+
+            function validationLastName() {
+                var last = $("#lastName").val();
+                if(last.length < 1){
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid last name");
+                }
+            }
+
+            function validationEmail() {
+                var regex = new RegExp("[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,3})");
+                if(!$("#email").val().match(regex)) {
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid mail");
+                }
+            }
         })
-
     </script>
-
-
-
-
     </body>
 </html>
