@@ -7,10 +7,10 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class LoginForm {
 
-    @NotBlank(message = "Ce champ ne peut pas rester vide")
+    @NotBlank(message = "{error.connect.username}")
     private String userName;
 
-    @NotBlank(message = "Ce champ ne peut pas rester vide")
+    @NotBlank(message = "{error.connect.password}")
     private String password;
 
     public String getUserName() {

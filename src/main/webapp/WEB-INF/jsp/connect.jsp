@@ -15,56 +15,56 @@
     <jsp:include page="./assets/menu.jsp" />
 
     <c:if test="${not empty success}">
-            <label class="success">Votre compte a bien été créer</label>
+            <label class="success"><spring:message code="${succcess}"/></label>
         </c:if>
         <c:if test="${signupForm.id == null}">
         <div>
-            <form:form method="post" action="connect/login" modelAttribute="loginForm">
+            <form:form method="post" action="/connect/login" modelAttribute="loginForm">
                 <fieldset>
                     <c:if test="${not empty error}">
-                        <label class="error">${error}</label>
+                        <label class="error"><spring:message code="${error}"/></label>
                     </c:if>
-                    <h2>Login</h2>
+                    <h2><spring:message code="connect.login"/></h2>
                     <div>
-                        <label for="userName">Login</label>
+                        <label for="userName"><spring:message code="connect.userName"/></label>
                         <div>
                             <form:input type="text" path="userName" id="username"/>
                             <form:errors path="userName" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="pwd">mot de passe</label>
+                        <label for="pwd"><spring:message code="connect.password"/></label>
                         <div>
                             <form:input type="password" path="password" id="pwd"/>
                             <form:errors path="password" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="se connecter">
+                        <input type="submit" value="<spring:message code="connect.login"/>">
                     </div>
                 </fieldset>
             </form:form>
         </div>
         </c:if>
         <c:if test="${signupForm.id == null}">
-            <c:set var="signupOrUpdate" value="connect/signup"/>
+            <c:set var="signupOrUpdate" value="/connect/signup"/>
         </c:if>
         <c:if test="${signupForm.id != null}">
-            <c:set var="signupOrUpdate" value="update"/>
+            <c:set var="signupOrUpdate" value="/connect/update"/>
         </c:if>
         <c:if test="${empty success}">
             <div>
                 <form:form method="post" action="${signupOrUpdate}" modelAttribute="signupForm">
                     <fieldset>
                         <c:if test="${not empty success}">
-                            <label class="success">Votre compte a bien été créer</label>
+                            <label class="success"><spring:message code="${success}"/></label>
                         </c:if>
                         <div style="visibility: hidden;">
                             <form:input type="text" path="id" cssClass="form-control" id="title"/>
                         </div>
-                        <h2>Inscription</h2>
+                        <h2><spring:message code="connect.signup"/></h2>
                         <div>
-                            <label for="login">login</label>
+                            <label for="login"><spring:message code="connect.userName"/></label>
                             <div>
                                 <c:if test="${signupForm.id == null}">
                                     <form:input type="text" path="login" id="login"/>
@@ -77,14 +77,14 @@
                             </div>
                         </div>
                         <div>
-                            <label for="pwd">mot de passe</label>
+                            <label for="pwd"><spring:message code="connect.password"/></label>
                             <div>
                                 <form:input type="password" path="password" id="pwd"/>
                                 <form:errors path="password" cssClass="error"/>
                             </div>
                         </div>
                         <div>
-                            <label for="pwdCheck">Confirmer le mot de passe</label>
+                            <label for="pwdCheck"><spring:message code="connect.passwordCheck"/></label>
                             <div>
                                 <form:input type="password" path="passwordCheck" id="pwdCheck"/>
                                 <form:errors path="passwordCheck" cssClass="error"/>
@@ -93,21 +93,21 @@
                             </div>
                         </div>
                         <div>
-                            <label for="firstName">prénom</label>
+                            <label for="firstName"><spring:message code="connect.firstName"/></label>
                             <div>
                                 <form:input type="firstName" path="firstName" id="firstName"/>
                                 <form:errors path="firstName" cssClass="error"/>
                             </div>
                         </div>
                         <div>
-                            <label for="lastName">nom</label>
+                            <label for="lastName"><spring:message code="connect.lastName"/></label>
                             <div>
                                 <form:input type="lastName" path="lastName" id="lastName"/>
                                 <form:errors path="lastName" cssClass="error"/>
                             </div>
                         </div>
                         <div>
-                            <label for="email">mail</label>
+                            <label for="email"><spring:message code="connect.mail"/></label>
                             <div>
                                 <c:if test="${signupForm.id == null}">
                                     <form:input type="email" path="email" id="email"/>
@@ -120,18 +120,18 @@
                             </div>
                         </div>
                         <div>
-                            <label for="langue">langue</label>
+                            <label for="langue"><spring:message code="connect.language"/></label>
                             <form:select type="langue" path="langue" id="langue">
-                                <form:option value = "FR">Francais</form:option>
-                                <form:option value = "EN">Anglais</form:option>
+                                <form:option value = "FR"><spring:message code="connect.languageFR"/></form:option>
+                                <form:option value = "EN"><spring:message code="connect.languageEN"/></form:option>
                             </form:select>
                         </div>
                         <div>
                             <c:if test="${signupForm.id == null}">
-                                <input type="submit" value="inscription" id="btnInscription">
+                                <input type="submit" value="<spring:message code="connect.signup"/>" id="btnInscription">
                             </c:if>
                             <c:if test="${signupForm.id != null}">
-                                <input type="submit" value="mettre à jour">
+                                <input type="submit" value="<spring:message code="connect.update"/>">
                             </c:if>
                         </div>
                     </fieldset>
