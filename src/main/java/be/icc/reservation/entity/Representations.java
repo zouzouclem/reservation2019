@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 public class Representations {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -74,5 +74,13 @@ public class Representations {
 
     public void setUsers(Set<Users> users) {
         this.users = users;
+    }
+
+    public Timestamp getWhenDate() {
+        return this.whenDate;
+    }
+
+    public void setWhenDate(Timestamp whenDate) {
+        this.whenDate = whenDate;
     }
 }

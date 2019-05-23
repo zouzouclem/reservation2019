@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Locations {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

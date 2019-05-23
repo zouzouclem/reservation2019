@@ -1,6 +1,5 @@
 package be.icc.reservation.entity;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -12,11 +11,10 @@ import java.util.Set;
 @Entity
 public class Users implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "roles_id")
     private Roles role;
 
     @ManyToMany(mappedBy = "users")

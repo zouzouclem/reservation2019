@@ -34,7 +34,7 @@ public class ShowServiceImpl implements ShowService {
     public Shows findById(int id) {
         return showRepository.findById(id);
     }
+
+    @Override
+    public Shows updateShow(Shows show) { return showRepository.save(show); }
 }
-
-
-

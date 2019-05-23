@@ -1,14 +1,23 @@
 package be.icc.reservation.form;
 
+import javax.validation.constraints.*;
+import java.math.BigDecimal;
+
 public class ShowForm
 {
     private Integer id;
+    @Size(min=3)
     private String slug;
+    @Size(min=5)
     private String title;
+    @NotNull
     private String posterURL;
+    @NotNull
     private int location;
+    @NotNull
     private boolean bookable;
-    private float price;
+    @NotNull
+    private BigDecimal price;
 
     public Integer getId()
     {
@@ -70,12 +79,12 @@ public class ShowForm
         this.bookable = bookable;
     }
 
-    public float getPrice()
+    public BigDecimal getPrice()
     {
         return price;
     }
 
-    public void setPrice(float price)
+    public void setPrice(BigDecimal price)
     {
         this.price = price;
     }
