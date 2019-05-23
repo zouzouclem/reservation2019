@@ -128,7 +128,7 @@
                         </div>
                         <div>
                             <c:if test="${signupForm.id == null}">
-                                <input type="submit" value="<spring:message code="connect.signup"/>">
+                                <input type="submit" value="<spring:message code="connect.signup"/>" id="btnInscription">
                             </c:if>
                             <c:if test="${signupForm.id != null}">
                                 <input type="submit" value="<spring:message code="connect.update"/>">
