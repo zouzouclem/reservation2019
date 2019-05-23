@@ -9,16 +9,16 @@
 <body>
 <jsp:include page="./assets/menu.jsp"/>
 
-Liste des reservations
+<spring:message code = "reservation.pageTitle"/>
 
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col"> ID</th>
-      <th scope="col"> Titre</th>
-      <th scope="col">Lieu</th>
-      <th scope="col">Date</th>
+      <th scope="col"> <spring:message code = "reservation.identification"/></th>
+      <th scope="col"> <spring:message code = "reservation.showTitle"/></th>
+      <th scope="col"><spring:message code = "reservation.location"/></th>
+      <th scope="col"><spring:message code = "reservation.date"/></th>
     </tr>
   </thead>
   <tbody>

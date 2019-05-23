@@ -18,7 +18,7 @@
 Image: <img src=${show.posterUrl}  class="img-fluid" alt="Responsive image">
 </br>
 Title: ${show.title} (${show.slug})</br>
-Location: ${show.locationId} Bookable: ${show.bookable} Price: ${show.price}
+Location: ${show.location} Bookable: ${show.bookable} Price: ${show.price}
 
 <jsp:include page="../assets/footer.jsp"/>
 

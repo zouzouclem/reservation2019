@@ -37,4 +37,14 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public Shows updateShow(Shows show) { return showRepository.save(show); }
+
+    @Override
+    public Shows showDetail(int id) {
+        return showRepository.findById(id);
+    }
+
+    /*public Shows showDetail(int id){
+
+        return showRepository.findById(id);
+    }*/
 }

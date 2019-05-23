@@ -107,4 +107,11 @@ public class ShowController {
         showService.updateShow(s);
         return "show/updateShow";
     }
+
+    @RequestMapping(value = "/show/showDetail/{id}")
+    public String showDetail(Model model, @PathVariable int id){
+
+        Shows sho = showService.findById(id);
+        return "show/showDetail";
+    }
 }

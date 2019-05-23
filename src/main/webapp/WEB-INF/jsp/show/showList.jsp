@@ -28,8 +28,12 @@ Liste des spectacles
     <tr>
         <td><input type="checkbox" name="showId" value=${show.id}></td>
        <td>${show.title}</td>
-       <td>${show.locationId}</td>
+       <td>${show.location}</td>
        <td>${show.price}</td>
+        <form:form method="get" action="/show/showDetail/${show.id}" >
+                   <td><input type="submit" name="consult" value="consult">
+                   </td>
+               </form:form>
         <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
             <td><input type="submit" name="update" value="Modifier">
             </td>
