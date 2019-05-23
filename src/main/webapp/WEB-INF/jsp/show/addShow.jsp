@@ -12,7 +12,7 @@
 
     <c:if test="${showForm.id == null}">
         <div>
-            <form:form method="post" action="show/add" modelAttribute="showForm">
+            <form:form method="post" action="/show/add" modelAttribute="showForm">
                 <fieldset>
                     <c:if test="${not empty error}">
                         <label class="error">${error}/></label>
@@ -56,10 +56,11 @@
                     <div>
                         <label for="price">Price</label>
                         <div>
-                            <form:input type="text" path="price" id="price"/>
+                            <form:input type="number" path="price" id="price"/>
                             <form:errors path="price" cssClass="error"/>
                         </div>
                     </div>
+                    <br />
                     <div>
                         <input type="submit" value="Enregistrer">
                     </div>

@@ -22,7 +22,7 @@
                     <c:if test="${not empty error}">
                         <label class="error">${error}/></label>
                     </c:if>
-                    <h2>Shows</h2>
+                    <h2><spring:message code="updateShow.pageTitle"/></h2>
                     <div>
                         <label for="slug">Slug</label>
                         <div>
