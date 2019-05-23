@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<shows>
+	<slug>Test</slug>
+	<title>Title</title>
+	<posterUrl>testurl.be</posterUrl>
+	<location>
+		<id>1</id>
+	</location>
+	<bookable>true</bookable>
+	<price>1.2</price>
+	<description>testdesc</description>
+</shows>

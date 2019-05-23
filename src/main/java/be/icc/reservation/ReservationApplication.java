@@ -1,6 +1,6 @@
 package be.icc.reservation;
 
-import be.icc.reservation.utils.RSSImporter;
+import be.icc.reservation.utils.CSVImporter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 public class ReservationApplication {
     public static void main(String[] args) {
         SpringApplication.run(ReservationApplication.class, args);
-        // CSVImporter.importShows("C:\\Users\\Medion\\Desktop\\showTest.csv");
-        // RSSImporter.importShows("C:\\Users\\Medion\\Desktop\\showTest.xml");
+        // CSVImporter.importShows("static/showTest.csv");
+        // RSSImporter.importShows("static/showTest.xml");
     }
 }

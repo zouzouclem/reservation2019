@@ -77,7 +77,7 @@ public class ShowController {
         showForm.setSlug(sho.getSlug());
         showForm.setTitle(sho.getTitle());
         showForm.setPosterURL(sho.getPosterUrl());
-        showForm.setLocation(sho.getLocationId().getId());
+        showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
         showForm.setPrice((BigDecimal)sho.getPrice());
         model.addAttribute("showForm", showForm);
@@ -99,7 +99,7 @@ public class ShowController {
         Shows s = showService.findById(showForm.getId());
         s.setSlug(showForm.getSlug());
         Locations l = locationsService.findLocationsById(showForm.getLocation());
-        s.setLocationId(l);
+        s.setLocation(l);
         s.setBookable(showForm.isBookable());
         s.setPosterUrl(showForm.getPosterURL());
         s.setPrice(showForm.getPrice());
