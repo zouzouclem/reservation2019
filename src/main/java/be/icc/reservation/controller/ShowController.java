@@ -59,7 +59,7 @@ public class ShowController {
         Shows s = new Shows();
         s.setSlug(showForm.getSlug());
         Locations loc = locationsService.findLocationsById(showForm.getLocation());
-        s.setLocationId(loc);
+        s.setLocation(loc);
         s.setBookable(showForm.isBookable());
         s.setPosterUrl(showForm.getPosterURL());
         s.setPrice(showForm.getPrice());

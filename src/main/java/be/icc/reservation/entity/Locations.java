@@ -102,7 +102,15 @@ public class Locations {
     }
 
     @Override
-    public String toString(){
-        return this.getLocality().getLocality();
+    public String toString() {
+        return "Locations{" +
+                "id=" + id +
+                ", locality=" + locality +
+                ", slug='" + slug + '\'' +
+                ", designation='" + designation + '\'' +
+                ", address='" + address + '\'' +
+                ", website='" + website + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }
