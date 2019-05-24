@@ -84,9 +84,9 @@
                             </div>
                         </div>
                         <div>
-                            <label for="pwdCheck"><spring:message code="connect.passwordCheck"/></label>
+                            <label for="myPswCheck"><spring:message code="connect.passwordCheck"/></label>
                             <div>
-                                <form:input type="password" path="passwordCheck" id="pwdCheck"/>
+                                <form:input type="password" path="passwordCheck" id="myPswCheck"/>
                                 <form:errors path="passwordCheck" cssClass="error"/>
                                 <br/>
                                 <form:errors path="isPasswordMatch" cssClass="error"/>
@@ -152,7 +152,7 @@
                 callValidations();
             });
 
-            $("#pwdCheck").blur(function () {
+            $("#myPswCheck").blur(function () {
                 callValidations();
             });
 
@@ -171,6 +171,7 @@
             function callValidations() {
                 validationLogin();
                 validationPassword();
+                validationPasswordMatch();
                 validationFirstName();
                 validationLastName();
                 validationEmail();
@@ -191,6 +192,15 @@
                 if(!pwd.match(regex)) {
                     $('#btnInscription').attr("disabled",true);
                     throw new Error("Invalid password");
+                }
+            }
+
+            function validationPasswordMatch() {
+                var pwd = document.getElementById("myPsw").value;
+                var myPswCheck = document.getElementById("myPswCheck").value;
+                if(pwd != myPswCheck) {
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid password check");
                 }
             }
 
