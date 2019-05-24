@@ -77,9 +77,9 @@
                             </div>
                         </div>
                         <div>
-                            <label for="pwd"><spring:message code="connect.password"/></label>
+                            <label for="myPsw"><spring:message code="connect.password"/></label>
                             <div>
-                                <form:input type="password" path="password" id="pwd"/>
+                                <form:input type="password" path="password" id="myPsw"/>
                                 <form:errors path="password" cssClass="error"/>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                 callValidations();
             });
 
-            $("#pwd").blur(function () {
+            $("#myPsw").blur(function () {
                 callValidations();
             });
 
@@ -170,7 +170,7 @@
 
             function callValidations() {
                 validationLogin();
-                // validationPassword();
+                validationPassword();
                 validationFirstName();
                 validationLastName();
                 validationEmail();
@@ -185,13 +185,14 @@
                 }
             }
 
-           /** function validationPassword() {
+            function validationPassword() {
                 var regex = new RegExp("^(?=.*[$&+,:;=?@#|'<>.^*()%!-])(?=.*[A-Z]).{6,}$");
-                if($("#pwd").val().match(regex)) {
+                var pwd = document.getElementById("myPsw").value;
+                if(!pwd.match(regex)) {
                     $('#btnInscription').attr("disabled",true);
                     throw new Error("Invalid password");
                 }
-            } **/
+            }
 
             function validationFirstName() {
                 var first = $("#firstName").val();
