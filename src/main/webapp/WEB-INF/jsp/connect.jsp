@@ -77,16 +77,16 @@
                             </div>
                         </div>
                         <div>
-                            <label for="pwd"><spring:message code="connect.password"/></label>
+                            <label for="myPsw"><spring:message code="connect.password"/></label>
                             <div>
-                                <form:input type="password" path="password" id="pwd"/>
+                                <form:input type="password" path="password" id="myPsw"/>
                                 <form:errors path="password" cssClass="error"/>
                             </div>
                         </div>
                         <div>
-                            <label for="pwdCheck"><spring:message code="connect.passwordCheck"/></label>
+                            <label for="myPswCheck"><spring:message code="connect.passwordCheck"/></label>
                             <div>
-                                <form:input type="password" path="passwordCheck" id="pwdCheck"/>
+                                <form:input type="password" path="passwordCheck" id="myPswCheck"/>
                                 <form:errors path="passwordCheck" cssClass="error"/>
                                 <br/>
                                 <form:errors path="isPasswordMatch" cssClass="error"/>
@@ -128,7 +128,7 @@
                         </div>
                         <div>
                             <c:if test="${signupForm.id == null}">
-                                <input type="submit" value="<spring:message code="connect.signup"/>" id="btnInscription">
+                                <input type="submit" value="<spring:message code="connect.signup"/>" id="btnInscription" disabled>
                             </c:if>
                             <c:if test="${signupForm.id != null}">
                                 <input type="submit" value="<spring:message code="connect.update"/>">
@@ -144,19 +144,90 @@
     <script>
         $(document).ready(function() {
 
-            $("#firstName").blur(function () {
-                var first = $("#firstName").val();
-                if(first.length < 3){
-                    $('#btnInscription').attr("disabled",true);
-                }
+            $("#login").blur(function () {
+                callValidations();
             });
 
+            $("#myPsw").blur(function () {
+                callValidations();
+            });
+
+            $("#myPswCheck").blur(function () {
+                callValidations();
+            });
+
+            $("#firstName").blur(function () {
+                callValidations();
+            });
+
+            $("#lastName").blur(function () {
+                callValidations();
+            });
+
+            $("#email").blur(function () {
+                callValidations();
+            });
+
+            function callValidations() {
+                validationLogin();
+                validationPassword();
+                validationPasswordMatch();
+                validationFirstName();
+                validationLastName();
+                validationEmail();
+                $('#btnInscription').attr("disabled",false);
+            }
+
+            function validationLogin() {
+                var login = $("#login").val();
+                if(login.length < 1){
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid login");
+                }
+            }
+
+            function validationPassword() {
+                var regex = new RegExp("^(?=.*[$&+,:;=?@#|'<>.^*()%!-])(?=.*[A-Z]).{6,}$");
+                var pwd = document.getElementById("myPsw").value;
+                if(!pwd.match(regex)) {
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid password");
+                }
+            }
+
+            function validationPasswordMatch() {
+                var pwd = document.getElementById("myPsw").value;
+                var myPswCheck = document.getElementById("myPswCheck").value;
+                if(pwd != myPswCheck) {
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid password check");
+                }
+            }
+
+            function validationFirstName() {
+                var first = $("#firstName").val();
+                if(first.length < 1){
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid first name");
+                }
+            }
+
+            function validationLastName() {
+                var last = $("#lastName").val();
+                if(last.length < 1){
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid last name");
+                }
+            }
+
+            function validationEmail() {
+                var regex = new RegExp("[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,3})");
+                if(!$("#email").val().match(regex)) {
+                    $('#btnInscription').attr("disabled",true);
+                    throw new Error("Invalid mail");
+                }
+            }
         })
-
     </script>
-
-
-
-
     </body>
 </html>
