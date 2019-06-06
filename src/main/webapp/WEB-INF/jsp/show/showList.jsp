@@ -38,7 +38,7 @@
        <td>${show.location}</td>
        <td>${show.price}</td>
         <form:form method="get" action="/show/showDetail/${show.id}" >
-                   <td><input type="submit" name="consult" value="consult">
+                   <td><input type="submit" name="consult" value="Consulter">
                    </td>
                </form:form>
         <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
