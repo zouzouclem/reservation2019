@@ -23,6 +23,7 @@
       <th scope="col">Prix</th>
               <th></th>
         <th></th>
+        <th></th>
 
     </tr>
   </thead>
