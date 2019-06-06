@@ -121,7 +121,7 @@ public class ShowController {
         showService.updateShow(s);
         return "redirect:/show/";
     }
-}
+
 
     @RequestMapping(value = "/show/showDetail/{id}")
     public String showDetail(Model model, @PathVariable int id){
