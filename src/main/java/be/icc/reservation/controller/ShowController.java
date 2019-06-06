@@ -112,6 +112,7 @@ public class ShowController {
     public String showDetail(Model model, @PathVariable int id){
 
         Shows sho = showService.findById(id);
+        model.addAttribute("sho", sho);
         return "show/showDetail";
     }
 }

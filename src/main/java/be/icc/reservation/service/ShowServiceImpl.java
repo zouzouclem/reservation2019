@@ -43,8 +43,5 @@ public class ShowServiceImpl implements ShowService {
         return showRepository.findById(id);
     }
 
-    /*public Shows showDetail(int id){
 
-        return showRepository.findById(id);
-    }*/
 }
