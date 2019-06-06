@@ -13,7 +13,9 @@
 Liste des spectacles
 
 
-
+<c:if test="${not empty success}">
+    <label class="success"><spring:message code="${succcess}"/></label>
+</c:if>
 <table class="table table-striped">
   <thead>
     <tr>

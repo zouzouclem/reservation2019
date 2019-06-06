@@ -60,11 +60,17 @@ public class ShowController {
         if (result.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.showForm", result);
             attr.addFlashAttribute("showForm", showForm);
+            Map<String,String> locationList = new LinkedHashMap<String,String>();
+            for(Locations location: locationsService.findAllLocations()){
+                locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
+            }
+            model.addAttribute("locationsList", locationList);
             return "show/addShow";
         }
 
         Shows s = convertShowFormInShows(null, showForm);
         showService.saveShow(s);
+        model.addAttribute("success", "success.shows.showsAdded");
         return "redirect:/show";
     }
 
@@ -107,7 +113,7 @@ public class ShowController {
 
     @RequestMapping(value = "/show/update", method = RequestMethod.POST)
     public String updateSpectacleDB(@ModelAttribute("showForm") @Valid ShowForm showForm, BindingResult result,
-                                  RedirectAttributes attr)
+                                  RedirectAttributes attr, Model model)
     {
         if(result.hasErrors())
         {
@@ -119,9 +125,9 @@ public class ShowController {
         Shows s = showService.findById(showForm.getId());
         s=convertShowFormInShows(s,showForm);
         showService.updateShow(s);
+        model.addAttribute("success", "success.shows.showsUpdated");
         return "redirect:/show/";
     }
-}
 
     @RequestMapping(value = "/show/showDetail/{id}")
     public String showDetail(Model model, @PathVariable int id){

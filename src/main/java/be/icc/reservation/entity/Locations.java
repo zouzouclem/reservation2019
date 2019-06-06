@@ -117,8 +117,4 @@ public class Locations {
     public String getCompleteAddress(){
         return getAddress() + " " + getLocality().getPostalCode() + " "+ getLocality().getLocality();
     }
-
-    public String getCompleteAddress(){
-        return getAddress() + " " + getLocality().getPostalCode() + " "+ getLocality().getLocality();
-    }
 }

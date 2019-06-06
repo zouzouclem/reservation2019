@@ -9,18 +9,22 @@ import java.math.BigDecimal;
 public class ShowForm
 {
     private Integer id;
+
     @Size(min=3, max=30)
+    @NotBlank(message = "{error.common.slug}")
     private String slug;
-    @NotBlank(message = "Ce champ ne peut pas rester vide")
+    @NotBlank(message = "{error.common.title}")
     @Size(min=3, max=50)
     private String title;
 
+    @NotBlank(message = "{error.common.posterURL}")
     private String posterURL;
-    @NotNull
+    @NotNull(message = "{error.common.location}")
     private int location;
     @NotNull
     private boolean bookable;
-    @NotNull
+
+    @NotNull(message = "{error.common.price}")
     @NumberFormat(style= NumberFormat.Style.NUMBER)
     private BigDecimal price;
 
