@@ -113,4 +113,8 @@ public class Locations {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
+    public String getCompleteAddress(){
+        return getAddress() + " " + getLocality().getPostalCode() + " "+ getLocality().getLocality();
+    }
 }

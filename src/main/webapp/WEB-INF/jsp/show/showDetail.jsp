@@ -25,6 +25,10 @@
 </br>
 <em><strong><spring:message code = "showDet.showDescription"/> :</strong></em> ${sho.description}
 </br>
+
+Title: ${show.title} (${show.slug})</br>
+Location: ${show.location} Bookable: ${show.bookable} Price: ${show.price}
+
 <jsp:include page="../assets/footer.jsp"/>
 
 </body>
