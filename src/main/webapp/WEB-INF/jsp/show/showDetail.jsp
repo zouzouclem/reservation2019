@@ -9,14 +9,23 @@
 <body>
 <jsp:include page="../assets/menu.jsp"/>
 
-<!-- Aqui metes la definicion de la vista, lo que vas a mostrar-->
-
-<h1>Liste des spectacles</h1>
-
-
-
-Image: <img src=${show.posterUrl}  class="img-fluid" alt="Responsive image">
+<h1><spring:message code = "showDet.pageTitle"/></h1>
 </br>
+ <img src=${show.posterUrl}  class="img-fluid" alt="Responsive image">
+</br>
+<em><strong><spring:message code = "showDet.showTitle"/> :</strong></em> ${sho.title} (${sho.slug})
+</br>
+<em><strong><spring:message code = "showDet.showLocation"/> : </strong></em> ${sho.location.designation}
+</br>
+<em><strong><spring:message code = "showDet.showLocationAdresse"/> :</strong></em> ${sho.location.address}
+</br>
+<em><strong><spring:message code = "showDet.showBookable"/> :</strong></em> ${sho.bookable}
+</br>
+<em><strong><spring:message code = "showDet.showPrix"/> :</strong></em> ${sho.price}
+</br>
+<em><strong><spring:message code = "showDet.showDescription"/> :</strong></em> ${sho.description}
+</br>
+
 Title: ${show.title} (${show.slug})</br>
 Location: ${show.location} Bookable: ${show.bookable} Price: ${show.price}
 

@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 public class ReservationApplication {
     public static void main(String[] args) {
         SpringApplication.run(ReservationApplication.class, args);
-        // CSVImporter.importShows("C:\\Users\\Medion\\Desktop\\showTest.csv");
+        // CSVImporter.importShows("static/showTest.csv");
+        // RSSImporter.importShows("static/showTest.xml");
     }
 }

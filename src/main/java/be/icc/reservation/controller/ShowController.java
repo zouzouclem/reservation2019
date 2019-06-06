@@ -74,7 +74,7 @@ public class ShowController {
         }
         s.setSlug(showForm.getSlug());
         Locations loc = locationsService.findLocationsById(showForm.getLocation());
-        s.setLocationId(loc);
+        s.setLocation(loc);
         s.setBookable(showForm.isBookable());
         s.setPosterUrl(showForm.getPosterURL());
         s.setPrice(showForm.getPrice());
@@ -91,7 +91,7 @@ public class ShowController {
         showForm.setSlug(sho.getSlug());
         showForm.setTitle(sho.getTitle());
         showForm.setPosterURL(sho.getPosterUrl());
-        showForm.setLocation(sho.getLocationId().getId());
+        showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
         showForm.setPrice((BigDecimal)sho.getPrice());
         model.addAttribute("showForm", showForm);
@@ -120,5 +120,14 @@ public class ShowController {
         s=convertShowFormInShows(s,showForm);
         showService.updateShow(s);
         return "redirect:/show/";
+    }
+}
+
+    @RequestMapping(value = "/show/showDetail/{id}")
+    public String showDetail(Model model, @PathVariable int id){
+
+        Shows sho = showService.findById(id);
+        model.addAttribute("sho", sho);
+        return "show/showDetail";
     }
 }
