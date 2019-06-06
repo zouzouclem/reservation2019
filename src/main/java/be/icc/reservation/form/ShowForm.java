@@ -1,22 +1,27 @@
 package be.icc.reservation.form;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class ShowForm
 {
     private Integer id;
-    @Size(min=3)
+    @Size(min=3, max=30)
     private String slug;
-    @Size(min=5)
+    @NotBlank(message = "Ce champ ne peut pas rester vide")
+    @Size(min=3, max=50)
     private String title;
-    @NotNull
+
     private String posterURL;
     @NotNull
     private int location;
     @NotNull
     private boolean bookable;
     @NotNull
+    @NumberFormat(style= NumberFormat.Style.NUMBER)
     private BigDecimal price;
 
     public Integer getId()

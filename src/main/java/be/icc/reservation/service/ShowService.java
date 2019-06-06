@@ -14,4 +14,5 @@ public interface ShowService {
     void deleteShow(Shows show);
     Shows findById(int id);
     Shows updateShow(Shows show);
+    Shows showDetail(int id);
 }
