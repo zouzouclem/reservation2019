@@ -5,24 +5,29 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 
+
 <jsp:include page="../assets/header.jsp"/>
 
 <body>
 <jsp:include page="../assets/menu.jsp"/>
 
-Liste des spectacles
+<spring:message code="showList.pageTitle"/>
 
 
 <c:if test="${not empty success}">
     <label class="success"><spring:message code="${succcess}"/></label>
 </c:if>
-<table class="table table-striped">
+<table class="table table-striped" id="showListTable" >
   <thead>
     <tr>
         <th></th>
       <th scope="col">Titre</th>
       <th scope="col">Lieu</th>
       <th scope="col">Prix</th>
+              <th></th>
+        <th></th>
+        <th></th>
+
     </tr>
   </thead>
   <tbody>
@@ -51,8 +56,12 @@ Liste des spectacles
 </table>
 
 
-
 <jsp:include page="../assets/footer.jsp"/>
 
+<script>
+$(document).ready(function() {
+    $('#showListTable').DataTable();
+} );
+</script>
 </body>
 </html>

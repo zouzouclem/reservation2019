@@ -9,6 +9,10 @@ import be.icc.reservation.service.LocationsService;
 import be.icc.reservation.entity.Shows;
 import be.icc.reservation.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.Model;
@@ -38,8 +42,10 @@ public class ShowController {
 
     @RequestMapping(value = "/show")
     public String home(Model model) {
-        List<Shows> showsList = showService.findAllShows();
-        model.addAttribute("showList", showsList);
+        Pageable sortedByName =
+                PageRequest.of(0, 20, Sort.by("title"));
+        Page<Shows> showsList = showService.findAllShows(sortedByName);
+        model.addAttribute("showList", showsList.getContent());
         return "show/showList";
     }
 
@@ -128,6 +134,7 @@ public class ShowController {
         model.addAttribute("success", "success.shows.showsUpdated");
         return "redirect:/show/";
     }
+
 
     @RequestMapping(value = "/show/showDetail/{id}")
     public String showDetail(Model model, @PathVariable int id){
