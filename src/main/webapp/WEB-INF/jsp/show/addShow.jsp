@@ -17,44 +17,44 @@
                     <c:if test="${not empty error}">
                         <label class="error">${error}/></label>
                     </c:if>
-                    <h2>Shows</h2>
+                    <h2><spring:message code="addShow.pageTitle"/></h2>
                     <div>
-                        <label for="slug">Slug</label>
+                        <label for="slug"><spring:message code="addShow.Slug"/></label>
                         <div>
                             <form:input type="text" path="slug" id="slug"/>
                             <form:errors path="slug" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="title">Title</label>
+                        <label for="title"><spring:message code="addShow.Title"/></label>
                         <div>
                             <form:input type="text" path="title" id="title"/>
                             <form:errors path="title" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="posterURL">Poster_URL</label>
+                        <label for="posterURL"><spring:message code="addShow.PosterURL"/></label>
                         <div>
                             <form:input type="text" path="posterURL" id="posterURL"/>
                             <form:errors path="posterURL" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="location">Location</label>
+                        <label for="location"><spring:message code="addShow.Location"/></label>
                         <div>
                             <form:select path="location" items="${locationsList}"/>
                             <form:errors path="location" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="bookable">Bookable</label>
+                        <label for="bookable"><spring:message code="addShow.Bookable"/></label>
                         <div>
                             <form:checkbox path="bookable" id="bookable"/>
                             <form:errors path="bookable" cssClass="error"/>
                         </div>
                     </div>
                     <div>
-                        <label for="price">Price</label>
+                        <label for="price"><spring:message code="addShow.Price"/></label>
                         <div>
                             <form:input type="number" path="price" id="price"/>
                             <form:errors path="price" cssClass="error"/>

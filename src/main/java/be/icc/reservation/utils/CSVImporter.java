@@ -73,7 +73,7 @@ public class CSVImporter {
                     show.setTitle(showData[i]);
                     break;
                 case "location_id":
-                    show.setLocationId(locationsService.findById(Integer.valueOf(showData[i])));
+                    show.setLocation(locationsService.findById(Integer.valueOf(showData[i])));
                     break;
                 case "description":
                     show.setDescription(showData[i]);

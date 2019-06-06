@@ -1,10 +1,13 @@
 package be.icc.reservation.entity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
+@XmlRootElement(name="shows")
 public class Shows {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,11 +57,11 @@ public class Shows {
         this.posterUrl = posterUrl;
     }
 
-    public Locations getLocationId() {
+    public Locations getLocation() {
         return location;
     }
 
-    public void setLocationId(Locations locationId) {
+    public void setLocation(Locations locationId) {
         this.location = locationId;
     }
 
