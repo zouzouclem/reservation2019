@@ -12,8 +12,6 @@
 
 <div class="container">
 
-    <h2 class="pb-2"><spring:message code="showDet.pageTitle"/></h2>
-
     <div class="card" style="width: 25rem;">
         <img src="${show.posterUrl}" class="img-fluid" alt="Responsive image"
              onerror="this.onerror=null;this.src='<c:url value="/resources/images/default-show.jpg"/>';">
@@ -58,13 +56,35 @@
                 </sec:authorize>
             </form:form>
 
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                  <th scope="col"></th>
+
+                </tr>
+              </thead>
+              <tbody>
+
+            <c:forEach items="${representations}" var="representation">
+                <tr>
+                   <td>${representation.whenDate}</td>
+
+
+                                 <form:form method="get" action="/reservation/booking/${representation.id}" >
+                                             <td><input type="submit" name="update" value="Modifier">
+                                             </td>
+                                         </form:form>
+                                         </tr>
+               </c:forEach>
+
+            </tbody>
+            </table>
         </div>
     </div>
 
-    <%--Title: ${show.title} (${show.slug})</br>--%>
-    <%--Location: ${show.location} Bookable: ${show.bookable} Price: ${show.price}--%>
-
 </div>
 <jsp:include page="../assets/footer.jsp"/>
+
 
 </body>
