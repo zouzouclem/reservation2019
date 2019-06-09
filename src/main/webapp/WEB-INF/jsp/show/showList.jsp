@@ -16,6 +16,8 @@
 
 <h2><spring:message code="showList.pageTitle"/></h2>
 
+    <%--TODO Leila Labels--%>
+    <%--TODO Leila enlever la checkbox--%>
 
 <c:if test="${not empty success}">
     <label class="success"><spring:message code="${succcess}"/></label>
