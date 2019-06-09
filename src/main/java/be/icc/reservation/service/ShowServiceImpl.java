@@ -8,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -16,6 +19,13 @@ public class ShowServiceImpl implements ShowService {
     @Autowired
     ShowRepository showRepository;
 
+    @Override
+    public List<Shows> findAll() {
+        return StreamSupport.stream(showRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Page<Shows> findAllShows(Pageable pageable) {
         return showRepository.findAll(pageable);
     }
@@ -36,7 +46,9 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public Shows updateShow(Shows show) { return showRepository.save(show); }
+    public Shows updateShow(Shows show) {
+        return showRepository.save(show);
+    }
 
     @Override
     public Shows showDetail(int id) {

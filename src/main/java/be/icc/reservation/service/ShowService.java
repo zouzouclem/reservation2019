@@ -9,10 +9,17 @@ import java.util.List;
 
 public interface ShowService {
 
+    List<Shows> findAll();
+
     Page<Shows> findAllShows(Pageable pageable);
+
     Shows saveShow(Shows show);
+
     void deleteShow(Shows show);
+
     Shows findById(int id);
+
     Shows updateShow(Shows show);
+
     Shows showDetail(int id);
 }

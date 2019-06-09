@@ -5,11 +5,15 @@ import be.icc.reservation.entity.Shows;
 import be.icc.reservation.form.ShowForm;
 import be.icc.reservation.service.LocationsService;
 import be.icc.reservation.service.ShowService;
+import be.icc.reservation.utils.CSVExporter;
+import be.icc.reservation.utils.CSVImporter;
+import be.icc.reservation.utils.RSSImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,17 +45,37 @@ public class ShowController {
 
     @RequestMapping(value = "/show")
     public String home(Model model) {
-        Pageable sortedByName =
-                PageRequest.of(0, 20, Sort.by("title"));
+        Pageable sortedByName = PageRequest.of(0, 20, Sort.by("title"));
         Page<Shows> showsList = showService.findAllShows(sortedByName);
         model.addAttribute("showList", showsList.getContent());
+        Users loggedIn = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean isAdmin = loggedIn != null || loggedIn.getRole().getRole().equalsIgnoreCase("ROLE_ADMIN");
+        model.addAttribute("isAdmin", isAdmin);
         return "show/showList";
+    }
+
+    @RequestMapping(value = "/show/importCSV", method = RequestMethod.POST)
+    public String importCSV(Model model) {
+        CSVImporter.importShows((String) model.asMap().get("fileUrl"));
+        return "show/importCSV";
+    }
+
+    @RequestMapping(value = "/show/importRSS", method = RequestMethod.POST)
+    public String importRSS(Model model) {
+        RSSImporter.importShows((String) model.asMap().get("fileUrl"));
+        return "show/importCSV";
+    }
+
+    @RequestMapping(value = "/show/exportCSV")
+    public String exportCSV(Model model) {
+        CSVExporter.exportShows();
+        return "show/exportCSV";
     }
 
     @RequestMapping(value = "/show/add")
     public String addSpectacle(Model model) {
         model.addAttribute("showForm", new ShowForm());
-        Map<String, String> locationList = new LinkedHashMap<String, String>();
+        Map<String, String> locationList = new LinkedHashMap<>();
         for (Locations location : locationsService.findAllLocations()) {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }
@@ -103,10 +127,10 @@ public class ShowController {
         showForm.setPosterURL(sho.getPosterUrl());
         showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
-        showForm.setPrice((BigDecimal) sho.getPrice());
+        showForm.setPrice( sho.getPrice());
         model.addAttribute("showForm", showForm);
 
-        Map<String, String> locationList = new LinkedHashMap<String, String>();
+        Map<String, String> locationList = new LinkedHashMap<>();
         for (Locations location : locationsService.findAllLocations()) {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }

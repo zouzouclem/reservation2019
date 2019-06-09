@@ -1,0 +1,94 @@
+<Shows>
+  <Shows>
+    <id>5</id>
+    <slug>testshow</slug>
+    <title>showtest</title>
+    <posterUrl>www.show1.be</posterUrl>
+    <location>
+      <id>1</id>
+      <locality>
+        <id>1</id>
+        <postalCode>1</postalCode>
+        <locality>a</locality>
+      </locality>
+      <slug>a</slug>
+      <designation>a</designation>
+      <address>a</address>
+      <website>a</website>
+      <phone>a</phone>
+    </location>
+    <bookable>true</bookable>
+    <price>10.00</price>
+    <description>testshow</description>
+  </Shows>
+  <Shows>
+    <id>6</id>
+    <slug>Test</slug>
+    <title>Title</title>
+    <posterUrl>testurl.be</posterUrl>
+    <location reference="../../Shows/location"/>
+    <bookable>true</bookable>
+    <price>1.20</price>
+    <description>testdesc</description>
+  </Shows>
+  <Shows>
+    <id>7</id>
+    <slug>testshow</slug>
+    <title>showtest</title>
+    <posterUrl>www.show1.be</posterUrl>
+    <location reference="../../Shows/location"/>
+    <bookable>true</bookable>
+    <price>10.00</price>
+    <description>testshow</description>
+  </Shows>
+  <Shows>
+    <id>8</id>
+    <slug>Test</slug>
+    <title>Title</title>
+    <posterUrl>testurl.be</posterUrl>
+    <location reference="../../Shows/location"/>
+    <bookable>true</bookable>
+    <price>1.20</price>
+    <description>testdesc</description>
+  </Shows>
+  <Shows>
+    <id>9</id>
+    <slug>testshow</slug>
+    <title>showtest</title>
+    <posterUrl>www.show1.be</posterUrl>
+    <location reference="../../Shows/location"/>
+    <bookable>true</bookable>
+    <price>10.00</price>
+    <description>testshow</description>
+  </Shows>
+  <Shows>
+    <id>10</id>
+    <slug>Test</slug>
+    <title>Title</title>
+    <posterUrl>testurl.be</posterUrl>
+    <location reference="../../Shows/location"/>
+    <bookable>true</bookable>
+    <price>1.20</price>
+    <description>testdesc</description>
+  </Shows>
+  <Shows>
+    <id>11</id>
+    <slug>testshow</slug>
+    <title>showtest</title>
+    <posterUrl>www.show1.be</posterUrl>
+    <location reference="../../Shows/location"/>
+    <bookable>true</bookable>
+    <price>10.00</price>
+    <description>testshow</description>
+  </Shows>
+  <Shows>
+    <id>12</id>
+    <slug>Test</slug>
+    <title>Title</title>
+    <posterUrl>testurl.be</posterUrl>
+    <location reference="../../Shows/location"/>
+    <bookable>true</bookable>
+    <price>1.20</price>
+    <description>testdesc</description>
+  </Shows>
+</Shows>
