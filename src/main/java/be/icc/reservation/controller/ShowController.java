@@ -11,6 +11,9 @@ import be.icc.reservation.utils.CSVExporter;
 import be.icc.reservation.utils.CSVImporter;
 import be.icc.reservation.utils.RSSExporter;
 import be.icc.reservation.utils.RSSImporter;
+import be.icc.reservation.utils.CSVExporter;
+import be.icc.reservation.utils.CSVImporter;
+import be.icc.reservation.utils.RSSImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -51,63 +54,28 @@ public class ShowController {
         Pageable sortedByName = PageRequest.of(0, 20, Sort.by("title"));
         Page<Shows> showsList = showService.findAllShows(sortedByName);
         model.addAttribute("showList", showsList.getContent());
+        Users loggedIn = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean isAdmin = loggedIn != null || loggedIn.getRole().getRole().equalsIgnoreCase("ROLE_ADMIN");
+        model.addAttribute("isAdmin", isAdmin);
         return "show/showList";
     }
 
-    @RequestMapping(value = "/show/importCSV", method = RequestMethod.GET)
-    public String showImportCSV(Model model) {
-        setIsAdminBoolean(model);
-        model.addAttribute("fileForm", new FileForm());
+    @RequestMapping(value = "/show/importCSV", method = RequestMethod.POST)
+    public String importCSV(Model model) {
+        CSVImporter.importShows((String) model.asMap().get("fileUrl"));
         return "show/importCSV";
     }
 
-    @RequestMapping(value = "/show/importCSV", method = RequestMethod.POST)
-    public String importCSV(@ModelAttribute("fileForm") @Valid FileForm fileForm, BindingResult result,
-                            RedirectAttributes attr, Model model) {
-        if (result.hasErrors()) {
-            attr.addFlashAttribute("org.springframework.validation.BindingResult.fileForm", result);
-            attr.addFlashAttribute("fileForm", fileForm);
-            return "show/importCSV";
-        }
-        String fileUrl = fileForm.getFile().getAbsolutePath()
-                .replace("\\reservation2019", ""); //cheat
-        CSVImporter.importShows(fileUrl);
-        model.addAttribute("success", "success.shows.showsAdded");
-        return "redirect:/show";
+    @RequestMapping(value = "/show/importRSS", method = RequestMethod.POST)
+    public String importRSS(Model model) {
+        RSSImporter.importShows((String) model.asMap().get("fileUrl"));
+        return "show/importCSV";
     }
 
-    @RequestMapping(value = "/show/exportCSV", method = RequestMethod.GET)
+    @RequestMapping(value = "/show/exportCSV")
     public String exportCSV(Model model) {
         CSVExporter.exportShows();
         return "show/exportCSV";
-    }
-
-    @RequestMapping(value = "/show/importRSS", method = RequestMethod.GET)
-    public String showImportRSS(Model model) {
-        setIsAdminBoolean(model);
-        model.addAttribute("fileForm", new FileForm());
-        return "show/importRSS";
-    }
-
-    @RequestMapping(value = "/show/importRSS", method = RequestMethod.POST)
-    public String importRSS(@ModelAttribute("fileForm") @Valid FileForm fileForm, BindingResult result,
-                            RedirectAttributes attr, Model model) {
-        if (result.hasErrors()) {
-            attr.addFlashAttribute("org.springframework.validation.BindingResult.fileForm", result);
-            attr.addFlashAttribute("fileForm", fileForm);
-            return "show/importRSS";
-        }
-        String fileUrl = fileForm.getFile().getAbsolutePath()
-                .replace("\\reservation2019", ""); //cheat
-        RSSImporter.importShows(fileUrl);
-        model.addAttribute("success", "success.shows.showsAdded");
-        return "redirect:/show";
-    }
-
-    @RequestMapping(value = "/show/exportRSS")
-    public String exportRSS(Model model) {
-        RSSExporter.exportShows();
-        return "show/exportRSS";
     }
 
     @RequestMapping(value = "/show/add")
