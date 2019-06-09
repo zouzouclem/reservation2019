@@ -2,11 +2,8 @@ package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
 import be.icc.reservation.entity.Shows;
-import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.ShowForm;
-import be.icc.reservation.form.SignupForm;
 import be.icc.reservation.service.LocationsService;
-import be.icc.reservation.entity.Shows;
 import be.icc.reservation.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.math.BigDecimal;
-
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -39,6 +33,11 @@ public class ShowController {
     private ShowService showService;
     @Autowired
     private LocationsService locationsService;
+
+    @ModelAttribute("styleColor")
+    public String getStyleColor(HttpServletRequest request) {
+        return (String) request.getSession().getAttribute("styleColor");
+    }
 
     @RequestMapping(value = "/show")
     public String home(Model model) {
@@ -52,8 +51,8 @@ public class ShowController {
     @RequestMapping(value = "/show/add")
     public String addSpectacle(Model model) {
         model.addAttribute("showForm", new ShowForm());
-        Map<String,String> locationList = new LinkedHashMap<String,String>();
-        for(Locations location: locationsService.findAllLocations()){
+        Map<String, String> locationList = new LinkedHashMap<String, String>();
+        for (Locations location : locationsService.findAllLocations()) {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }
         model.addAttribute("locationsList", locationList);
@@ -62,12 +61,12 @@ public class ShowController {
 
     @RequestMapping(value = "/show/add", method = RequestMethod.POST)
     public String addShowDB(@ModelAttribute("showForm") @Valid ShowForm showForm, BindingResult result,
-                         RedirectAttributes attr, Model model) {
+                            RedirectAttributes attr, Model model) {
         if (result.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.showForm", result);
             attr.addFlashAttribute("showForm", showForm);
-            Map<String,String> locationList = new LinkedHashMap<String,String>();
-            for(Locations location: locationsService.findAllLocations()){
+            Map<String, String> locationList = new LinkedHashMap<String, String>();
+            for (Locations location : locationsService.findAllLocations()) {
                 locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
             }
             model.addAttribute("locationsList", locationList);
@@ -80,8 +79,8 @@ public class ShowController {
         return "redirect:/show";
     }
 
-    private Shows convertShowFormInShows(Shows s, ShowForm showForm){
-        if(s == null){
+    private Shows convertShowFormInShows(Shows s, ShowForm showForm) {
+        if (s == null) {
             s = new Shows();
         }
         s.setSlug(showForm.getSlug());
@@ -95,8 +94,7 @@ public class ShowController {
     }
 
     @RequestMapping(value = "/show/update/{id}")
-    public String modifyShow(Model model, @PathVariable int id)
-    {
+    public String modifyShow(Model model, @PathVariable int id) {
         Shows sho = showService.findById(id);
         ShowForm showForm = new ShowForm();
         showForm.setId(sho.getId());
@@ -105,11 +103,11 @@ public class ShowController {
         showForm.setPosterURL(sho.getPosterUrl());
         showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
-        showForm.setPrice((BigDecimal)sho.getPrice());
+        showForm.setPrice((BigDecimal) sho.getPrice());
         model.addAttribute("showForm", showForm);
 
-        Map<String,String> locationList = new LinkedHashMap<String,String>();
-        for(Locations location: locationsService.findAllLocations()){
+        Map<String, String> locationList = new LinkedHashMap<String, String>();
+        for (Locations location : locationsService.findAllLocations()) {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }
 
@@ -119,17 +117,15 @@ public class ShowController {
 
     @RequestMapping(value = "/show/update", method = RequestMethod.POST)
     public String updateSpectacleDB(@ModelAttribute("showForm") @Valid ShowForm showForm, BindingResult result,
-                                  RedirectAttributes attr, Model model)
-    {
-        if(result.hasErrors())
-        {
+                                    RedirectAttributes attr, Model model) {
+        if (result.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.showForm", result);
             attr.addFlashAttribute("showForm", showForm);
             return "redirect:/show/updateShow";
         }
 
         Shows s = showService.findById(showForm.getId());
-        s=convertShowFormInShows(s,showForm);
+        s = convertShowFormInShows(s, showForm);
         showService.updateShow(s);
         model.addAttribute("success", "success.shows.showsUpdated");
         return "redirect:/show/";
@@ -137,7 +133,7 @@ public class ShowController {
 
 
     @RequestMapping(value = "/show/showDetail/{id}")
-    public String showDetail(Model model, @PathVariable int id){
+    public String showDetail(Model model, @PathVariable int id) {
 
         Shows sho = showService.findById(id);
         model.addAttribute("sho", sho);

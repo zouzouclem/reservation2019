@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
@@ -35,6 +36,11 @@ public class IdentificationController {
     UserService userService;
     @Autowired
     MailService mailService;
+
+    @ModelAttribute("styleColor")
+    public String getStyleColor(HttpServletRequest request) {
+        return (String) request.getSession().getAttribute("styleColor");
+    }
 
     @RequestMapping("")
     public String connect(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String success) {
@@ -115,7 +121,7 @@ public class IdentificationController {
         if ("anonymousUser".equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal())) {
             return "redirect:/connect";
         }
-        Users user = (Users)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Users user = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!model.containsAttribute("signupForm") || updateSignupForm != null) {
             SignupForm signupForm = new SignupForm();
             signupForm.setId(user.getId());
@@ -142,8 +148,8 @@ public class IdentificationController {
         user.setFirstname(signupForm.getFirstName());
         user.setLastname(signupForm.getLastName());
         user.setLangue(signupForm.getLangue());
-        BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
-        String hashedPassword= encoder.encode(signupForm.getPassword());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(signupForm.getPassword());
         user.setPassword(hashedPassword);
         userService.update(user);
         return "redirect:/";

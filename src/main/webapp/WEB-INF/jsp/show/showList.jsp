@@ -7,6 +7,7 @@
 
 
 <jsp:include page="../assets/header.jsp"/>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <body>
 <jsp:include page="../assets/menu.jsp"/>
@@ -17,51 +18,51 @@
 <c:if test="${not empty success}">
     <label class="success"><spring:message code="${succcess}"/></label>
 </c:if>
-<table class="table table-striped" id="showListTable" >
-  <thead>
+<table class="table table-striped" id="showListTable">
+    <thead>
     <tr>
         <th></th>
-      <th scope="col">Titre</th>
-      <th scope="col">Lieu</th>
-      <th scope="col">Prix</th>
-              <th></th>
+        <th scope="col">Titre</th>
+        <th scope="col">Lieu</th>
+        <th scope="col">Prix</th>
+        <th></th>
         <th></th>
         <th></th>
 
     </tr>
-  </thead>
-  <tbody>
-  <c:forEach items="${showList}" var="show">
-    <tr>
-        <td><input type="checkbox" name="showId" value=${show.id}></td>
-       <td>${show.title}</td>
-       <td>${show.location}</td>
-       <td>${show.price}</td>
-        <form:form method="get" action="/show/showDetail/${show.id}" >
-                   <td><input type="submit" name="consult" value="Consulter">
-                   </td>
-               </form:form>
-        <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
-            <td><input type="submit" name="update" value="Modifier">
-            </td>
-        </form:form>
-        <form:form method="get" action="/show/delete/${show.id}" modelAttribute="showForm">
-            <td><input type="submit" name="delete" value="Supprimer"></td>
-        </form:form>
+    </thead>
+    <tbody>
+    <c:forEach items="${showList}" var="show">
+        <tr>
+            <td><input type="checkbox" name="showId" value=${show.id}></td>
+            <td>${show.title}</td>
+            <td>${show.location}</td>
+            <td>${show.price}</td>
+            <form:form method="get" action="/show/showDetail/${show.id}">
+                <td><input type="submit" name="consult" value="Consulter">
+                </td>
+            </form:form>
+            <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
+                <td><input type="submit" name="update" value="Modifier">
+                </td>
+            </form:form>
+            <form:form method="get" action="/show/delete/${show.id}" modelAttribute="showForm">
+                <td><input type="submit" name="delete" value="Supprimer"></td>
+            </form:form>
 
-    </tr>
-   </c:forEach>
+        </tr>
+    </c:forEach>
 
-  </tbody>
+    </tbody>
 </table>
 
 
 <jsp:include page="../assets/footer.jsp"/>
 
 <script>
-$(document).ready(function() {
-    $('#showListTable').DataTable();
-} );
+    $(document).ready(function () {
+        $('#showListTable').DataTable();
+    });
 </script>
 </body>
 </html>

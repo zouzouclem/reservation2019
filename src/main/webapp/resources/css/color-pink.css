@@ -1,0 +1,12 @@
+:root {
+    --main-bg-color: pink;
+    --main-txt-color: black;
+    --main-padding: 15px;
+}
+
+.navbar {
+    background-color: var(--main-bg-color) !important;
+    color: var(--main-txt-color);
+    padding: var(--main-padding);
+}
+
