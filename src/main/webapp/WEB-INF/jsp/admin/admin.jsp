@@ -17,7 +17,7 @@
 
 <div class="container">
 
-    <h4><spring:message code="admin.color.text"/></h4>
+    <h2><spring:message code="admin.color.text"/></h2>
     <br/>
 
 
