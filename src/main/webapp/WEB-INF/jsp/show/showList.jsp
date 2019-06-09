@@ -14,7 +14,7 @@
 
 <div class="container">
 
-<h2><spring:message code="showList.pageTitle"/></h2>
+<h2 class="bold"><spring:message code="showList.pageTitle"/></h2>
 
     <%--TODO Leila Labels--%>
     <%--TODO Leila enlever la checkbox--%>
@@ -30,8 +30,10 @@
         <th scope="col">Lieu</th>
         <th scope="col">Prix</th>
         <th></th>
+        <sec:authorize access="hasRole('ADMIN')">
         <th></th>
         <th></th>
+        </sec:authorize>
 
     </tr>
     </thead>
@@ -43,16 +45,18 @@
             <td>${show.location}</td>
             <td>${show.price}</td>
             <form:form method="get" action="/show/showDetail/${show.id}">
-                <td><input type="submit" name="consult" value="Consulter">
+                <td><input type="submit" class="btn btn-secondary" value="Consulter">
                 </td>
             </form:form>
+            <sec:authorize access="hasRole('ADMIN')">
             <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
-                <td><input type="submit" name="update" value="Modifier">
+                <td><input type="submit" class="btn btn-secondary"value="Modifier">
                 </td>
             </form:form>
             <form:form method="get" action="/show/delete/${show.id}" modelAttribute="showForm">
-                <td><input type="submit" name="delete" value="Supprimer"></td>
+                <td><input type="submit" class="btn btn-secondary" value="Supprimer"></td>
             </form:form>
+            </sec:authorize>
 
         </tr>
     </c:forEach>

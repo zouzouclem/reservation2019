@@ -9,7 +9,9 @@
 <body>
 <jsp:include page="./assets/menu.jsp"/>
 
-<spring:message code = "reservation.pageTitle"/>
+<div class="container">
+
+<h2><spring:message code = "reservation.pageTitle"/></h2>
 
 
 <table class="table table-striped">
@@ -35,6 +37,7 @@
   </tbody>
 </table>
 
+</div>
 <jsp:include page="./assets/footer.jsp"/>
 
 </body>

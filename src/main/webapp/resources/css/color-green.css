@@ -10,3 +10,7 @@
     padding: var(--main-padding);
 }
 
+.btn-secondary{
+    background-color: var(--main-bg-color) !important;
+    color: white;
+}

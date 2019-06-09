@@ -24,9 +24,6 @@
             <c:if test="${signupForm.id == null}">
                 <form:form method="post" action="/connect/login" modelAttribute="loginForm">
                     <fieldset>
-                        <c:if test="${not empty error}">
-                            <label class="error"><spring:message code="${error}"/></label>
-                        </c:if>
                         <h2><spring:message code="connect.login"/></h2>
                         <div class="form-group"><label for="userName"><spring:message code="connect.userName"/></label>
                             <div>
@@ -51,6 +48,9 @@
             </c:if>
             <c:if test="${signupForm.id != null}">
                 <c:set var="signupOrUpdate" value="/connect/update"/>
+            </c:if>
+            <c:if test="${not empty error}">
+                <label class="error"><spring:message code="${error}"/></label>
             </c:if>
         </div>
         <div class="col-md-6">

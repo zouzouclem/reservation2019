@@ -15,7 +15,12 @@
 
 <body>
 <jsp:include page="./assets/menu.jsp"/>
-<spring:message code="access.denied.message"/>
+<div class="container">
+    <div class="alert alert-danger pt-2" role="alert">
+        <h4 class="alert-heading">Attention</h4>
+        <p><spring:message code="access.denied.message"/></p>
+    </div>
+</div>
 
 <jsp:include page="./assets/footer.jsp"/>
 

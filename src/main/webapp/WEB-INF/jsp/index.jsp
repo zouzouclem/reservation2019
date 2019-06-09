@@ -14,13 +14,18 @@
 
 <body>
 <jsp:include page="./assets/menu.jsp" />
-    <spring:message code="welcome.text"/>
-    <br/>
+<div class="container">
+
+
+    <h2><spring:message code="welcome.text"/></h2>
+
+
     <sec:authorize access="isAuthenticated()">
         <sec:authentication property="principal.username" var="username" />
-        Vous êtes connecté en tant que : ${username}
+      <span>Bonjour ${username}</span>
     </sec:authorize>
 
-    <jsp:include page="./assets/footer.jsp" />
+
+</div>
 
 </body>

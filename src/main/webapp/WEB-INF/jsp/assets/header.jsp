@@ -11,9 +11,8 @@
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 
-    <c:if test="${styleColor == 'default'}">
-        <link href="<c:url value="/resources/css/myCss.css" />" rel="stylesheet">
-    </c:if>
+
+    <link href="<c:url value="/resources/css/myCss.css" />" rel="stylesheet">
     <c:if test="${styleColor== 'blue'}">
         <link href="<c:url value="/resources/css/color-blue.css" />" rel="stylesheet">
     </c:if>

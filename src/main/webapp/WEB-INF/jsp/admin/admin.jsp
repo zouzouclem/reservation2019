@@ -28,7 +28,7 @@
                     <h5 class="card-title"><spring:message code="admin.default.style"/> </h5>
                     <img src="<c:url value="/resources/images/style-default.PNG" />" class="card-img-top" alt="...">
                 </div>
-                <a class="btn btn-secondary" href="<c:url value="/admin/changeColor/default"/>"><spring:message code="admin.default.style.apply"/></a>
+                <a class="btn btn-light" href="<c:url value="/admin/changeColor/default"/>"><spring:message code="admin.default.style.apply"/></a>
 
             </div>
         </div>
