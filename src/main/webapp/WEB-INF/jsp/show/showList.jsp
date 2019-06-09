@@ -12,7 +12,9 @@
 <body>
 <jsp:include page="../assets/menu.jsp"/>
 
-<spring:message code="showList.pageTitle"/>
+<div class="container">
+
+<h2><spring:message code="showList.pageTitle"/></h2>
 
 
 <c:if test="${not empty success}">
@@ -55,7 +57,7 @@
 
     </tbody>
 </table>
-
+</div>
 
 <jsp:include page="../assets/footer.jsp"/>
 
