@@ -10,8 +10,7 @@
 <body>
 <jsp:include page="../assets/menu.jsp"/>
 
-<c:choose>
-    <c:when test="${fileForm.id == null && isAdmin}">
+    <c:if test="${fileForm.id == null}">
         <div>
             <form:form method="post" action="/show/importCSV" modelAttribute="fileForm">
                 <fieldset>
@@ -33,10 +32,6 @@
                 </fieldset>
             </form:form>
         </div>
-    </c:when>
-    <c:otherwise>
-        <spring:message code="authentication.adminNeeded"/>
-    </c:otherwise>
-</c:choose>
+    </c:if>
 <jsp:include page="../assets/footer.jsp"/>
 </body>
