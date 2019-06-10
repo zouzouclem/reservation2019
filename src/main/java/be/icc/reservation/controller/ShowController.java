@@ -56,6 +56,7 @@ public class ShowController {
 
     @RequestMapping(value = "/show/importCSV", method = RequestMethod.GET)
     public String showImportCSV(Model model) {
+        setIsAdminBoolean(model);
         model.addAttribute("fileForm", new FileForm());
         return "show/importCSV";
     }
@@ -68,7 +69,6 @@ public class ShowController {
             attr.addFlashAttribute("fileForm", fileForm);
             return "show/importCSV";
         }
-
         String fileUrl = fileForm.getFile().getAbsolutePath()
                 .replace("\\reservation2019", ""); //cheat
         CSVImporter.importShows(fileUrl);
@@ -84,6 +84,7 @@ public class ShowController {
 
     @RequestMapping(value = "/show/importRSS", method = RequestMethod.GET)
     public String showImportRSS(Model model) {
+        setIsAdminBoolean(model);
         model.addAttribute("fileForm", new FileForm());
         return "show/importRSS";
     }
@@ -96,7 +97,6 @@ public class ShowController {
             attr.addFlashAttribute("fileForm", fileForm);
             return "show/importRSS";
         }
-
         String fileUrl = fileForm.getFile().getAbsolutePath()
                 .replace("\\reservation2019", ""); //cheat
         RSSImporter.importShows(fileUrl);
@@ -118,10 +118,6 @@ public class ShowController {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }
         model.addAttribute("locationsList", locationList);
-        Users loggedIn = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        boolean isAdmin = loggedIn != null || loggedIn.getRole().getRole()
-                .equalsIgnoreCase("ROLE_ADMIN");
-        model.addAttribute("isAdmin", isAdmin);
         return "show/addShow";
     }
 
@@ -169,7 +165,7 @@ public class ShowController {
         showForm.setPosterURL(sho.getPosterUrl());
         showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
-        showForm.setPrice( sho.getPrice());
+        showForm.setPrice(sho.getPrice());
         model.addAttribute("showForm", showForm);
 
         Map<String, String> locationList = new LinkedHashMap<>();
@@ -211,5 +207,16 @@ public class ShowController {
 
         showService.deleteShow(showService.findById(id));
         return "redirect:/show";
+    }
+
+    private void setIsAdminBoolean(Model model) {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Users) {
+            Users loggedIn = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            boolean isAdmin = loggedIn != null || loggedIn.getRole().getRole()
+                    .equalsIgnoreCase("ROLE_ADMIN");
+            model.addAttribute("isAdmin", isAdmin);
+        } else {
+            model.addAttribute("isAdmin", false);
+        }
     }
 }
