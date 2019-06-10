@@ -50,7 +50,7 @@
                 <dd class="col-sm-7"> ${show.description}</dd>
             </div>
             </p>
-            <form:form method="get" action="/representation/add/${show.id}">
+            <form:form method="get" action="/admin/representation/add/${show.id}">
 
                 <a href="#" class="btn btn-secondary">book</a>
                 <sec:authorize access="hasRole('ADMIN')">
