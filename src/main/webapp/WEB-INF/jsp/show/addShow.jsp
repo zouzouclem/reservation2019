@@ -66,7 +66,7 @@
                     </div>
                     <br/>
                     <div>
-                        <input type="submit" class="btn btn-secondary" value="Enregistrer">
+                        <button class="btn btn-secondary" type="submit"><spring:message code="addShow.Save"/></button>
                     </div>
 
                 </div>

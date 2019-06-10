@@ -45,19 +45,16 @@
             <td>${show.location}</td>
             <td>${show.price}</td>
             <form:form method="get" action="/show/showDetail/${show.id}">
-                <td><input type="submit" class="btn btn-secondary" value="Consulter">
-                </td>
+                <td><button class="btn btn-secondary" type="submit"><spring:message code="showList.Consultation"/></button></td>
             </form:form>
             <sec:authorize access="hasRole('ADMIN')">
             <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
-                <td><input type="submit" class="btn btn-secondary"value="Modifier">
-                </td>
+                <td><button class="btn btn-secondary" type="submit"><spring:message code="showList.Modification"/></button></td>
             </form:form>
             <form:form method="get" action="/show/delete/${show.id}" modelAttribute="showForm">
-                <td><input type="submit" class="btn btn-secondary" value="Supprimer"></td>
+                <td><button class="btn btn-secondary" type="submit"><spring:message code="showList.Suppression"/></button></td>
             </form:form>
             </sec:authorize>
-
         </tr>
     </c:forEach>
 

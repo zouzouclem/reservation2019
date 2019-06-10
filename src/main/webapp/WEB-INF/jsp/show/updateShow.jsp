@@ -72,7 +72,7 @@
                     <br/>
                     <div>
                         <%--TODO philippe label--%>
-                        <input type="submit" value="Mettre à jour" class="btn btn-secondary">
+                            <button class="btn btn-secondary" type="submit"><spring:message code="updateShow.maj"/>
                     </div>
                 </div>
             </div>
