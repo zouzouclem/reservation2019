@@ -1,0 +1,143 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 10-06-2019 a las 17:03:22
+-- Versión del servidor: 5.7.14
+-- Versión de PHP: 5.6.25
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `reservations`
+--
+
+--
+-- Volcado de datos para la tabla `artists`
+--
+
+INSERT INTO `artists` (`id`, `firstname`, `lastname`) VALUES
+(1, 'aaaaa', 'bbbbbb'),
+(2, 'cccccc', 'dddddd'),
+(3, 'eeeeee', 'fffffff'),
+(4, 'gggggg', 'hhhhhh'),
+(5, 'iiiii', 'jjjjj'),
+(6, 'aaaaa', 'bbbbbb'),
+(7, 'cccccc', 'dddddd'),
+(8, 'eeeeee', 'fffffff'),
+(9, 'gggggg', 'hhhhhh'),
+(10, 'iiiii', 'jjjjj');
+
+--
+-- Volcado de datos para la tabla `artist_type`
+--
+
+INSERT INTO `artist_type` (`id`, `artist_id`, `type_id`) VALUES
+(1, 3, 1),
+(2, 4, 2);
+
+--
+-- Volcado de datos para la tabla `artist_type_show`
+--
+
+INSERT INTO `artist_type_show` (`artist_type_id`, `show_id`) VALUES
+(1, 2),
+(2, 1);
+
+--
+-- Volcado de datos para la tabla `localities`
+--
+
+INSERT INTO `localities` (`id`, `locality`, `postal_code`) VALUES
+(1, 'tsrfhtr', '1245'),
+(2, 'caca1', '1234'),
+(3, 'caca2', '1234'),
+(4, 'caca3', '1234'),
+(5, 'caca4', '123'),
+(6, 'tsrfhtr', '1245'),
+(7, 'caca1', '1234'),
+(8, 'caca2', '1234'),
+(9, 'caca3', '1234'),
+(10, 'caca4', '123');
+
+--
+-- Volcado de datos para la tabla `locations`
+--
+
+INSERT INTO `locations` (`id`, `address`, `designation`, `phone`, `slug`, `website`, `localities_id`) VALUES
+(1, 'caascdasdccacac', 'cacacac1', '618293267', 'sdfsdf', 'fSDFsdf', 10),
+(2, 'sdfsdgb', 'sFGWESD', 'FSDFSF', 'efFsdf', 'afWEFWEF', 9),
+(3, 'fWEFf', 'SFfWEF', 'EFfeEF', 'EAFfWF', 'fWEFwefWF', 8),
+(4, 'wfEFWef', 'EFwef', 'FEwef', 'WEFwef', 'FwefEF', 7),
+(5, 'efsxfWFD', 'EFGWGsg', 'GRWQWFAG', 'RGAWRGSD', 'REWFASGAWRG', 6),
+(6, 'caascdasdccacac', 'cacacac1', '618293267', 'sdfsdf', 'fSDFsdf', 5),
+(7, 'sdfsdgb', 'sFGWESD', 'FSDFSF', 'efFsdf', 'afWEFWEF', 4),
+(8, 'fWEFf', 'SFfWEF', 'EFfeEF', 'EAFfWF', 'fWEFwefWF', 3),
+(9, 'wfEFWef', 'EFwef', 'FEwef', 'WEFwef', 'FwefEF', 2),
+(10, 'efsxfWFD', 'EFGWGsg', 'GRWQWFAG', 'RGAWRGSD', 'REWFASGAWRG', 1);
+
+--
+-- Volcado de datos para la tabla `representations`
+--
+
+INSERT INTO `representations` (`id`, `when_date`, `location_id`, `show_id`) VALUES
+(1, '2019-06-20 00:00:00', 1, 1),
+(2, '2019-06-13 00:00:00', NULL, NULL),
+(3, '2019-06-17 00:00:00', 5, 2),
+(4, '2019-06-29 00:00:00', NULL, NULL),
+(5, '2019-06-10 00:00:00', NULL, NULL),
+(6, '2019-06-20 00:00:00', NULL, NULL),
+(7, '2019-06-13 00:00:00', NULL, NULL),
+(8, '2019-06-17 00:00:00', NULL, NULL),
+(9, '2019-06-29 00:00:00', NULL, NULL),
+(10, '2019-06-10 00:00:00', NULL, NULL);
+
+--
+-- Volcado de datos para la tabla `representation_user`
+--
+
+INSERT INTO `representation_user` (`representation_id`, `user_id`) VALUES
+(1, 1),
+(3, 1);
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `role`) VALUES
+(1, 'ROLE_USER');
+
+--
+-- Volcado de datos para la tabla `shows`
+--
+
+INSERT INTO `shows` (`id`, `bookable`, `description`, `poster_url`, `price`, `slug`, `title`, `location_id`) VALUES
+(1, b'1', 'FJXFGHJ', 'POPOPOPOPOP', '453.00', 'KFK', 'HJKFK', 4),
+(2, b'0', 'FHGJGJ', 'POPOPOPOP', '12345.00', 'FJXFJ', 'FGNGHM', 5);
+
+--
+-- Volcado de datos para la tabla `types`
+--
+
+INSERT INTO `types` (`id`, `type`) VALUES
+(1, 'SGSRG'),
+(2, 'GGGGGGGGGG');
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `firstname`, `langue`, `lastname`, `login`, `password`, `role_id`) VALUES
+(1, 'Manu01830@gmail.com', 'Manuel', 'FR', 'Torres', 'Manu', '$2a$10$2QZg2A6Rk21ff4vxGT2yFOXS.ZzsS9H3ZoxsAGyWaWN1bbQD0688e', 1);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
