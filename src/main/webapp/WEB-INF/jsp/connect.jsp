@@ -70,6 +70,7 @@
                             <div>
                                 <c:if test="${signupForm.id == null}">
                                     <form:input class="form-control" type="text" path="login" id="login"/>
+                                    <label style="display: none" class="error" id="loginError"><spring:message code="error.connect.username"/></label>
                                     <form:errors path="login" cssClass="error"/>
                                 </c:if>
                                 <c:if test="${signupForm.id != null}">
@@ -82,6 +83,7 @@
                             <label for="myPsw"><spring:message code="connect.password"/></label>
                             <div>
                                 <form:input class="form-control" type="password" path="password" id="myPsw"/>
+                                <label style="display: none" class="error" id="myPswError"><spring:message code="error.connect.passwordFormat"/></label>
                                 <form:errors path="password" cssClass="error"/>
                             </div>
                         </div>
@@ -89,6 +91,7 @@
                             <label for="myPswCheck"><spring:message code="connect.passwordCheck"/></label>
                             <div>
                                 <form:input class="form-control" type="password" path="passwordCheck" id="myPswCheck"/>
+                                <label style="display: none" class="error" id="myPswCheckError"><spring:message code="error.connect.passwordNotMatch"/></label>
                                 <form:errors path="passwordCheck" cssClass="error"/>
                                 <br/>
                                 <form:errors path="isPasswordMatch" cssClass="error"/>
@@ -98,6 +101,7 @@
                             <label for="firstName"><spring:message code="connect.firstName"/></label>
                             <div>
                                 <form:input class="form-control" type="firstName" path="firstName" id="firstName"/>
+                                <label style="display: none" class="error" id="firstNameError"><spring:message code="error.connect.firstName"/></label>
                                 <form:errors path="firstName" cssClass="error"/>
                             </div>
                         </div>
@@ -105,6 +109,7 @@
                             <label for="lastName"><spring:message code="connect.lastName"/></label>
                             <div>
                                 <form:input class="form-control" type="lastName" path="lastName" id="lastName"/>
+                                <label style="display: none" class="error" id="lastNameError"><spring:message code="error.connect.lastName"/></label>
                                 <form:errors path="lastName" cssClass="error"/>
                             </div>
                         </div>
@@ -113,6 +118,7 @@
                             <div>
                                 <c:if test="${signupForm.id == null}">
                                     <form:input class="form-control" type="email" path="email" id="email"/>
+                                    <label style="display: none" class="error" id="emailError"><spring:message code="error.connect.mail"/></label>
                                     <form:errors path="email" cssClass="error"/>
                                 </c:if>
                                 <c:if test="${signupForm.id != null}">
@@ -190,8 +196,10 @@
             var login = $("#login").val();
             if (login.length < 1) {
                 $('#btnInscription').attr("disabled", true);
-                throw new Error("Invalid login");
+                document.getElementById('loginError').style.display = 'block';
+                throw new Error("Invalid password");
             }
+            document.getElementById('loginError').style.display = 'none';
         }
 
         function validationPassword() {
@@ -199,8 +207,10 @@
             var pwd = document.getElementById("myPsw").value;
             if (!pwd.match(regex)) {
                 $('#btnInscription').attr("disabled", true);
+                document.getElementById('myPswError').style.display = 'block';
                 throw new Error("Invalid password");
             }
+            document.getElementById('myPswError').style.display = 'none';
         }
 
         function validationPasswordMatch() {
@@ -208,32 +218,41 @@
             var myPswCheck = document.getElementById("myPswCheck").value;
             if (pwd != myPswCheck) {
                 $('#btnInscription').attr("disabled", true);
+                document.getElementById('myPswCheckError').style.display = 'block';
                 throw new Error("Invalid password check");
             }
+            document.getElementById('myPswCheckError').style.display = 'none';
+
         }
 
         function validationFirstName() {
             var first = $("#firstName").val();
             if (first.length < 1) {
                 $('#btnInscription').attr("disabled", true);
+                document.getElementById('firstNameError').style.display = 'block';
                 throw new Error("Invalid first name");
             }
+            document.getElementById('firstNameError').style.display = 'none';
         }
 
         function validationLastName() {
             var last = $("#lastName").val();
             if (last.length < 1) {
                 $('#btnInscription').attr("disabled", true);
+                document.getElementById('lastNameError').style.display = 'block';
                 throw new Error("Invalid last name");
             }
+            document.getElementById('lastNameError').style.display = 'none';
         }
 
         function validationEmail() {
             var regex = new RegExp("[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,3})");
             if (!$("#email").val().match(regex)) {
                 $('#btnInscription').attr("disabled", true);
+                document.getElementById('emailError').style.display = 'block';
                 throw new Error("Invalid mail");
             }
+            document.getElementById('emailError').style.display = 'none';
         }
     })
 </script>
