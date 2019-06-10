@@ -45,9 +45,11 @@
             </c:if>
             <c:if test="${signupForm.id == null}">
                 <c:set var="signupOrUpdate" value="/connect/signup"/>
+                <c:set var="signupOrUpdateTitle" value="connect.signup"/>
             </c:if>
             <c:if test="${signupForm.id != null}">
                 <c:set var="signupOrUpdate" value="/connect/update"/>
+                <c:set var="signupOrUpdateTitle" value="connect.modify"/>
             </c:if>
             <c:if test="${not empty error}">
                 <label class="error"><spring:message code="${error}"/></label>
@@ -62,7 +64,7 @@
                             <label class="success"><spring:message code="${success}"/></label>
                         </c:if>
 
-                        <h2><spring:message code="connect.signup"/></h2>
+                        <h2><spring:message code="${signupOrUpdateTitle}"/></h2>
                         <div class="form-group">
                             <label for="login"><spring:message code="connect.userName"/></label>
                             <div>
