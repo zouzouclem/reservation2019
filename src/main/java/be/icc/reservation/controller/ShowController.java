@@ -60,6 +60,7 @@ public class ShowController {
 
     @RequestMapping(value = "/show/importCSV", method = RequestMethod.GET)
     public String showImportCSV(Model model) {
+        setIsAdminBoolean(model);
         model.addAttribute("fileForm", new FileForm());
         return "show/importCSV";
     }
@@ -72,7 +73,6 @@ public class ShowController {
             attr.addFlashAttribute("fileForm", fileForm);
             return "show/importCSV";
         }
-
         String fileUrl = fileForm.getFile().getAbsolutePath()
                 .replace("\\reservation2019", ""); //cheat
         CSVImporter.importShows(fileUrl);
@@ -88,6 +88,7 @@ public class ShowController {
 
     @RequestMapping(value = "/show/importRSS", method = RequestMethod.GET)
     public String showImportRSS(Model model) {
+        setIsAdminBoolean(model);
         model.addAttribute("fileForm", new FileForm());
         return "show/importRSS";
     }
@@ -100,7 +101,6 @@ public class ShowController {
             attr.addFlashAttribute("fileForm", fileForm);
             return "show/importRSS";
         }
-
         String fileUrl = fileForm.getFile().getAbsolutePath()
                 .replace("\\reservation2019", ""); //cheat
         RSSImporter.importShows(fileUrl);
@@ -122,10 +122,6 @@ public class ShowController {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }
         model.addAttribute("locationsList", locationList);
-        Users loggedIn = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        boolean isAdmin = loggedIn != null || loggedIn.getRole().getRole()
-                .equalsIgnoreCase("ROLE_ADMIN");
-        model.addAttribute("isAdmin", isAdmin);
         return "show/addShow";
     }
 
