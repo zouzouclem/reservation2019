@@ -135,8 +135,8 @@ public class ShowController {
     @RequestMapping(value = "/show/showDetail/{id}")
     public String showDetail(Model model, @PathVariable int id) {
 
-        Shows sho = showService.findById(id);
-        model.addAttribute("sho", sho);
+        Shows show = showService.findById(id);
+        model.addAttribute("show", show);
         return "show/showDetail";
     }
 }
