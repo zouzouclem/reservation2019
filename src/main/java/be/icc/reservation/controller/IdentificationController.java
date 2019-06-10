@@ -93,6 +93,7 @@ public class IdentificationController {
         user.setPassword(signupForm.getPassword());
         userService.signUp(user);
         mailService.sendConfirmationSignUpEmail(user);
+        model.addAttribute("success", "success.userCreated");
         return "redirect:/connect?success=userCreated";
     }
 

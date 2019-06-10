@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row">
         <c:if test="${not empty success}">
-            <label class="success"><spring:message code="${succcess}"/></label>
+            <label class="success"><spring:message code="${success}"/></label>
         </c:if>
 
         <div class="col-md-6">
