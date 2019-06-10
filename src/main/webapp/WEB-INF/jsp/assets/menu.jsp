@@ -27,6 +27,9 @@
                     <sec:authorize access="hasRole('ADMIN')">
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<c:url value="/show/add"/>">Ajouter un spectacle</a>
+                    <a class="dropdown-item" href="<c:url value="/show/add"/>">ajouter un spectacle</a>
+                    <a class="dropdown-item" href="<c:url value="/show/importCSV" />">importer des spectacles (CSV)</a>
+                    <a class="dropdown-item" href="<c:url value="/show/importRSS" />">importer des spectacles (RSS)</a>
                     </sec:authorize>
                 </div>
             </li>
