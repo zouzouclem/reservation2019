@@ -15,7 +15,7 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/reservation" />"> Mes reservations</a>
+                <a class="nav-link" href="<c:url value="/reservation" />">Mes reservations</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -23,10 +23,10 @@
                     Spectacles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<c:url value="/show" />">liste des spectacles</a>
+                    <a class="dropdown-item" href="<c:url value="/show" />">Liste des spectacles</a>
                     <sec:authorize access="hasRole('ADMIN')">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<c:url value="/show/add"/>">ajouter un spectacle</a>
+                    <a class="dropdown-item" href="<c:url value="/show/add"/>">Ajouter un spectacle</a>
                     </sec:authorize>
                 </div>
             </li>
