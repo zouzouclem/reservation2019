@@ -1,11 +1,13 @@
 package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
+import be.icc.reservation.entity.Representations;
 import be.icc.reservation.entity.Shows;
 import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.FileForm;
 import be.icc.reservation.form.ShowForm;
 import be.icc.reservation.service.LocationsService;
+import be.icc.reservation.service.RepresentationService;
 import be.icc.reservation.service.ShowService;
 import be.icc.reservation.utils.CSVExporter;
 import be.icc.reservation.utils.CSVImporter;
@@ -35,6 +37,8 @@ import java.util.Map;
 @Controller
 public class ShowController {
 
+    @Autowired
+    private RepresentationService representationService;
     @Autowired
     private ShowService showService;
     @Autowired
@@ -196,8 +200,10 @@ public class ShowController {
     @RequestMapping(value = "/show/showDetail/{id}")
     public String showDetail(Model model, @PathVariable int id) {
 
-        Shows show = showService.findById(id);
-        model.addAttribute("show", show);
+        Shows sho = showService.findById(id);
+        model.addAttribute("sho", sho);
+        ArrayList<Representations> r = representationService.findRepresentationsByShow(sho);
+        model.addAttribute("r", r);
         return "show/showDetail";
     }
 
