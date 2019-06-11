@@ -26,15 +26,14 @@
     <thead>
     <tr>
 
-        <th scope="col">Titre</th>
-        <th scope="col">Lieu</th>
-        <th scope="col">Prix</th>
+        <th scope="col"><spring:message code="showList.Title"/></th>
+        <th scope="col"><spring:message code="showList.Place"/></th>
+        <th scope="col"><spring:message code="showList.Price"/></th>
         <th></th>
         <sec:authorize access="hasRole('ADMIN')">
         <th></th>
         <th></th>
         </sec:authorize>
-
     </tr>
     </thead>
     <tbody>

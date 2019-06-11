@@ -12,29 +12,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/"><spring:message code="menu.Home"/><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/reservation" />">Mes reservations</a>
+                <a class="nav-link" href="<c:url value="/reservation" />"><spring:message code="menu.myShows"/></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Spectacles
+                    <spring:message code="menu.Shows"/>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<c:url value="/show" />">Liste des spectacles</a>
+                    <a class="dropdown-item" href="<c:url value="/show" />"><spring:message code="menu.showsList"/></a>
                     <sec:authorize access="hasRole('ADMIN')">
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="<c:url value="/show/add"/>">Ajouter un spectacle</a>
-                    <a class="dropdown-item" href="<c:url value="/show/importCSV" />">Importer des spectacles (CSV)</a>
-                    <a class="dropdown-item" href="<c:url value="/show/importRSS" />">Importer des spectacles (RSS)</a>
+                    <a class="dropdown-item" href="<c:url value="/show/add"/>"><spring:message code="menu.addShow"/></a>
+                    <a class="dropdown-item" href="<c:url value="/show/importCSV" />"><spring:message code="menu.importShowsCSV"/></a>
+                    <a class="dropdown-item" href="<c:url value="/show/importRSS" />"><spring:message code="menu.importShowsRSS"/></a>
                     </sec:authorize>
                 </div>
             </li>
             <sec:authorize access="hasRole('ADMIN')">
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/admin/" />">Admin</a>
+                    <a class="nav-link" href="<c:url value="/admin/" />"><spring:message code="menu.admin"/></a>
                 </li>
             </sec:authorize>
         </ul>
