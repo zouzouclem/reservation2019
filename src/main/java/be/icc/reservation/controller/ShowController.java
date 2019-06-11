@@ -139,4 +139,11 @@ public class ShowController {
         model.addAttribute("show", show);
         return "show/showDetail";
     }
+
+    @RequestMapping(value = "/show/delete/{id}")
+    public String delete(Model model, @PathVariable int id) {
+
+        showService.deleteShow(showService.findById(id));
+        return "redirect:/show";
+    }
 }
