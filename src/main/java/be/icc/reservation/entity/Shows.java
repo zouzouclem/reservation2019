@@ -3,6 +3,7 @@ package be.icc.reservation.entity;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class Shows {
     private String title;
     private String posterUrl;
     @OneToOne
+    @XmlTransient
     private Locations location;
     @Column(nullable = false)
     private boolean bookable;
