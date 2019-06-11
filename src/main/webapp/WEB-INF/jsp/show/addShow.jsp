@@ -64,6 +64,13 @@
                             <form:errors path="price" cssClass="error"/>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="description"><spring:message code="addShow.descriptionShow"/></label>
+                        <div>
+                            <form:textarea class="form-control" path="description" id="description" rows="5" cols="33"/>
+                            <form:errors path="description" cssClass="error"/>
+                        </div>
+                    </div>
                     <br/>
                     <div>
                         <button class="btn btn-secondary" type="submit"><spring:message code="addShow.Save"/></button>

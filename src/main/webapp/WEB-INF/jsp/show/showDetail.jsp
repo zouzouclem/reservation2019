@@ -54,7 +54,7 @@
 
                 <a href="#" class="btn btn-secondary"><spring:message code="showDet.booking"/></a>
                 <sec:authorize access="hasRole('ADMIN')">
-                    <input type="submit" class="btn btn-secondary" value="Add Representation">
+                    <button class="btn btn-secondary" type="submit"><spring:message code="showDet.addRepresentation"/></button>
                 </sec:authorize>
             </form:form>
 

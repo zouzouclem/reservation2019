@@ -28,6 +28,9 @@ public class ShowForm
     @NumberFormat(style= NumberFormat.Style.NUMBER)
     private BigDecimal price;
 
+    @NotBlank(message = "{error.common.description}")
+    private String description;
+
     public Integer getId()
     {
         return id;
@@ -97,4 +100,8 @@ public class ShowForm
     {
         this.price = price;
     }
+
+    public String getDescription(){ return description; }
+
+    public void setDescription(String description) { this.description = description; }
 }

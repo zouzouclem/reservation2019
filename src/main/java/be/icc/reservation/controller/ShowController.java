@@ -151,6 +151,7 @@ public class ShowController {
         s.setPosterUrl(showForm.getPosterURL());
         s.setPrice(showForm.getPrice());
         s.setTitle(showForm.getTitle());
+        s.setDescription(showForm.getDescription());
         return s;
     }
 
@@ -165,6 +166,7 @@ public class ShowController {
         showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
         showForm.setPrice(sho.getPrice());
+        showForm.setDescription(sho.getDescription());
         model.addAttribute("showForm", showForm);
 
         Map<String, String> locationList = new LinkedHashMap<>();
