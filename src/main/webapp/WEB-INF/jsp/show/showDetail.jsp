@@ -52,7 +52,7 @@
             </p>
             <form:form method="get" action="/admin/representation/add/${show.id}">
 
-                <a href="#" class="btn btn-secondary">book</a>
+                <a href="#" class="btn btn-secondary"><spring:message code="showDet.booking"/></a>
                 <sec:authorize access="hasRole('ADMIN')">
                     <input type="submit" class="btn btn-secondary" value="Add Representation">
                 </sec:authorize>
