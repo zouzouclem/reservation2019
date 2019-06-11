@@ -2,14 +2,21 @@ package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
 import be.icc.reservation.entity.Shows;
+import be.icc.reservation.entity.Users;
+import be.icc.reservation.form.FileForm;
 import be.icc.reservation.form.ShowForm;
 import be.icc.reservation.service.LocationsService;
 import be.icc.reservation.service.ShowService;
+import be.icc.reservation.utils.CSVExporter;
+import be.icc.reservation.utils.CSVImporter;
+import be.icc.reservation.utils.RSSExporter;
+import be.icc.reservation.utils.RSSImporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -41,17 +47,72 @@ public class ShowController {
 
     @RequestMapping(value = "/show")
     public String home(Model model) {
-        Pageable sortedByName =
-                PageRequest.of(0, 20, Sort.by("title"));
+        Pageable sortedByName = PageRequest.of(0, 20, Sort.by("title"));
         Page<Shows> showsList = showService.findAllShows(sortedByName);
         model.addAttribute("showList", showsList.getContent());
         return "show/showList";
     }
 
+    @RequestMapping(value = "/show/importCSV", method = RequestMethod.GET)
+    public String showImportCSV(Model model) {
+        setIsAdminBoolean(model);
+        model.addAttribute("fileForm", new FileForm());
+        return "show/importCSV";
+    }
+
+    @RequestMapping(value = "/show/importCSV", method = RequestMethod.POST)
+    public String importCSV(@ModelAttribute("fileForm") @Valid FileForm fileForm, BindingResult result,
+                            RedirectAttributes attr, Model model) {
+        if (result.hasErrors()) {
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.fileForm", result);
+            attr.addFlashAttribute("fileForm", fileForm);
+            return "show/importCSV";
+        }
+        String fileUrl = fileForm.getFile().getAbsolutePath()
+                .replace("\\reservation2019", ""); //cheat
+        CSVImporter.importShows(fileUrl);
+        model.addAttribute("success", "success.shows.showsAdded");
+        return "redirect:/show";
+    }
+
+    @RequestMapping(value = "/show/exportCSV", method = RequestMethod.GET)
+    public String exportCSV(Model model) {
+        CSVExporter.exportShows();
+        return "show/exportCSV";
+    }
+
+    @RequestMapping(value = "/show/importRSS", method = RequestMethod.GET)
+    public String showImportRSS(Model model) {
+        setIsAdminBoolean(model);
+        model.addAttribute("fileForm", new FileForm());
+        return "show/importRSS";
+    }
+
+    @RequestMapping(value = "/show/importRSS", method = RequestMethod.POST)
+    public String importRSS(@ModelAttribute("fileForm") @Valid FileForm fileForm, BindingResult result,
+                            RedirectAttributes attr, Model model) {
+        if (result.hasErrors()) {
+            attr.addFlashAttribute("org.springframework.validation.BindingResult.fileForm", result);
+            attr.addFlashAttribute("fileForm", fileForm);
+            return "show/importRSS";
+        }
+        String fileUrl = fileForm.getFile().getAbsolutePath()
+                .replace("\\reservation2019", ""); //cheat
+        RSSImporter.importShows(fileUrl);
+        model.addAttribute("success", "success.shows.showsAdded");
+        return "redirect:/show";
+    }
+
+    @RequestMapping(value = "/show/exportRSS")
+    public String exportRSS(Model model) {
+        RSSExporter.exportShows();
+        return "show/exportRSS";
+    }
+
     @RequestMapping(value = "/show/add")
     public String addSpectacle(Model model) {
         model.addAttribute("showForm", new ShowForm());
-        Map<String, String> locationList = new LinkedHashMap<String, String>();
+        Map<String, String> locationList = new LinkedHashMap<>();
         for (Locations location : locationsService.findAllLocations()) {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }
@@ -103,10 +164,10 @@ public class ShowController {
         showForm.setPosterURL(sho.getPosterUrl());
         showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
-        showForm.setPrice((BigDecimal) sho.getPrice());
+        showForm.setPrice(sho.getPrice());
         model.addAttribute("showForm", showForm);
 
-        Map<String, String> locationList = new LinkedHashMap<String, String>();
+        Map<String, String> locationList = new LinkedHashMap<>();
         for (Locations location : locationsService.findAllLocations()) {
             locationList.put(String.valueOf(location.getId()), location.getCompleteAddress());
         }
@@ -145,5 +206,16 @@ public class ShowController {
 
         showService.deleteShow(showService.findById(id));
         return "redirect:/show";
+    }
+
+    private void setIsAdminBoolean(Model model) {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof Users) {
+            Users loggedIn = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            boolean isAdmin = loggedIn != null || loggedIn.getRole().getRole()
+                    .equalsIgnoreCase("ROLE_ADMIN");
+            model.addAttribute("isAdmin", isAdmin);
+        } else {
+            model.addAttribute("isAdmin", false);
+        }
     }
 }
