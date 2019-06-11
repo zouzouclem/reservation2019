@@ -27,8 +27,8 @@
                     <sec:authorize access="hasRole('ADMIN')">
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<c:url value="/show/add"/>"><spring:message code="menu.addShow"/></a>
-                    <a class="dropdown-item" href="<c:url value="/show/importCSV" />"><spring:message code="menu.importShowsCSV"/></a>
-                    <a class="dropdown-item" href="<c:url value="/show/importRSS" />"><spring:message code="menu.importShowsRSS"/></a>
+                    <a class="dropdown-item" href="<c:url value="/admin/show/importCSV" />"><spring:message code="menu.importShowsCSV"/></a>
+                    <a class="dropdown-item" href="<c:url value="/admin/show/importRSS" />"><spring:message code="menu.importShowsRSS"/></a>
                     </sec:authorize>
                 </div>
             </li>
