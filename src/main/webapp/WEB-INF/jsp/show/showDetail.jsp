@@ -56,10 +56,11 @@
                 </p>
                 <form:form method="get" action="/admin/representation/add/${show.id}">
                     <sec:authorize access="hasRole('ADMIN')">
-                        <input type="submit" class="btn btn-secondary" value="Add Representation">
+                        <!-- <input type="submit" class="btn btn-secondary" value="Add Representation">-->
+                        <button type="submit" class="btn btn-secondary"><spring:message
+                                code="showDet.addRepresentation"/></button>
                     </sec:authorize>
                 </form:form>
-
             </div>
         </div>
         <div class="col-md-1"></div>

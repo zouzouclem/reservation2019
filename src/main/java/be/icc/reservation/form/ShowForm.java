@@ -26,6 +26,7 @@ public class ShowForm
 
     @NotNull(message = "{error.common.price}")
     @NumberFormat(style= NumberFormat.Style.NUMBER)
+    @Min(value = 1)
     private BigDecimal price;
 
     @NotBlank(message = "{error.common.description}")
