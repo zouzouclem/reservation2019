@@ -19,47 +19,48 @@
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <p class="card-text">
-                <div class="row">
-                    <dt class="col-sm-5"><spring:message code="showDet.showTitle"/>:</dt>
-                    <dd class="col-sm-7">${show.title} (${show.slug})</dd>
-                </div>
+                    <div class="row">
+                        <dt class="col-sm-5"><spring:message code="showDet.showTitle"/>:</dt>
+                        <dd class="col-sm-7">${show.title} (${show.slug})</dd>
+                    </div>
 
-                <div class="row">
-                    <dt class="col-sm-5"><spring:message code="showDet.showLocation"/>:</dt>
-                    <dd class="col-sm-7">${show.location.designation}</dd>
-                </div>
+                    <div class="row">
+                        <dt class="col-sm-5"><spring:message code="showDet.showLocation"/>:</dt>
+                        <dd class="col-sm-7">${show.location.designation}</dd>
+                    </div>
 
-                <div class="row">
-                    <dt class="col-sm-5"><spring:message code="showDet.showLocationAdresse"/>:</dt>
-                    <dd class="col-sm-7">${show.location.getCompleteAddress()}</dd>
-                </div>
+                    <div class="row">
+                        <dt class="col-sm-5"><spring:message code="showDet.showLocationAdresse"/>:</dt>
+                        <dd class="col-sm-7">${show.location.getCompleteAddress()}</dd>
+                    </div>
 
-                <div class="row">
-                    <dt class="col-sm-5"><spring:message code="showDet.showBookable"/>:</dt>
-                    <c:if test="${show.bookable == false}">
-                                                    <dd class="col-sm-7"><spring:message code="show.bookable1"/></dd>
-                                                </c:if>
-                                                <c:if test="${show.bookable == true}">
-                                                    <dd class="col-sm-7"><spring:message code="show.bookable2"/></dd>
-                                                </c:if>
-                </div>
+                    <div class="row">
+                        <dt class="col-sm-5"><spring:message code="showDet.showBookable"/>:</dt>
+                        <c:if test="${show.bookable == false}">
+                            <dd class="col-sm-7"><spring:message code="show.bookable1"/></dd>
+                        </c:if>
+                        <c:if test="${show.bookable == true}">
+                            <dd class="col-sm-7"><spring:message code="show.bookable2"/></dd>
+                        </c:if>
+                    </div>
 
-                <div class="row">
-                    <dt class="col-sm-5"><spring:message code="showDet.showPrix"/>:</dt>
-                    <dd class="col-sm-7">${show.price} €</dd>
-                </div>
+                    <div class="row">
+                        <dt class="col-sm-5"><spring:message code="showDet.showPrix"/>:</dt>
+                        <dd class="col-sm-7">${show.price} €</dd>
+                    </div>
 
-                <div class="row">
-                    <dt class="col-sm-5"><spring:message code="showDet.showDescription"/>:</dt>
-                    <dd class="col-sm-7"> ${show.description}</dd>
-                </div>
+                    <div class="row">
+                        <dt class="col-sm-5"><spring:message code="showDet.showDescription"/>:</dt>
+                        <dd class="col-sm-7"> ${show.description}</dd>
+                    </div>
                 </p>
                 <form:form method="get" action="/admin/representation/add/${show.id}">
                     <sec:authorize access="hasRole('ADMIN')">
-                        <input type="submit" class="btn btn-secondary" value="Add Representation">
+                        <!-- <input type="submit" class="btn btn-secondary" value="Add Representation">-->
+                        <button type="submit" class="btn btn-secondary"><spring:message
+                                code="showDet.addRepresentation"/></button>
                     </sec:authorize>
                 </form:form>
-
             </div>
         </div>
         <div class="col-md-1"></div>
@@ -68,30 +69,26 @@
             <c:if test="${not empty representations}">
                 <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th scope="col">Date</th>
-                        <th scope="col"></th>
-
-                    </tr>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col"></th>
+                        </tr>
                     </thead>
                     <tbody>
+                        <c:forEach items="${representations}" var="representation">
+                            <tr>
+                                <td>  <fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${representation.whenDate}"/></td>
 
-                    <c:forEach items="${representations}" var="representation">
-                        <tr>
-                            <td>  <fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${representation.whenDate}"/></td>
-
-                            <td>
-                                <c:if test="${show.bookable}">
-                                <form:form method="get" action="/reservation/booking/${representation.id}">
-                                    <button type="submit" class="btn btn-secondary"><spring:message
-                                            code="showDet.booking"/></button>
-
-                                </form:form>
-                                    </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-
+                                <td>
+                                    <c:if test="${show.bookable}">
+                                    <form:form method="get" action="/reservation/booking/${representation.id}">
+                                        <button type="submit" class="btn btn-secondary"><spring:message
+                                                code="showDet.booking"/></button>
+                                    </form:form>
+                                        </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </c:if>
