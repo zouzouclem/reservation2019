@@ -5,6 +5,7 @@ import be.icc.reservation.entity.Representations;
 import be.icc.reservation.entity.Shows;
 import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.FileForm;
+import be.icc.reservation.form.PlaceForm;
 import be.icc.reservation.form.ShowForm;
 import be.icc.reservation.service.LocationsService;
 import be.icc.reservation.service.RepresentationService;
@@ -207,6 +208,7 @@ public class ShowController {
         model.addAttribute("show", show);
         ArrayList<Representations> representations = representationService.findRepresentationsByShow(show);
         model.addAttribute("representations", representations);
+        model.addAttribute("placeForm", new PlaceForm());
         return "show/showDetail";
     }
 

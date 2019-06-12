@@ -37,11 +37,11 @@
                 <div class="row">
                     <dt class="col-sm-5"><spring:message code="showDet.showBookable"/>:</dt>
                     <c:if test="${show.bookable == false}">
-                                                    <dd class="col-sm-7"><spring:message code="show.bookable1"/></dd>
-                                                </c:if>
-                                                <c:if test="${show.bookable == true}">
-                                                    <dd class="col-sm-7"><spring:message code="show.bookable2"/></dd>
-                                                </c:if>
+                        <dd class="col-sm-7"><spring:message code="show.bookable1"/></dd>
+                    </c:if>
+                    <c:if test="${show.bookable == true}">
+                        <dd class="col-sm-7"><spring:message code="show.bookable2"/></dd>
+                    </c:if>
                 </div>
 
                 <div class="row">
@@ -70,6 +70,8 @@
                     <thead>
                     <tr>
                         <th scope="col">Date</th>
+                        <th scope="col">Heure</th>
+                        <th scope="col">Place</th>
                         <th scope="col"></th>
 
                     </tr>
@@ -78,17 +80,24 @@
 
                     <c:forEach items="${representations}" var="representation">
                         <tr>
-                            <td>  <fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${representation.whenDate}"/></td>
+                            <form:form method="get" action="/reservation/booking/${representation.id}"
+                                       modelAttribute="placeForm">
+                                <td><fmt:formatDate pattern="dd-MM-yyyy" value="${representation.whenDate}"/></td>
+                                <td><fmt:formatDate pattern="HH:mm" value="${representation.whenDate}"/></td>
 
-                            <td>
-                                <c:if test="${show.bookable}">
-                                <form:form method="get" action="/reservation/booking/${representation.id}">
-                                    <button type="submit" class="btn btn-secondary"><spring:message
-                                            code="showDet.booking"/></button>
-
-                                </form:form>
+                                <td>
+                                    <div class="form-group">
+                                        <form:input path="place" type="number" min="1" class="form-control"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <c:if test="${show.bookable}">
+                                        <button type="submit" class="btn btn-secondary"><spring:message
+                                                code="showDet.booking"/></button>
                                     </c:if>
-                            </td>
+                                </td>
+                            </form:form>
+
                         </tr>
                     </c:forEach>
 
@@ -102,6 +111,5 @@
     </div>
 </div>
 <jsp:include page="../assets/footer.jsp"/>
-
 
 </body>

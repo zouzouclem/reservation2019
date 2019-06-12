@@ -24,18 +24,23 @@
             <th scope="col"><spring:message code="reservation.date"/></th>
             <th scope="col"><spring:message code="reservation.hour"/></th>
             <th scope="col"><spring:message code="reservation.price"/></th>
+            <th scope="col"><spring:message code="reservation.place"/></th>
+            <th scope="col"><spring:message code="reservation.totalPrice"/></th>
+
 
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${Reservations}" var="reservation">
             <tr>
-                <td>${reservation.show.title}</td>
-                <td>${reservation.location}</td>
-                <td> ${reservation.location.getCompleteAddress()}</td>
-                <td><fmt:formatDate pattern="dd-MM-yyyy" value="${reservation.whenDate}"/></td>
-                <td><fmt:formatDate pattern="HH:mm" value="${reservation.whenDate}"/></td>
-                <td>${reservation.show.price} €</td>
+                <td>${reservation.representation.show.title}</td>
+                <td>${reservation.representation.location}</td>
+                <td> ${reservation.representation.location.getCompleteAddress()}</td>
+                <td><fmt:formatDate pattern="dd-MM-yyyy" value="${reservation.representation.whenDate}"/></td>
+                <td><fmt:formatDate pattern="HH:mm" value="${reservation.representation.whenDate}"/></td>
+                <td>${reservation.representation.show.price} €</td>
+                <td>${reservation.places}</td>
+                <td>${reservation.places * reservation.representation.show.price} €</td>
 
             </tr>
         </c:forEach>

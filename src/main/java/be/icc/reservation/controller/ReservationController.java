@@ -4,6 +4,7 @@ import be.icc.reservation.entity.Locations;
 import be.icc.reservation.entity.Representations;
 import be.icc.reservation.entity.RepresentationsUsers;
 import be.icc.reservation.entity.Users;
+import be.icc.reservation.form.PlaceForm;
 import be.icc.reservation.form.RepresentationForm;
 import be.icc.reservation.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Calendar;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -52,18 +56,9 @@ public class ReservationController {
         }
         Users user = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        ArrayList<Representations> reservationUser = extractRepresentations(user);
-        model.addAttribute("Reservations", reservationUser);
-        return "reservationList";
-    }
-
-    private ArrayList<Representations> extractRepresentations(Users user) {
         Set<RepresentationsUsers> representationsUsersSet = representationsUsersService.findByUser(user.getId());
-        ArrayList<Representations> representations = new ArrayList<>();
-        for (RepresentationsUsers representationsUsers : representationsUsersSet) {
-            representations.add(representationsUsers.getRepresentation());
-        }
-        return representations;
+        model.addAttribute("Reservations", representationsUsersSet);
+        return "reservationList";
     }
 
     @RequestMapping(value = "/admin/representation/add/{idShow}")
@@ -107,7 +102,7 @@ public class ReservationController {
     }
 
     @RequestMapping(value = "/reservation/booking/{representationId}")
-    public String bookShow(Model model, @PathVariable("representationId") int representationId) {
+    public String bookShow(Model model, @PathVariable("representationId") int representationId, @ModelAttribute("placeForm") @Valid PlaceForm placeForm) {
 
         if ("anonymousUser".equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal())) {
             return "redirect:/connect";
@@ -117,13 +112,12 @@ public class ReservationController {
         RepresentationsUsers representationsUsers = new RepresentationsUsers();
         representationsUsers.setRepresentation(representation);
         representationsUsers.setUser(user);
-        representationsUsers.setPlaces(1);
+        representationsUsers.setPlaces(placeForm.getPlace());
         representation.setRepresentationsUsers(Stream.of(representationsUsers).collect(Collectors.toSet()));
         user.setRepresentationsUsers(Stream.of(representationsUsers).collect(Collectors.toSet()));
         representationService.saveRepresentation(representation);
         userService.save(user);
         representationsUsersService.save(representationsUsers);
-        //TODO clv ?? set User
         return "redirect:/reservation";
     }
 }
