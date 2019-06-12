@@ -13,7 +13,7 @@
     <c:choose>
         <c:when test="${fileForm.id == null && isAdmin}">
             <div>
-                <form:form method="post" action="admin/show/importRSS" modelAttribute="fileForm">
+                <form:form method="post" action="/admin/show/importRSS" modelAttribute="fileForm">
                     <fieldset>
                         <c:if test="${not empty error}">
                             <label class="error">${error}/></label>
@@ -32,7 +32,7 @@
                         </div>
                         <br/>
                         <div>
-                            <input type="submit" class="btn btn-secondary" value="Import">
+                            <input type="submit" class="btn btn-secondary" value="Import" disabled>
                         </div>
                     </fieldset>
                 </form:form>
@@ -44,4 +44,16 @@
     </c:choose>
 </div>
 <jsp:include page="../assets/footer.jsp"/>
+<script>
+    $(document).ready(function() {
+        $('input[type="file"]').change(function() {
+            var selectedFile = $('input[type=file]').val();
+            if (null == selectedFile ||selectedFile == "") {
+                $('input[type="submit"]').attr("disabled", true);
+            } else {
+                $('input[type="submit"]').removeAttr("disabled");
+            }
+        });
+    });
+</script>
 </body>

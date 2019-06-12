@@ -29,7 +29,7 @@
                     <a class="dropdown-item" href="<c:url value="/show/add"/>"><spring:message code="menu.addShow"/></a>
                     <a class="dropdown-item" href="<c:url value="/admin/show/importCSV" />"><spring:message code="menu.importShowsCSV"/></a>
                     <a class="dropdown-item" href="<c:url value="/admin/show/importRSS" />"><spring:message code="menu.importShowsRSS"/></a>
-                        <a class="dropdown-item" href="<c:url value="/allShows" />"><spring:message code="menu.webService"/></a>
+                    <a class="dropdown-item" href="<c:url value="/allShows" />"><spring:message code="menu.webService"/></a>
 
                     </sec:authorize>
                 </div>
