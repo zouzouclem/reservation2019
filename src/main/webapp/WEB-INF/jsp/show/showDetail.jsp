@@ -41,7 +41,7 @@
 
                 <div class="row">
                     <dt class="col-sm-5"><spring:message code="showDet.showPrix"/>:</dt>
-                    <dd class="col-sm-7">${show.price}</dd>
+                    <dd class="col-sm-7">${show.price} €</dd>
                 </div>
 
                 <div class="row">

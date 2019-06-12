@@ -44,7 +44,7 @@
                 <td>${show.title}</td>
                 <td>${show.location}</td>
                 <td>${show.location.getCompleteAddress()}</td>
-                <td>${show.price}</td>
+                <td>${show.price} €</td>
                 <form:form method="get" action="/show/showDetail/${show.id}">
                     <td>
                         <button class="btn btn-secondary" type="submit"><spring:message

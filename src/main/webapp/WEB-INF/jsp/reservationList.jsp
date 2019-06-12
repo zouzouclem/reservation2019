@@ -22,6 +22,9 @@
             <th scope="col"><spring:message code="reservation.location"/></th>
             <th scope="col"><spring:message code="reservation.address"/></th>
             <th scope="col"><spring:message code="reservation.date"/></th>
+            <th scope="col"><spring:message code="reservation.hour"/></th>
+            <th scope="col"><spring:message code="reservation.price"/></th>
+
         </tr>
         </thead>
         <tbody>
@@ -30,7 +33,9 @@
                 <td>${reservation.show.title}</td>
                 <td>${reservation.location}</td>
                 <td> ${reservation.location.getCompleteAddress()}</td>
-                <td><fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${reservation.whenDate}"/></td>
+                <td><fmt:formatDate pattern="dd-MM-yyyy" value="${reservation.whenDate}"/></td>
+                <td><fmt:formatDate pattern="HH:mm" value="${reservation.whenDate}"/></td>
+                <td>${reservation.show.price} €</td>
 
             </tr>
         </c:forEach>
