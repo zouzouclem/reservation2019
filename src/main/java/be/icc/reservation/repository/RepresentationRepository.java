@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface RepresentationRepository extends JpaRepository<Representations, Integer>{
 
-    ArrayList<Representations> findByUsersIn(List<Users> users);
     Representations findById(int id);
     ArrayList<Representations> findByShow(Shows s);
 

@@ -11,13 +11,8 @@ public class Representations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "representation_user",
-            joinColumns = {@JoinColumn(name = "representation_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
-    private Set<Users> users;
+    @OneToMany(mappedBy = "representation")
+    private Set<RepresentationsUsers> representationsUsers;
 
     @ManyToOne
     private Shows show;
@@ -68,12 +63,12 @@ public class Representations {
         return Objects.hash(id, show.getId(), whenDate, location.getId());
     }
 
-    public Set<Users> getUsers() {
-        return users;
+    public Set<RepresentationsUsers> getRepresentationsUsers() {
+        return representationsUsers;
     }
 
-    public void setUsers(Set<Users> users) {
-        this.users = users;
+    public void setRepresentationsUsers(Set<RepresentationsUsers> representationsUsers) {
+        this.representationsUsers = representationsUsers;
     }
 
     public Timestamp getWhenDate() {

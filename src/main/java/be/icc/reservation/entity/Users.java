@@ -17,8 +17,8 @@ public class Users implements UserDetails {
     @ManyToOne(optional = false)
     private Roles role;
 
-    @ManyToMany(mappedBy = "users")
-    private Set<Representations> representations;
+    @OneToMany(mappedBy = "user")
+    private Set<RepresentationsUsers> representationsUsers;
 
     @Column(nullable = false)
     private String login;
@@ -146,11 +146,11 @@ public class Users implements UserDetails {
         return Objects.hash(id, login, password, firstname, lastname, email, langue);
     }
 
-    public Set<Representations> getRepresentations() {
-        return representations;
+    public Set<RepresentationsUsers> getRepresentationsUsers() {
+        return representationsUsers;
     }
 
-    public void setRepresentations(Set<Representations> representations) {
-        this.representations = representations;
+    public void setRepresentationsUsers(Set<RepresentationsUsers> representationsUsers) {
+        this.representationsUsers = representationsUsers;
     }
 }

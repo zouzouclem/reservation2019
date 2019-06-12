@@ -37,15 +37,6 @@ public class RepresentationServiceImpl implements RepresentationService {
     public void deleteRepresentation(Representations rep_id){ representationRepository.delete(rep_id); }
 
     @Override
-    public ArrayList<Representations> userReservations(int user_id) {
-
-        Users user = userRepository.findById(user_id);
-        List<Users> users = new ArrayList<>();
-        users.add(user);
-        return representationRepository.findByUsersIn(users);
-    }
-
-    @Override
     public ArrayList<Representations> findRepresentationsByShow(Shows shows) {
         return representationRepository.findByShow(shows);
     }

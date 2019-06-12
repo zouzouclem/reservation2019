@@ -2,13 +2,10 @@ package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
 import be.icc.reservation.entity.Representations;
-import be.icc.reservation.entity.Shows;
+import be.icc.reservation.entity.RepresentationsUsers;
 import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.RepresentationForm;
-import be.icc.reservation.form.ShowForm;
-import be.icc.reservation.service.LocationsService;
-import be.icc.reservation.service.RepresentationService;
-import be.icc.reservation.service.ShowService;
+import be.icc.reservation.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Controller
@@ -35,6 +34,11 @@ public class ReservationController {
     LocationsService locationsService;
     @Autowired
     ShowService showService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    RepresentationsUsersService representationsUsersService;
+
     @ModelAttribute("styleColor")
     public String getStyleColor(HttpServletRequest request) {
         return (String) request.getSession().getAttribute("styleColor");
@@ -48,14 +52,23 @@ public class ReservationController {
         }
         Users user = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        ArrayList<Representations> reservationUser = representationService.userReservations(user.getId());
+        ArrayList<Representations> reservationUser = extractRepresentations(user);
         model.addAttribute("Reservations", reservationUser);
         return "reservationList";
     }
 
+    private ArrayList<Representations> extractRepresentations(Users user) {
+        Set<RepresentationsUsers> representationsUsersSet = representationsUsersService.findByUser(user.getId());
+        ArrayList<Representations> representations = new ArrayList<>();
+        for (RepresentationsUsers representationsUsers : representationsUsersSet) {
+            representations.add(representationsUsers.getRepresentation());
+        }
+        return representations;
+    }
+
     @RequestMapping(value = "/admin/representation/add/{idShow}")
-    public String addRepresentation(Model model, @PathVariable("idShow")int showId) {
-        RepresentationForm form= new RepresentationForm();
+    public String addRepresentation(Model model, @PathVariable("idShow") int showId) {
+        RepresentationForm form = new RepresentationForm();
         form.setShow(showId);
         model.addAttribute("representationForm", form);
         Map<String, String> locationList = new LinkedHashMap<String, String>();
@@ -78,33 +91,38 @@ public class ReservationController {
             model.addAttribute("locationsList", locationList);
             return "admin/addRepresentation";
         }
-        Representations representation= new Representations();
+        Representations representation = new Representations();
         representation.setLocation(locationsService.findLocationsById(representationForm.getLocation()));
-        int hour= Integer.parseInt(representationForm.getWhenTime().substring(0,2));
-        int minute= Integer.parseInt(representationForm.getWhenTime().substring(3,5));
-        Calendar date= Calendar.getInstance();
+        int hour = Integer.parseInt(representationForm.getWhenTime().substring(0, 2));
+        int minute = Integer.parseInt(representationForm.getWhenTime().substring(3, 5));
+        Calendar date = Calendar.getInstance();
         date.setTime(representationForm.getWhenDate());
-        date.set(Calendar.HOUR,hour);
-        date.set(Calendar.MINUTE,minute);
-        Timestamp time= new Timestamp(date.getTime().getTime());
+        date.set(Calendar.HOUR, hour);
+        date.set(Calendar.MINUTE, minute);
+        Timestamp time = new Timestamp(date.getTime().getTime());
         representation.setWhenDate(time);
         representation.setShow(showService.findById(representationForm.getShow()));
         representationService.saveRepresentation(representation);
-        return "redirect:/show/showDetail/"+representationForm.getShow();
+        return "redirect:/show/showDetail/" + representationForm.getShow();
     }
 
     @RequestMapping(value = "/reservation/booking/{representationId}")
-    public String bookShow(Model model, @PathVariable("representationId") int representationId){
+    public String bookShow(Model model, @PathVariable("representationId") int representationId) {
 
         if ("anonymousUser".equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal())) {
             return "redirect:/connect";
         }
         Users user = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Representations representation= representationService.findById(representationId);
-        Set<Users>users= representation.getUsers();
-        users.add(user);
-        representation.setUsers(users);
+        Representations representation = representationService.findById(representationId);
+        RepresentationsUsers representationsUsers = new RepresentationsUsers();
+        representationsUsers.setRepresentation(representation);
+        representationsUsers.setUser(user);
+        representationsUsers.setPlaces(1);
+        representation.setRepresentationsUsers(Stream.of(representationsUsers).collect(Collectors.toSet()));
+        user.setRepresentationsUsers(Stream.of(representationsUsers).collect(Collectors.toSet()));
         representationService.saveRepresentation(representation);
+        userService.save(user);
+        representationsUsersService.save(representationsUsers);
         //TODO clv ?? set User
         return "redirect:/reservation";
     }

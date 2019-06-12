@@ -13,7 +13,6 @@ public interface RepresentationService {
     Representations findById(int id);
     Representations saveRepresentation(Representations rep);
     void deleteRepresentation(Representations rep_id);
-    ArrayList<Representations> userReservations(int user_id);
     ArrayList<Representations> findRepresentationsByShow(Shows shows);
 
 }
