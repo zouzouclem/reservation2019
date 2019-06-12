@@ -36,12 +36,17 @@
 
                 <div class="row">
                     <dt class="col-sm-5"><spring:message code="showDet.showBookable"/>:</dt>
-                    <dd class="col-sm-7">${show.bookable}</dd>
+                    <c:if test="${show.bookable == false}">
+                                                    <dd class="col-sm-7"><spring:message code="show.bookable1"/></dd>
+                                                </c:if>
+                                                <c:if test="${show.bookable == true}">
+                                                    <dd class="col-sm-7"><spring:message code="show.bookable2"/></dd>
+                                                </c:if>
                 </div>
 
                 <div class="row">
                     <dt class="col-sm-5"><spring:message code="showDet.showPrix"/>:</dt>
-                    <dd class="col-sm-7">${show.price}</dd>
+                    <dd class="col-sm-7">${show.price} €</dd>
                 </div>
 
                 <div class="row">
