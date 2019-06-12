@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <jsp:include page="./assets/header.jsp"/>
@@ -29,7 +30,7 @@
        <td>${reservation.id}</td>
        <td>${reservation.show.title}</td>
        <td>${reservation.location.address}</td>
-       <td>${reservation.whenDate}</td>
+       <td> <fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${reservation.whenDate}"/></td>
 
     </tr>
    </c:forEach>
