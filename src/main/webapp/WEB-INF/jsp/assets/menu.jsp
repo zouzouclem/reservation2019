@@ -18,7 +18,7 @@
                 <a class="nav-link" href="<c:url value="/reservation" />"><spring:message code="menu.myShows"/></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <spring:message code="menu.Shows"/>
                 </a>
@@ -53,3 +53,11 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    $('.dropdown').click(function(){
+
+        $('.dropdown-menu').toggleClass('show');
+
+    });
+</script>
