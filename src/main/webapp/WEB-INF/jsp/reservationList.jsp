@@ -12,31 +12,31 @@
 
 <div class="container">
 
-<h2><spring:message code = "reservation.pageTitle"/></h2>
+    <h2><spring:message code="reservation.pageTitle"/></h2>
 
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col"> <spring:message code = "reservation.identification"/></th>
-      <th scope="col"> <spring:message code = "reservation.showTitle"/></th>
-      <th scope="col"><spring:message code = "reservation.location"/></th>
-      <th scope="col"><spring:message code = "reservation.date"/></th>
-    </tr>
-  </thead>
-  <tbody>
-  <c:forEach items="${Reservations}" var="reservation">
-    <tr>
-       <td>${reservation.id}</td>
-       <td>${reservation.show.title}</td>
-       <td>${reservation.location.address}</td>
-       <td> <fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${reservation.whenDate}"/></td>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col"><spring:message code="reservation.showTitle"/></th>
+            <th scope="col"><spring:message code="reservation.location"/></th>
+            <th scope="col"><spring:message code="reservation.address"/></th>
+            <th scope="col"><spring:message code="reservation.date"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${Reservations}" var="reservation">
+            <tr>
+                <td>${reservation.show.title}</td>
+                <td>${reservation.location}</td>
+                <td> ${reservation.location.getCompleteAddress()}</td>
+                <td><fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${reservation.whenDate}"/></td>
 
-    </tr>
-   </c:forEach>
+            </tr>
+        </c:forEach>
 
-  </tbody>
-</table>
+        </tbody>
+    </table>
 
 </div>
 <jsp:include page="./assets/footer.jsp"/>
