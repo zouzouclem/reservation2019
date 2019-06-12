@@ -9,34 +9,52 @@
 
 <body>
 <jsp:include page="../assets/menu.jsp"/>
+<div class="container">
 
-<c:choose>
-    <c:when test="${fileForm.id == null && isAdmin}">
-        <div>
-            <form:form method="post" action="/show/importCSV" modelAttribute="fileForm">
-                <fieldset>
-                    <c:if test="${not empty error}">
-                        <label class="error">${error}/></label>
-                    </c:if>
-                    <h2><spring:message code="importShowCSV.pageTitle"/></h2>
-                    <div>
-                        <label for="file"><spring:message code="importShowCSV.File"/></label>
-                        <div>
-                            <form:input type="file" path="file" id="file" accept=".csv"/>
-                            <form:errors path="file" cssClass="error"/>
+    <c:choose>
+        <c:when test="${fileForm.id == null && isAdmin}">
+            <div>
+                <form:form method="post" action="/admin/show/importCSV" modelAttribute="fileForm">
+                    <fieldset>
+                        <c:if test="${not empty error}">
+                            <label class="error">${error}/></label>
+                        </c:if>
+                        <h2><spring:message code="importShowCSV.pageTitle"/></h2>
+                        <div class="col-md-4">
+                            <div class="custom-file">
+                                <label for="file" class="custom-file-label"><spring:message
+                                        code="importShowCSV.File"/></label>
+                                <div>
+                                    <form:input class="custom-file-input" type="file" path="file" id="file"
+                                                accept=".csv"/>
+                                    <form:errors path="file" cssClass="error"/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <br />
-                    <div>
-                        <input type="submit" value="Import">
-                    </div>
-                </fieldset>
-            </form:form>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <spring:message code="authentication.adminNeeded"/>
-    </c:otherwise>
-</c:choose>
+                        <br/>
+                        <div>
+                            <input type="submit" class="btn btn-secondary" value="Import" disabled>
+                        </div>
+                    </fieldset>
+                </form:form>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <spring:message code="authentication.adminNeeded"/>
+        </c:otherwise>
+    </c:choose>
+</div>
 <jsp:include page="../assets/footer.jsp"/>
+<script>
+    $(document).ready(function() {
+        $('input[type="file"]').change(function() {
+            var selectedFile = $('input[type=file]').val();
+            if (null == selectedFile ||selectedFile == "") {
+                $('input[type="submit"]').attr("disabled", true);
+            } else {
+                $('input[type="submit"]').removeAttr("disabled");
+            }
+        });
+    });
+</script>
 </body>

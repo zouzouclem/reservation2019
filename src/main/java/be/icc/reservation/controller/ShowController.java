@@ -1,11 +1,13 @@
 package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
+import be.icc.reservation.entity.Representations;
 import be.icc.reservation.entity.Shows;
 import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.FileForm;
 import be.icc.reservation.form.ShowForm;
 import be.icc.reservation.service.LocationsService;
+import be.icc.reservation.service.RepresentationService;
 import be.icc.reservation.service.ShowService;
 import be.icc.reservation.utils.CSVExporter;
 import be.icc.reservation.utils.CSVImporter;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,6 +38,8 @@ import java.util.Map;
 @Controller
 public class ShowController {
 
+    @Autowired
+    private RepresentationService representationService;
     @Autowired
     private ShowService showService;
     @Autowired
@@ -53,14 +58,14 @@ public class ShowController {
         return "show/showList";
     }
 
-    @RequestMapping(value = "/show/importCSV", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/show/importCSV", method = RequestMethod.GET)
     public String showImportCSV(Model model) {
         setIsAdminBoolean(model);
         model.addAttribute("fileForm", new FileForm());
         return "show/importCSV";
     }
 
-    @RequestMapping(value = "/show/importCSV", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/show/importCSV", method = RequestMethod.POST)
     public String importCSV(@ModelAttribute("fileForm") @Valid FileForm fileForm, BindingResult result,
                             RedirectAttributes attr, Model model) {
         if (result.hasErrors()) {
@@ -75,20 +80,20 @@ public class ShowController {
         return "redirect:/show";
     }
 
-    @RequestMapping(value = "/show/exportCSV", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/show/exportCSV", method = RequestMethod.GET)
     public String exportCSV(Model model) {
         CSVExporter.exportShows();
         return "show/exportCSV";
     }
 
-    @RequestMapping(value = "/show/importRSS", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/show/importRSS", method = RequestMethod.GET)
     public String showImportRSS(Model model) {
         setIsAdminBoolean(model);
         model.addAttribute("fileForm", new FileForm());
         return "show/importRSS";
     }
 
-    @RequestMapping(value = "/show/importRSS", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/show/importRSS", method = RequestMethod.POST)
     public String importRSS(@ModelAttribute("fileForm") @Valid FileForm fileForm, BindingResult result,
                             RedirectAttributes attr, Model model) {
         if (result.hasErrors()) {
@@ -151,6 +156,7 @@ public class ShowController {
         s.setPosterUrl(showForm.getPosterURL());
         s.setPrice(showForm.getPrice());
         s.setTitle(showForm.getTitle());
+        s.setDescription(showForm.getDescription());
         return s;
     }
 
@@ -165,6 +171,7 @@ public class ShowController {
         showForm.setLocation(sho.getLocation().getId());
         showForm.setBookable(sho.isBookable());
         showForm.setPrice(sho.getPrice());
+        showForm.setDescription(sho.getDescription());
         model.addAttribute("showForm", showForm);
 
         Map<String, String> locationList = new LinkedHashMap<>();
@@ -198,6 +205,8 @@ public class ShowController {
 
         Shows show = showService.findById(id);
         model.addAttribute("show", show);
+        ArrayList<Representations> representations = representationService.findRepresentationsByShow(show);
+        model.addAttribute("representations", representations);
         return "show/showDetail";
     }
 

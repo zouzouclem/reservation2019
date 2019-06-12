@@ -64,6 +64,13 @@
                             <form:errors path="price" cssClass="error"/>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="description"><spring:message code="addShow.descriptionShow"/></label>
+                        <div>
+                            <form:textarea class="form-control" path="description" id="description" rows="5" cols="33"/>
+                            <form:errors path="description" cssClass="error"/>
+                        </div>
+                    </div>
                     <br/>
                     <div>
                         <button class="btn btn-secondary" type="submit"><spring:message code="addShow.Save"/></button>
@@ -73,23 +80,6 @@
             </div>
         </fieldset>
     </form:form>
-        <c:if test="${isAdmin}">
-            <input type="file" name="csvImporter" onChange="importCSV()" />
-        </c:if>
 </div>
 <jsp:include page="../assets/footer.jsp"/>
-
-<script type="text/javascript">
-function importCSV() {
-    var fileUlr = ${'csvImporter'}.target.files[0].name;
-    $.ajax({
-        type : 'POST',
-        url : '/show/importCSV',
-        data : {
-            fileUrl :fileUrl
-        },
-        success : alert('File imported successfully')
-    )};
-}
-</script>
 </body>

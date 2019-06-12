@@ -18,7 +18,7 @@
                 <a class="nav-link" href="<c:url value="/reservation" />"><spring:message code="menu.myShows"/></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <spring:message code="menu.Shows"/>
                 </a>
@@ -27,8 +27,10 @@
                     <sec:authorize access="hasRole('ADMIN')">
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<c:url value="/show/add"/>"><spring:message code="menu.addShow"/></a>
-                    <a class="dropdown-item" href="<c:url value="/show/importCSV" />"><spring:message code="menu.importShowsCSV"/></a>
-                    <a class="dropdown-item" href="<c:url value="/show/importRSS" />"><spring:message code="menu.importShowsRSS"/></a>
+                    <a class="dropdown-item" href="<c:url value="/admin/show/importCSV" />"><spring:message code="menu.importShowsCSV"/></a>
+                    <a class="dropdown-item" href="<c:url value="/admin/show/importRSS" />"><spring:message code="menu.importShowsRSS"/></a>
+                    <a class="dropdown-item" href="<c:url value="/allShows" />"><spring:message code="menu.webService"/></a>
+
                     </sec:authorize>
                 </div>
             </li>
@@ -51,3 +53,11 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    $('.dropdown').click(function(){
+
+        $('.dropdown-menu').toggleClass('show');
+
+    });
+</script>

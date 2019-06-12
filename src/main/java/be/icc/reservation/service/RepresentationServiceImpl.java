@@ -23,6 +23,11 @@ public class RepresentationServiceImpl implements RepresentationService {
     }
 
     @Override
+    public Representations findById(int id) {
+        return representationRepository.findById(id);
+    }
+
+    @Override
     public Representations saveRepresentation(Representations rep)
     {
         return representationRepository.save(rep);
@@ -38,6 +43,11 @@ public class RepresentationServiceImpl implements RepresentationService {
         List<Users> users = new ArrayList<>();
         users.add(user);
         return representationRepository.findByUsersIn(users);
+    }
+
+    @Override
+    public ArrayList<Representations> findRepresentationsByShow(Shows shows) {
+        return representationRepository.findByShow(shows);
     }
 
 
