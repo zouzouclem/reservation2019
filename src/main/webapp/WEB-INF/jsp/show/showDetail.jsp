@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <jsp:include page="../assets/header.jsp"/>
@@ -84,7 +85,7 @@
 
                     <c:forEach items="${representations}" var="representation">
                         <tr>
-                            <td>${representation.whenDate}</td>
+                            <td>  <fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${representation.whenDate}"/></td>
 
                             <td>
                                 <c:if test="${show.bookable}">
