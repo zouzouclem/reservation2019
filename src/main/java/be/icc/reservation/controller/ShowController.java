@@ -30,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -200,10 +201,10 @@ public class ShowController {
     @RequestMapping(value = "/show/showDetail/{id}")
     public String showDetail(Model model, @PathVariable int id) {
 
-        Shows sho = showService.findById(id);
-        model.addAttribute("sho", sho);
-        ArrayList<Representations> r = representationService.findRepresentationsByShow(sho);
-        model.addAttribute("r", r);
+        Shows show = showService.findById(id);
+        model.addAttribute("show", show);
+        ArrayList<Representations> representations = representationService.findRepresentationsByShow(show);
+        model.addAttribute("representations", representations);
         return "show/showDetail";
     }
 

@@ -49,37 +49,42 @@
             </div>
             </p>
             <form:form method="get" action="/admin/representation/add/${show.id}">
-
-                <a href="#" class="btn btn-secondary"><spring:message code="showDet.booking"/></a>
                 <sec:authorize access="hasRole('ADMIN')">
                     <input type="submit" class="btn btn-secondary" value="Add Representation">
                 </sec:authorize>
             </form:form>
 
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                    <th scope="col">Date</th>
-                  <th scope="col"></th>
 
-                </tr>
-              </thead>
-              <tbody>
+            <div>
+                <h4>Representations:</h4>
 
-            <c:forEach items="${representations}" var="representation">
-                <tr>
-                   <td>${representation.whenDate}</td>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col"></th>
 
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                                 <form:form method="get" action="/reservation/booking/${representation.id}" >
-                                             <td><input type="submit" name="update" value="Modifier">
-                                             </td>
-                                         </form:form>
-                                         </tr>
-               </c:forEach>
+                    <c:forEach items="${representations}" var="representation">
+                        <tr>
+                            <td>${representation.whenDate}</td>
 
-            </tbody>
-            </table>
+                            <td>
+                                <form:form method="get" action="/reservation/booking/${representation.id}">
+                                    <button type="submit" class="btn btn-secondary"><spring:message
+                                            code="showDet.booking"/></button>
+
+                                </form:form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
