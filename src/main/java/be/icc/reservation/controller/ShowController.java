@@ -1,11 +1,13 @@
 package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
+import be.icc.reservation.entity.Representations;
 import be.icc.reservation.entity.Shows;
 import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.FileForm;
 import be.icc.reservation.form.ShowForm;
 import be.icc.reservation.service.LocationsService;
+import be.icc.reservation.service.RepresentationService;
 import be.icc.reservation.service.ShowService;
 import be.icc.reservation.utils.CSVExporter;
 import be.icc.reservation.utils.CSVImporter;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -35,6 +38,8 @@ import java.util.Map;
 @Controller
 public class ShowController {
 
+    @Autowired
+    private RepresentationService representationService;
     @Autowired
     private ShowService showService;
     @Autowired
@@ -200,6 +205,8 @@ public class ShowController {
 
         Shows show = showService.findById(id);
         model.addAttribute("show", show);
+        ArrayList<Representations> representations = representationService.findRepresentationsByShow(show);
+        model.addAttribute("representations", representations);
         return "show/showDetail";
     }
 

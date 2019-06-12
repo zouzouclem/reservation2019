@@ -2,6 +2,7 @@ package be.icc.reservation.controller;
 
 import be.icc.reservation.entity.Locations;
 import be.icc.reservation.entity.Representations;
+import be.icc.reservation.entity.Shows;
 import be.icc.reservation.entity.Users;
 import be.icc.reservation.form.RepresentationForm;
 import be.icc.reservation.form.ShowForm;
@@ -90,5 +91,21 @@ public class ReservationController {
         representation.setShow(showService.findById(representationForm.getShow()));
         representationService.saveRepresentation(representation);
         return "redirect:/show/showDetail/"+representationForm.getShow();
+    }
+
+    @RequestMapping(value = "/reservation/booking/{representationId}")
+    public String bookShow(Model model, @PathVariable("representationId") int representationId){
+
+        if ("anonymousUser".equals(SecurityContextHolder.getContext().getAuthentication().getPrincipal())) {
+            return "redirect:/connect";
+        }
+        Users user = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Representations representation= representationService.findById(representationId);
+        Set<Users>users= representation.getUsers();
+        users.add(user);
+        representation.setUsers(users);
+        representationService.saveRepresentation(representation);
+        //TODO clv ?? set User
+        return "redirect:/reservation";
     }
 }
