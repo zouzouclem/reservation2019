@@ -19,7 +19,9 @@
         <c:if test="${not empty success}">
             <label class="success"><spring:message code="${success}"/></label>
         </c:if>
-
+        <c:if test="${not empty error}">
+            <label class="error"><spring:message code="${error}"/></label>
+        </c:if>
         <div class="col-md-6">
             <c:if test="${signupForm.id == null}">
                 <form:form method="post" action="/connect/login" modelAttribute="loginForm">
@@ -50,9 +52,6 @@
             <c:if test="${signupForm.id != null}">
                 <c:set var="signupOrUpdate" value="/connect/update"/>
                 <c:set var="signupOrUpdateTitle" value="connect.modify"/>
-            </c:if>
-            <c:if test="${not empty error}">
-                <label class="error"><spring:message code="${error}"/></label>
             </c:if>
         </div>
         <div class="col-md-6">
