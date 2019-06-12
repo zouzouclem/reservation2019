@@ -14,51 +14,62 @@
 
 <div class="container">
 
-<h2 class="bold"><spring:message code="showList.pageTitle"/></h2>
+    <h2 class="bold"><spring:message code="showList.pageTitle"/></h2>
 
     <%--TODO Leila Labels--%>
     <%--TODO Leila enlever la checkbox--%>
 
-<c:if test="${not empty success}">
-    <label class="success"><spring:message code="${succcess}"/></label>
-</c:if>
-<table class="table table-striped" id="showListTable">
-    <thead>
-    <tr>
-
-        <th scope="col"><spring:message code="showList.Title"/></th>
-        <th scope="col"><spring:message code="showList.Place"/></th>
-        <th scope="col"><spring:message code="showList.Price"/></th>
-        <th></th>
-        <sec:authorize access="hasRole('ADMIN')">
-        <th></th>
-        <th></th>
-        </sec:authorize>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${showList}" var="show">
+    <c:if test="${not empty success}">
+        <label class="success"><spring:message code="${succcess}"/></label>
+    </c:if>
+    <table class="table table-striped" id="showListTable">
+        <thead>
         <tr>
 
-            <td>${show.title}</td>
-            <td>${show.location}</td>
-            <td>${show.price}</td>
-            <form:form method="get" action="/show/showDetail/${show.id}">
-                <td><button class="btn btn-secondary" type="submit"><spring:message code="showList.Consultation"/></button></td>
-            </form:form>
+            <th scope="col"><spring:message code="showList.Title"/></th>
+            <th scope="col"><spring:message code="showList.Place"/></th>
+            <th scope="col"><spring:message code="showList.Address"/></th>
+            <th scope="col"><spring:message code="showList.Price"/></th>
+            <th></th>
             <sec:authorize access="hasRole('ADMIN')">
-            <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
-                <td><button class="btn btn-secondary" type="submit"><spring:message code="showList.Modification"/></button></td>
-            </form:form>
-            <form:form method="get" action="/show/delete/${show.id}" modelAttribute="showForm">
-                <td><button class="btn btn-secondary" type="submit"><spring:message code="showList.Suppression"/></button></td>
-            </form:form>
+                <th></th>
+                <th></th>
             </sec:authorize>
         </tr>
-    </c:forEach>
+        </thead>
+        <tbody>
+        <c:forEach items="${showList}" var="show">
+            <tr>
 
-    </tbody>
-</table>
+                <td>${show.title}</td>
+                <td>${show.location}</td>
+                <td>${show.location.getCompleteAddress()}</td>
+                <td>${show.price}</td>
+                <form:form method="get" action="/show/showDetail/${show.id}">
+                    <td>
+                        <button class="btn btn-secondary" type="submit"><spring:message
+                                code="showList.Consultation"/></button>
+                    </td>
+                </form:form>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <form:form method="get" action="/show/update/${show.id}" modelAttribute="showForm">
+                        <td>
+                            <button class="btn btn-secondary" type="submit"><spring:message
+                                    code="showList.Modification"/></button>
+                        </td>
+                    </form:form>
+                    <form:form method="get" action="/show/delete/${show.id}" modelAttribute="showForm">
+                        <td>
+                            <button class="btn btn-secondary" type="submit"><spring:message
+                                    code="showList.Suppression"/></button>
+                        </td>
+                    </form:form>
+                </sec:authorize>
+            </tr>
+        </c:forEach>
+
+        </tbody>
+    </table>
 </div>
 
 <jsp:include page="../assets/footer.jsp"/>

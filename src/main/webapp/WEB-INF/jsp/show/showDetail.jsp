@@ -31,7 +31,7 @@
 
                 <div class="row">
                     <dt class="col-sm-5"><spring:message code="showDet.showLocationAdresse"/>:</dt>
-                    <dd class="col-sm-7">${show.location.address}</dd>
+                    <dd class="col-sm-7">${show.location.getCompleteAddress()}</dd>
                 </div>
 
                 <div class="row">
