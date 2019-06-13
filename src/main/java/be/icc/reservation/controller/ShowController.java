@@ -84,7 +84,8 @@ public class ShowController {
     @RequestMapping(value = "/admin/show/exportCSV", method = RequestMethod.GET)
     public String exportCSV(Model model) {
         CSVExporter.exportShows();
-        return "show/exportCSV";
+        model.addAttribute("success", "success.shows.showsExported");
+        return "redirect:/show";
     }
 
     @RequestMapping(value = "/admin/show/importRSS", method = RequestMethod.GET)
@@ -109,10 +110,11 @@ public class ShowController {
         return "redirect:/show";
     }
 
-    @RequestMapping(value = "/show/exportRSS")
+    @RequestMapping(value = "/admin/show/exportRSS")
     public String exportRSS(Model model) {
         RSSExporter.exportShows();
-        return "show/exportRSS";
+        model.addAttribute("success", "success.shows.showsExported");
+        return "redirect:/show";
     }
 
     @RequestMapping(value = "/show/add")

@@ -38,6 +38,9 @@
                     </fieldset>
                 </form:form>
             </div>
+            <div>
+                <a class="btn" href="<c:url value="/admin/show/exportCSV"/>"><spring:message code="exportShowCSV.button"/></a>
+            </div>
         </c:when>
         <c:otherwise>
             <spring:message code="authentication.adminNeeded"/>

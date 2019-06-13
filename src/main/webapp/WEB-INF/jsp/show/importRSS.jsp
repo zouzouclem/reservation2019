@@ -37,6 +37,9 @@
                     </fieldset>
                 </form:form>
             </div>
+            <div>
+                <a class="btn" href="<c:url value="/admin/show/exportRSS"/>"><spring:message code="exportShowRSS.button"/></a>
+            </div>
         </c:when>
         <c:otherwise>
             <spring:message code="authentication.adminNeeded"/>
